@@ -1,0 +1,7 @@
+C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\obj\Debug\ResolveAssemblyReference.cache
+C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\bin\Dispenser.dll
+C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\bin\Dispenser.pdb
+C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\bin\Telerik.Web.UI.dll
+C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\bin\Telerik.Web.UI.xml
+C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\obj\Debug\Dispenser.dll
+C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\obj\Debug\Dispenser.pdb

@@ -48,6 +48,223 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Web.UI, Version=2010.2.713.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Connection.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dst\Clientes.Master.cs">
+      <DependentUpon>Clientes.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dst\Clientes.Master.designer.cs">
+      <DependentUpon>Clientes.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Dst\SeguimientoSolicitudes.aspx.cs">
+      <DependentUpon>SeguimientoSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dst\SeguimientoSolicitudes.aspx.designer.cs">
+      <DependentUpon>SeguimientoSolicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dst\Solicitud_Dispensadores.aspx.cs">
+      <DependentUpon>Solicitud_Dispensadores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dst\Solicitud_Dispensadores.aspx.designer.cs">
+      <DependentUpon>Solicitud_Dispensadores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Kcp\Autorizaciones.Master.cs">
+      <DependentUpon>Autorizaciones.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Kcp\Autorizaciones.Master.designer.cs">
+      <DependentUpon>Autorizaciones.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Kcp\AutorizacionSolicitudes.aspx.cs">
+      <DependentUpon>AutorizacionSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Kcp\AutorizacionSolicitudes.aspx.designer.cs">
+      <DependentUpon>AutorizacionSolicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Kcp\Solicitud.aspx.cs">
+      <DependentUpon>Solicitud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Kcp\Solicitud.aspx.designer.cs">
+      <DependentUpon>Solicitud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\AgregarKAM.aspx.cs">
+      <DependentUpon>AgregarKAM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\AgregarKAM.aspx.designer.cs">
+      <DependentUpon>AgregarKAM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\Agregar_Usuario.aspx.cs">
+      <DependentUpon>Agregar_Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\Agregar_Usuario.aspx.designer.cs">
+      <DependentUpon>Agregar_Usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\Agregar_Vendedor.aspx.cs">
+      <DependentUpon>Agregar_Vendedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\Agregar_Vendedor.aspx.designer.cs">
+      <DependentUpon>Agregar_Vendedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\Editar_KAM.aspx.cs">
+      <DependentUpon>Editar_KAM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\Editar_KAM.aspx.designer.cs">
+      <DependentUpon>Editar_KAM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\Editar_Socio.aspx.cs">
+      <DependentUpon>Editar_Socio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\Editar_Socio.aspx.designer.cs">
+      <DependentUpon>Editar_Socio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\Editar_Usuario.aspx.cs">
+      <DependentUpon>Editar_Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\Editar_Usuario.aspx.designer.cs">
+      <DependentUpon>Editar_Usuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\Editar_Vendedor.aspx.cs">
+      <DependentUpon>Editar_Vendedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\Editar_Vendedor.aspx.designer.cs">
+      <DependentUpon>Editar_Vendedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\Mantenimiento.Master.cs">
+      <DependentUpon>Mantenimiento.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\Mantenimiento.Master.designer.cs">
+      <DependentUpon>Mantenimiento.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\Nuevo_Socio.aspx.cs">
+      <DependentUpon>Nuevo_Socio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\Nuevo_Socio.aspx.designer.cs">
+      <DependentUpon>Nuevo_Socio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mantenimiento\TP.aspx.cs">
+      <DependentUpon>TP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mantenimiento\TP.aspx.designer.cs">
+      <DependentUpon>TP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Reportes.Master.cs">
+      <DependentUpon>Reportes.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\Reportes.Master.designer.cs">
+      <DependentUpon>Reportes.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="About.aspx" />
+    <Content Include="App_Data\ASPNETDB.MDF" />
+    <Content Include="App_Data\ASPNETDB_log.ldf">
+      <DependentUpon>ASPNETDB.MDF</DependentUpon>
+    </Content>
+    <Content Include="Default.aspx" />
+    <Content Include="Dst\SeguimientoSolicitudes.aspx" />
+    <Content Include="Dst\Solicitud_Dispensadores.aspx" />
+    <Content Include="Imagenes\Arte-Nuevo-de-KCP.png" />
+    <Content Include="Imagenes\bg.jpg" />
+    <Content Include="Imagenes\cancel.png" />
+    <Content Include="Imagenes\check.png" />
+    <Content Include="Imagenes\Clean.png" />
+    <Content Include="Imagenes\KCPLogos.png" />
+    <Content Include="Imagenes\Logo CTM.png" />
+    <Content Include="Imagenes\right_bg.gif" />
+    <Content Include="Imagenes\right_bot.gif" />
+    <Content Include="Imagenes\right_top.gif" />
+    <Content Include="Imagenes\Template_Elea.jpg" />
+    <Content Include="Imagenes\tit.jpg" />
+    <Content Include="Imagenes\top.png" />
+    <Content Include="Kcp\AutorizacionSolicitudes.aspx" />
+    <Content Include="Kcp\Solicitud.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Mantenimiento\AgregarKAM.aspx" />
+    <Content Include="Mantenimiento\Agregar_Usuario.aspx" />
+    <Content Include="Mantenimiento\Agregar_Vendedor.aspx" />
+    <Content Include="Mantenimiento\ChangePassword.aspx" />
+    <Content Include="Mantenimiento\Editar_KAM.aspx" />
+    <Content Include="Mantenimiento\Editar_Socio.aspx" />
+    <Content Include="Mantenimiento\Editar_Usuario.aspx" />
+    <Content Include="Mantenimiento\Editar_Vendedor.aspx" />
+    <Content Include="Mantenimiento\Nuevo_Socio.aspx" />
+    <Content Include="Mantenimiento\TP.aspx" />
+    <Content Include="Reportes\Dashboard.aspx" />
+    <Content Include="Scripts\Advertencia.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Styles\Autorizaciones.css" />
+    <Content Include="Styles\Mantenimiento.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\Solicitudes.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dst\Clientes.Master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
@@ -59,7 +276,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Kcp\Autorizaciones.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Mantenimiento\Mantenimiento.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reportes\Reportes.Master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
