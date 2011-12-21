@@ -158,7 +158,10 @@ namespace Dispenser.Mantenimiento
 
 
                 if (conexion.Actualizar(query))
-                    RadAjaxManager1.ResponseScripts.Add(String.Format("exitoNuevoUsuario();"));
+                    if(conexion.notificacionNuevoUsuario(cmbUbicacion.SelectedValue))
+                        RadAjaxManager1.ResponseScripts.Add(String.Format("exitoNuevoUsuario(1);"));
+                    else
+                        RadAjaxManager1.ResponseScripts.Add(String.Format("exitoNuevoUsuario(0);"));
                 else
                     RadAjaxManager1.ResponseScripts.Add(String.Format("alert('Error inesperado de conexion, intentelo mas tarde');"));
             }

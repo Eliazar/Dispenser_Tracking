@@ -1640,37 +1640,110 @@ namespace Dispenser
             return true;
         }
 
-        public bool enviarActualizacionTP(List<string> correos, double TP)
+        public bool enviarActualizacionTP(DataTable correos, string clientID)
         {
+
+            string query = String.Format("SELECT K.KAM_NAME, K.KAM_MAIL FROM KAM AS K JOIN CUENTAS_KAM AS CK ON CK.KAM_ID = K.KAM_ID WHERE CK.CLIENT_ID = '{0}' AND K.KAM_ACTIVE = 1"
+                , clientID);
+
+            DataTable kamInfo = getGridDataSource(query);
+            
+            StringBuilder cuerpo = new StringBuilder();
+            cuerpo.Append("<h3>Correo de aviso!</h3>");
+            cuerpo.Append("<p>Se ingreso el nuevo presupuesto para dispensadores.<br /><a href=\"http://www.analitica-b2b.com/dispenser/login.aspx\">Ingrese al portal!!</a></p>");
+
+            MailMessage mensaje = new MailMessage();
+
+            //Se ingresa primero la copia ya que no se quiere mandar mas de una vez el correo en caso de que existieran varis customer care
+            MailAddress copia = new MailAddress(kamInfo.Rows[0]["KAM_MAIL"].ToString(), kamInfo.Rows[0]["KAM_NAME"].ToString());
+            mensaje.CC.Add(copia);
+
+            if (correos.Rows.Count == 0)
+                return false;
+
+            foreach (DataRow fila in correos.Rows)
+            {
+                try
+                {
+                    MailAddress de = new MailAddress("dispenser@analitica-b2b.com", "Dispenser Tracking");//Solicitud dispensadores
+                    MailAddress para = new MailAddress(fila["E_MAIL"].ToString(), fila["USER_NAME"].ToString());//Administrador
+
+                    //mensaje.Bcc.Add(txtEmail.Text);
+                    mensaje.From = de;
+                    mensaje.To.Add(para);
+                    mensaje.Subject = "Actualizacion TP";
+                    mensaje.BodyEncoding = System.Text.Encoding.Default;
+                    mensaje.IsBodyHtml = false;
+                    mensaje.Body = cuerpo.ToString();
+                    mensaje.IsBodyHtml = true;
+
+                    SmtpClient cliente = new SmtpClient("relay-hosting.secureserver.net");
+                    cliente.Credentials = new System.Net.NetworkCredential("dispenser@analitica-b2b.com", "dispensador2011");
+                    cliente.EnableSsl = false;
+
+                    cliente.Send(mensaje);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+        }
+
+        public bool notificacionNuevoUsuario(string clientID)
+        {
+
+            string query = String.Format("SELECT K.KAM_NAME, K.KAM_MAIL FROM KAM AS K JOIN CUENTAS_KAM AS CK ON CK.KAM_ID = K.KAM_ID WHERE CK.CLIENT_ID = '{0}' AND K.KAM_ACTIVE = 1"
+                , clientID);
+
+            DataTable kamInfo = getGridDataSource(query);
 
             StringBuilder cuerpo = new StringBuilder();
             cuerpo.Append("<h3>Correo de aviso!</h3>");
-            cuerpo.Append("<p>Movimiento de TP para este mes:</p>");
+            cuerpo.Append("<p>Se ha creado su usuario exitosamente:");
+            cuerpo.Append("");
 
-            try
-            {
-                MailAddress de = new MailAddress("dispenser@analitica-b2b.com", "Dispenser Tracking");//Solicitud dispensadores
-                MailAddress para = new MailAddress(fila["E_MAIL"].ToString(), fila["USER_NAME"].ToString());//Administrador
-                MailMessage mensaje = new MailMessage(de, para);
-                mensaje.Attachments.Add(new Attachment(filePath));
+            MailMessage mensaje = new MailMessage();
 
-                // mensaje.Bcc.Add(txtEmail.Text);
-                mensaje.Subject = "Confirmacion";
-                mensaje.BodyEncoding = System.Text.Encoding.Default;
-                mensaje.IsBodyHtml = false;
-                mensaje.Body = cuerpo.ToString();
-                mensaje.IsBodyHtml = true;
+            //Se ingresa primero la copia ya que no se quiere mandar mas de una vez el correo en caso de que existieran varis customer care
+            MailAddress copia = new MailAddress(kamInfo.Rows[0]["KAM_MAIL"].ToString(), kamInfo.Rows[0]["KAM_NAME"].ToString());
+            mensaje.CC.Add(copia);
 
-                SmtpClient cliente = new SmtpClient("relay-hosting.secureserver.net");
-                cliente.Credentials = new System.Net.NetworkCredential("dispenser@analitica-b2b.com", "dispensador2011");
-                cliente.EnableSsl = false;
-
-                cliente.Send(mensaje);
-            }
-            catch (Exception)
-            {
+            if (correos.Rows.Count == 0)
                 return false;
+
+            foreach (DataRow fila in correos.Rows)
+            {
+                try
+                {
+                    MailAddress de = new MailAddress("dispenser@analitica-b2b.com", "Dispenser Tracking");//Solicitud dispensadores
+                    MailAddress para = new MailAddress(fila["E_MAIL"].ToString(), fila["USER_NAME"].ToString());//Administrador
+
+                    //mensaje.Bcc.Add(txtEmail.Text);
+                    mensaje.From = de;
+                    mensaje.To.Add(para);
+                    mensaje.Subject = "Actualizacion TP";
+                    mensaje.BodyEncoding = System.Text.Encoding.Default;
+                    mensaje.IsBodyHtml = false;
+                    mensaje.Body = cuerpo.ToString();
+                    mensaje.IsBodyHtml = true;
+
+                    SmtpClient cliente = new SmtpClient("relay-hosting.secureserver.net");
+                    cliente.Credentials = new System.Net.NetworkCredential("dispenser@analitica-b2b.com", "dispensador2011");
+                    cliente.EnableSsl = false;
+
+                    cliente.Send(mensaje);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
+
+            return true;
 
         }
         #endregion

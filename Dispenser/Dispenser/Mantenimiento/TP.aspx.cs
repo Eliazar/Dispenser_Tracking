@@ -110,12 +110,19 @@ namespace Dispenser.Mantenimiento
                     }
                 }
 
-                mensajes.Text = String.Format("<script languaje='javascript'>" +
+
+                query = String.Format("SELECT USER_NAME, E_MAIL FROM USUARIOS WHERE CLIENT_ID = '{0}'", cmbSocioComercial.SelectedValue);
+                DataTable correos = conexion.getGridDataSource(query);
+                
+                if (conexion.enviarActualizacionTP(correos, cmbSocioComercial.SelectedValue))
+                    mensajes.Text = String.Format("<script languaje='javascript'>" +
                                                     "alert('TP actualizado con exito. Con solicitudes pendientes habilitadas: {0} y corridas: {1}');" +
                                               "</script>", transferidas, pendientes);
-
-                query = String.Format("SELECT K.KAM_MAIL FROM CUENTAS_KAM AS CK JOIN KAM AS K ON K.KAM_ID = CK.KAM_ID WHERE CK.CLIENT_ID = '{0}'",
-                    cmbSocioComercial.SelectedValue);
+                else
+                    mensajes.Text = String.Format("<script languaje='javascript'>" +
+                                                    "alert('TP actualizado con exito. Con solicitudes pendientes habilitadas: {0} y corridas: {1}." +
+                                                    " Pero no se envio la notificacion por problemas con el servidor.');" +
+                                              "</script>", transferidas, pendientes);
                 
                 nmcPresupuesto.Text = String.Empty;
                 cmbSocioComercial.SelectedItem.Remove();

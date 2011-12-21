@@ -53,7 +53,7 @@
                     </td>
                     <td>
                         <telerik:RadMaskedTextBox ID="txtTelefono" runat="server" 
-                            Mask="####-####" PromptChar=" " Skin="Web20" Width="150px">
+                            Mask="########" PromptChar=" " Skin="Web20" Width="150px">
                         </telerik:RadMaskedTextBox>
                         
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
