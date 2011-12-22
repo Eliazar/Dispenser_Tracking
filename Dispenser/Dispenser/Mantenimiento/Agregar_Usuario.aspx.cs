@@ -156,9 +156,15 @@ namespace Dispenser.Mantenimiento
                     DateTime.Now.AddMonths(1).ToString("yyyMMdd"), txtCodigo.Text, conexion.getUserCountry(Session.Contents["userid"].ToString()),
                     txtCorreo.Text, cmbUbicacion.SelectedValue);
 
+                List<string> datos = new List<string>();
+                datos.Add(cmbUbicacion.SelectedValue);
+                datos.Add(txtCodigo.Text);
+                datos.Add(txtUsuario.Text);
+                datos.Add(password);
+                datos.Add(txtCorreo.Text);
 
                 if (conexion.Actualizar(query))
-                    if(conexion.notificacionNuevoUsuario(cmbUbicacion.SelectedValue))
+                    if(conexion.notificacionNuevoUsuario(datos))
                         RadAjaxManager1.ResponseScripts.Add(String.Format("exitoNuevoUsuario(1);"));
                     else
                         RadAjaxManager1.ResponseScripts.Add(String.Format("exitoNuevoUsuario(0);"));

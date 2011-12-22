@@ -99,6 +99,8 @@ namespace Dispenser
                         Session.Add("aprobado", inversion);
                         Session.Add("pendiente", inversionF);
                         Session.Add("porcentaje", Convert.ToDouble(((inversion + inversionF) / tp) * 100));
+                        Session.Add("correoBajo", false);
+                        Session.Add("correoSobre", false);
                     }
                 }
 

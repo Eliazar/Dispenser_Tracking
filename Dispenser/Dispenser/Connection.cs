@@ -1693,29 +1693,102 @@ namespace Dispenser
 
         }
 
-        public bool notificacionNuevoUsuario(string clientID)
+        public bool notificacionNuevoUsuario(List<string> datos)
         {
 
             string query = String.Format("SELECT K.KAM_NAME, K.KAM_MAIL FROM KAM AS K JOIN CUENTAS_KAM AS CK ON CK.KAM_ID = K.KAM_ID WHERE CK.CLIENT_ID = '{0}' AND K.KAM_ACTIVE = 1"
-                , clientID);
+                , datos[0]);
 
             DataTable kamInfo = getGridDataSource(query);
-
             StringBuilder cuerpo = new StringBuilder();
+
+            #region Cuerpo del correo
             cuerpo.Append("<h3>Correo de aviso!</h3>");
-            cuerpo.Append("<p>Se ha creado su usuario exitosamente:");
-            cuerpo.Append("");
+            cuerpo.Append("<p>Se ha creado su usuario exitosamente:</p>");
+            
+            cuerpo.Append("<table>");
+                cuerpo.Append("<tr>");
+                    cuerpo.Append("<td>");
+                        cuerpo.Append("Usuario:");
+                    cuerpo.Append("</td>");
+                    cuerpo.Append("<td>");
+                        cuerpo.Append(datos[1]);
+                    cuerpo.Append("</td>");
+                cuerpo.Append("</tr>");
+
+                cuerpo.Append("<tr>");
+                    cuerpo.Append("<td>");
+                        cuerpo.Append("Password:");
+                    cuerpo.Append("</td>");
+                    cuerpo.Append("<td>");
+                        cuerpo.Append(datos[3]);
+                    cuerpo.Append("</td>");
+                cuerpo.Append("</tr>");
+            cuerpo.Append("</table>");
+
+            cuerpo.Append("<p>click <a href=\"http://www.analitica-b2b.com/dispenser/login.aspx\">aqui</a> para redireccionarte.</p>");
+            #endregion
 
             MailMessage mensaje = new MailMessage();
+            
+            try
+            {
+                MailAddress de = new MailAddress("dispenser@analitica-b2b.com", "Dispenser Tracking");//Solicitud dispensadores
+                MailAddress para = new MailAddress(datos[4], datos[2]);//Administrador
+                MailAddress copia = new MailAddress(kamInfo.Rows[0]["KAM_MAIL"].ToString(), kamInfo.Rows[0]["KAM_NAME"].ToString());
 
-            //Se ingresa primero la copia ya que no se quiere mandar mas de una vez el correo en caso de que existieran varis customer care
+                //mensaje.Bcc.Add(txtEmail.Text);
+                mensaje.From = de;
+                mensaje.To.Add(para);
+                mensaje.CC.Add(copia);
+                mensaje.Subject = "Nuevo usuario";
+                mensaje.BodyEncoding = System.Text.Encoding.Default;
+                mensaje.IsBodyHtml = false;
+                mensaje.Body = cuerpo.ToString();
+                mensaje.IsBodyHtml = true;
+
+                SmtpClient cliente = new SmtpClient("relay-hosting.secureserver.net");
+                cliente.Credentials = new System.Net.NetworkCredential("dispenser@analitica-b2b.com", "dispensador2011");
+                cliente.EnableSsl = false;
+
+                cliente.Send(mensaje);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+
+            return true;
+
+        }
+
+        public bool correoPresupuesto(string codigoDistribuidor, double porcentaje)
+        {
+            string query = String.Format("SELECT K.KAM_NAME, K.KAM_MAIL FROM KAM AS K JOIN CUENTAS_KAM AS CK ON CK.KAM_ID = K.KAM_ID WHERE CK.CLIENT_ID = '{0}' AND K.KAM_ACTIVE = 1"
+                , codigoDistribuidor);
+
+            DataTable kamInfo = getGridDataSource(query);
+            DataTable customerCare = getCustomerCareInfo(getClientKCInfo("COUNTRY", "CLIENT_ID", codigoDistribuidor));
+            string distribuidor = getClientKCInfo("CLIENT_NAME", "CLIENT_ID", codigoDistribuidor);
+            
+            StringBuilder cuerpo = new StringBuilder();
+
+            #region Cuerpo del correo
+            
+            cuerpo.Append("<h3>Correo de aviso!</h3>");
+            if(porcentaje >= 80 && porcentaje < 100)
+                cuerpo.Append(String.Format("<p>Atencion presupuesto bajo para el distribuidor {0}</p>", distribuidor));
+            else if(porcentaje >= 100)
+                cuerpo.Append(String.Format("<p>Atencion presupuesto agotado para el distribuidor {0}</p>", distribuidor));
+
+            #endregion
+
+            MailMessage mensaje = new MailMessage();
             MailAddress copia = new MailAddress(kamInfo.Rows[0]["KAM_MAIL"].ToString(), kamInfo.Rows[0]["KAM_NAME"].ToString());
             mensaje.CC.Add(copia);
 
-            if (correos.Rows.Count == 0)
-                return false;
-
-            foreach (DataRow fila in correos.Rows)
+            foreach (DataRow fila in customerCare.Rows)
             {
                 try
                 {
@@ -1725,7 +1798,7 @@ namespace Dispenser
                     //mensaje.Bcc.Add(txtEmail.Text);
                     mensaje.From = de;
                     mensaje.To.Add(para);
-                    mensaje.Subject = "Actualizacion TP";
+                    mensaje.Subject = "Presupuesto";
                     mensaje.BodyEncoding = System.Text.Encoding.Default;
                     mensaje.IsBodyHtml = false;
                     mensaje.Body = cuerpo.ToString();
@@ -1743,8 +1816,8 @@ namespace Dispenser
                 }
             }
 
-            return true;
 
+            return true;
         }
         #endregion
     }

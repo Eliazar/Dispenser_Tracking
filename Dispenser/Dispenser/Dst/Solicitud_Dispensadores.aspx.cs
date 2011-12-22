@@ -77,11 +77,24 @@ namespace Dispenser.Dst
                 costoDetalle = new List<double>();
 
                 if (Convert.ToDouble(Session["porcentaje"].ToString()) >= 80 && Convert.ToDouble(Session["porcentaje"].ToString()) < 100)
+                {
                     radajaxmanager.ResponseScripts.Add(@"alert('Advertencia su presupuesto es menor o igual a un 20%.');");
+
+                    if (!Convert.ToBoolean(Session.Contents["correoBajo"].ToString())){
+                        conexion.correoPresupuesto(conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString()), Convert.ToDouble(Session["porcentaje"].ToString()));
+                        Session.Contents["correoBajo"] = true;
+                    }
+                }
                 else if (Convert.ToDouble(Session["porcentaje"].ToString()) >= 100)
                 {
                     radajaxmanager.ResponseScripts.Add(@"alert('Advertencia presupuesto agotado toda solicitud sera movida al siguiente mes.');");
                     dpFechaSolicitada.MinDate = hoy.AddDays(new DateTime(hoy.Year, hoy.Month + 1, 1).DayOfYear - hoy.DayOfYear);
+
+                    if (!Convert.ToBoolean(Session.Contents["correoSobre"].ToString()))
+                    {
+                        conexion.correoPresupuesto(conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString()), Convert.ToDouble(Session["porcentaje"].ToString()));
+                        Session.Contents["correoSobre"] = true;
+                    }
                 }
             }
         }
