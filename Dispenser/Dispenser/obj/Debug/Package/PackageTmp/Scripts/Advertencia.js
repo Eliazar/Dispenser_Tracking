@@ -28,8 +28,13 @@ function alerta2(costo) {
 
 //----- Usuarios -------
 
-function exitoNuevoUsuario() {
-    var confirmacion = confirm("Usuario creado con exito, se envio correo de notificacion." + '\n' + "¿Desea ingresar un nuevo usuario?");
+function exitoNuevoUsuario(exito) {
+
+    if (exito == 1) {
+        var confirmacion = confirm("Usuario creado con exito, se envio correo de notificacion." + '\n' + "¿Desea ingresar un nuevo usuario?");
+    } else {
+        var confirmacion = confirm("Usuario creado con exito, sin notificacion por error en servidor de correos." + '\n' + "¿Desea ingresar un nuevo usuario?");
+    }
 
     if (confirmacion == true) {
         window.location.href = 'Agregar_Usuario.aspx';
