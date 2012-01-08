@@ -21,38 +21,47 @@ namespace Dispenser.Mantenimiento
 
         protected void btGuardar_Click(object sender, EventArgs e)
         {
-            Connection conexion = new Connection();
-
-            string clientId = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString());
-            string query = String.Format("SELECT SALES_ID FROM VENDEDORES WHERE CLIENT_ID = '{0}'", clientId);
-
-            //Se valida que el codigo de vendedor no este en la base de datos.
-            DataTable tabla = conexion.getGridDataSource(query);
-            foreach (DataRow fila in tabla.Rows)
+            try
             {
-                if (fila["SALES_ID"].ToString().ToUpper().Equals(txtCodigo.Text.ToUpper()))
+                Connection conexion = new Connection();
+
+                string clientId = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString());
+                string query = String.Format("SELECT SALES_ID FROM VENDEDORES WHERE CLIENT_ID = '{0}'", clientId);
+
+                //Se valida que el codigo de vendedor no este en la base de datos.
+                DataTable tabla = conexion.getGridDataSource(query);
+                foreach (DataRow fila in tabla.Rows)
                 {
-                    lblMensajes.Text = String.Format("<script languaje='javascript'>" +
-                                    "alert('Codigo de vendedor ya existe.');" +
-                                 "</script>");
-                    return;
+                    if (fila["SALES_ID"].ToString().ToUpper().Equals(txtCodigo.Text.ToUpper()))
+                    {
+                        lblMensajes.Text = String.Format("<script languaje='javascript'>" +
+                                        "alert('Codigo de vendedor ya existe.');" +
+                                     "</script>");
+                        return;
+                    }
+
                 }
 
+                query = String.Format("INSERT INTO VENDEDORES (SALES_ID, CLIENT_ID, SALES_NAME) VALUES ('{0}', '{1}', '{2}')",
+                    txtCodigo.Text.ToUpper(), clientId, txtNombre.Text);
+
+                if (conexion.Actualizar(query))
+                    lblMensajes.Text = String.Format("<script languaje='javascript'>" +
+                                        "alert('Vendedor ingresado con exito.');" +
+                                        "window.location.href = '../Default.aspx';" +
+                                     "</script>");
+                else
+                    lblMensajes.Text = String.Format("<script languaje='javascript'>" +
+                                        "alert('Error de conexion, intente refrescar la pagina.');" +
+                                     "</script>");
             }
-
-            query = String.Format("INSERT INTO VENDEDORES (SALES_ID, CLIENT_ID, SALES_NAME) VALUES ('{0}', '{1}', '{2}')",
-                txtCodigo.Text.ToUpper(), clientId, txtNombre.Text);
-
-            if (conexion.Actualizar(query))
-                lblMensajes.Text = String.Format("<script languaje='javascript'>" +
-                                    "alert('Vendedor ingresado con exito.');" +
-                                    "window.location.href = '../Default.aspx';" +
-                                 "</script>");
-            else
-                lblMensajes.Text = String.Format("<script languaje='javascript'>" +
-                                    "alert('Error de conexion, intente refrescar la pagina.');" +
-                                 "</script>");
-
+            catch (Exception error)
+            {
+                literal.Text = String.Format("<script languaje='javascript'>" +
+                    "alert('Sucedio el siguiente error: {0}');" +
+                    "window.location.href = '../Default.aspx';" +
+                    "</script>", error.Message);
+            }
         }
     }
 }

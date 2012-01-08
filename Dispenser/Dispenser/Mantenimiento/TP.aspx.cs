@@ -17,28 +17,38 @@ namespace Dispenser.Mantenimiento
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Menu menu = Master.FindControl("NavigationMenu") as Menu;
-            menu.Items[2].ChildItems[2].ChildItems.RemoveAt(2);
-
-            if (!IsPostBack)
+            try
             {
-                Connection conexion = new Connection();
+                Menu menu = Master.FindControl("NavigationMenu") as Menu;
+                menu.Items[2].ChildItems[2].ChildItems.RemoveAt(2);
 
-                string paisUsuario = conexion.getUserCountry(Session.Contents["userid"].ToString());
-                string query = String.Format("SELECT CLIENT_ID, CLIENT_NAME FROM CLIENTES_KC WHERE COUNTRY = '{0}' AND NEXT_UPDATE <= '{1}' AND DIRECT_CUSTOMER = 0",
-                    paisUsuario, DateTime.Now.ToString("yyyMMdd"));
-
-                DataTable tabla = conexion.getGridDataSource(query);
-
-                foreach (DataRow fila in tabla.Rows)
+                if (!IsPostBack)
                 {
-                    RadComboBoxItem item = new RadComboBoxItem();
-                    item.Text = fila["CLIENT_ID"].ToString() + " | " + fila["CLIENT_NAME"].ToString();
-                    item.Value = fila["CLIENT_ID"].ToString();
+                    Connection conexion = new Connection();
 
-                    item.DataBind();
-                    cmbSocioComercial.Items.Add(item);
+                    string paisUsuario = conexion.getUserCountry(Session.Contents["userid"].ToString());
+                    string query = String.Format("SELECT CLIENT_ID, CLIENT_NAME FROM CLIENTES_KC WHERE COUNTRY = '{0}' AND NEXT_UPDATE <= '{1}' AND DIRECT_CUSTOMER = 0",
+                        paisUsuario, DateTime.Now.ToString("yyyMMdd"));
+
+                    DataTable tabla = conexion.getGridDataSource(query);
+
+                    foreach (DataRow fila in tabla.Rows)
+                    {
+                        RadComboBoxItem item = new RadComboBoxItem();
+                        item.Text = fila["CLIENT_ID"].ToString() + " | " + fila["CLIENT_NAME"].ToString();
+                        item.Value = fila["CLIENT_ID"].ToString();
+
+                        item.DataBind();
+                        cmbSocioComercial.Items.Add(item);
+                    }
                 }
+            }
+            catch (Exception error)
+            {
+                literal.Text = String.Format("<script languaje='javascript'>" +
+                    "alert('Sucedio el siguiente error: {0}');" +
+                    "window.location.href = '../Default.aspx';" +
+                    "</script>", error.Message);
             }
         }
 

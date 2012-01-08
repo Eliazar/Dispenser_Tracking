@@ -19,31 +19,41 @@ namespace Dispenser.Mantenimiento
 
         protected void btAplicar_Click(object sender, EventArgs e)
         {
-            Connection conexion = new Connection();
-
-            string contraActual = conexion.getUsersInfo("PASSWORD", "USER_ID", Session.Contents["userid"].ToString());
-
-            if (contraActual.Equals(txtContraseñaActual.Text))
+            try
             {
-                DateTime hoy = DateTime.Now.AddMonths(1);
-                string query = String.Format("UPDATE USUARIOS SET PASSWORD = '{0}', P_EXPIRATION = '{1}' WHERE USER_ID = '{2}'",
-                    txtNuevaContraseña.Text, hoy.ToString("yyyMMdd"), Session.Contents["userid"].ToString());
+                Connection conexion = new Connection();
 
-                if (conexion.Actualizar(query))
-                    mensajes.Text = String.Format("<script languaje='javascript'>" +
-                                    "alert('Contraseña actualizada.');" +
-                                    "window.location.href = '../Default.aspx';" +
-                                 "</script>");
+                string contraActual = conexion.getUsersInfo("PASSWORD", "USER_ID", Session.Contents["userid"].ToString());
+
+                if (contraActual.Equals(txtContraseñaActual.Text))
+                {
+                    DateTime hoy = DateTime.Now.AddMonths(1);
+                    string query = String.Format("UPDATE USUARIOS SET PASSWORD = '{0}', P_EXPIRATION = '{1}' WHERE USER_ID = '{2}'",
+                        txtNuevaContraseña.Text, hoy.ToString("yyyMMdd"), Session.Contents["userid"].ToString());
+
+                    if (conexion.Actualizar(query))
+                        mensajes.Text = String.Format("<script languaje='javascript'>" +
+                                        "alert('Contraseña actualizada.');" +
+                                        "window.location.href = '../Default.aspx';" +
+                                     "</script>");
+                    else
+                        mensajes.Text = String.Format("<script languaje='javascript'>" +
+                                        "alert('Ocurrio un error de conexion, no se pudo actualizar la contraseña.');" +
+                                     "</script>");
+                }
                 else
+                {
                     mensajes.Text = String.Format("<script languaje='javascript'>" +
-                                    "alert('Ocurrio un error de conexion, no se pudo actualizar la contraseña.');" +
-                                 "</script>");
+                                        "alert('La contraseña actual no coincide.');" +
+                                     "</script>");
+                }
             }
-            else
+            catch (Exception error)
             {
-                mensajes.Text = String.Format("<script languaje='javascript'>" +
-                                    "alert('La contraseña actual no coincide.');" +
-                                 "</script>");
+                literal.Text = String.Format("<script languaje='javascript'>" +
+                    "alert('Sucedio el siguiente error: {0}');" +
+                    "window.location.href = '../Default.aspx';" +
+                    "</script>", error.Message);
             }
         }
     }

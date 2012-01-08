@@ -14,6 +14,10 @@ namespace Dispenser.Reportes
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+        }
+
+        protected void HeadLoginStatus_LoggedOut(object sender, EventArgs e)
+        {
             FormsAuthentication.SignOut();
 
             Session.Abandon();
