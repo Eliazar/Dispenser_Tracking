@@ -5,3 +5,10 @@ C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\bin\Telerik.We
 C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\bin\Telerik.Web.UI.xml
 C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\obj\Debug\Dispenser.dll
 C:\Eliazar\Benji_Proyectos\Dispenser_Tracking\Dispenser\Dispenser\obj\Debug\Dispenser.pdb
+C:\Users\Eliazar Melendez\Dispenser_Tracking\Dispenser\Dispenser\bin\Dispenser.dll
+C:\Users\Eliazar Melendez\Dispenser_Tracking\Dispenser\Dispenser\bin\Dispenser.pdb
+C:\Users\Eliazar Melendez\Dispenser_Tracking\Dispenser\Dispenser\bin\Telerik.Web.UI.dll
+C:\Users\Eliazar Melendez\Dispenser_Tracking\Dispenser\Dispenser\bin\Telerik.Web.UI.xml
+C:\Users\Eliazar Melendez\Dispenser_Tracking\Dispenser\Dispenser\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Eliazar Melendez\Dispenser_Tracking\Dispenser\Dispenser\obj\Debug\Dispenser.dll
+C:\Users\Eliazar Melendez\Dispenser_Tracking\Dispenser\Dispenser\obj\Debug\Dispenser.pdb
