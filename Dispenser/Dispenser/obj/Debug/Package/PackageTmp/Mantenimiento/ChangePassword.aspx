@@ -8,6 +8,8 @@
     <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
     </telerik:RadScriptManager>
 
+    <asp:Literal runat="server" ID="literal" />
+
     <div class="centrar">
 
         <asp:Literal ID="Errores" runat="server" />

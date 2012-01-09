@@ -139,13 +139,13 @@ namespace Dispenser.Dst {
         protected global::System.Web.UI.WebControls.Label lblCodigoCliente;
         
         /// <summary>
-        /// txtCodigoClienteFinal control.
+        /// cmbNombreComercial control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCodigoClienteFinal;
+        protected global::Telerik.Web.UI.RadComboBox cmbNombreComercial;
         
         /// <summary>
         /// lblVendedor control.
@@ -155,6 +155,15 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblVendedor;
+        
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
         /// cmbVendedor control.
@@ -184,22 +193,22 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadTextBox txtCedulaJuridica;
         
         /// <summary>
-        /// lblSegmento control.
+        /// lblSubSegmento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSegmento;
+        protected global::System.Web.UI.WebControls.Label lblSubSegmento;
         
         /// <summary>
-        /// cmbSegmento control.
+        /// cmbSubSegmento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbSegmento;
+        protected global::Telerik.Web.UI.RadComboBox cmbSubSegmento;
         
         /// <summary>
         /// lblNombreComercial control.
@@ -218,33 +227,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox txtNombreComercial;
-        
-        /// <summary>
-        /// cmbNombreComercial control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbNombreComercial;
-        
-        /// <summary>
-        /// lblSubSegmento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSubSegmento;
-        
-        /// <summary>
-        /// cmbSubSegmento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbSubSegmento;
         
         /// <summary>
         /// lblRazonSocial control.

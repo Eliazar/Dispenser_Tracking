@@ -9,6 +9,8 @@
     <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
     </telerik:RadScriptManager>
         
+    <asp:Literal runat="server" ID="literal" />
+    
     <div class="centrar">
         <fieldset>
             <legend>Ingreso de KAM</legend>

@@ -85,7 +85,7 @@
                                 <br />
                             </td>
                             <td>
-                                <asp:Label ID="lblFechaRequerida" runat="server">Fecha de servicio<b>*</b>:</asp:Label>
+                                <asp:Label ID="lblFechaRequerida" runat="server">Fecha de servicio:</asp:Label>
                             </td>
                             <td>
                                 <telerik:RadDatePicker ID="dpFechaSolicitada" runat="server" Culture="es-HN" 
@@ -121,21 +121,23 @@
                     <table>
                         <tr>
                             <td>
-                                <asp:Label ID="lblCodigoCliente" runat="server">Codigo Cliente:</asp:Label>
+                                <asp:Label ID="lblCodigoCliente" runat="server">Codigo/Nombre Cliente:</asp:Label>
                             </td>
                             <td>
                                                         
-                                <telerik:RadTextBox ID="txtCodigoClienteFinal" runat="server" 
-                                    AutoPostBack="True" Enabled="False" MaxLength="50" 
-                                    ontextchanged="txtCodigoClienteFinal_TextChanged" Skin="Web20" 
-                                    Width="190px">
-                                </telerik:RadTextBox>
+                                <telerik:RadComboBox ID="cmbNombreComercial" runat="server" 
+                                    AllowCustomText="True" AutoPostBack="true" Enabled="false" Filter="Contains" 
+                                    onselectedindexchanged="cmbNombreComercial_SelectedIndexChanged" Skin="Web20" 
+                                    Width="240px" EnableAutomaticLoadOnDemand="True" ItemsPerRequest="30">
+                                </telerik:RadComboBox>
                                                         
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblVendedor">Vendedor<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblVendedor">Vendedor:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                    ControlToValidate="cmbVendedor" CssClass="failureNotification">*</asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cmbVendedor" runat="server" Skin="Web20" Width="190px" 
@@ -146,43 +148,13 @@
                                 <br />
                             </td>
                             <td>
-                                <asp:Label runat="server" ID="lblCedulaJuridica">Cedula Juridica<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblCedulaJuridica">Cedula Juridica:</asp:Label>
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtCedulaJuridica" runat="server" Width="240px"
+                                <telerik:RadTextBox ID="txtCedulaJuridica" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" ontextchanged="txtCedulaJuridica_TextChanged" 
                                     MaxLength="15">
                                 </telerik:RadTextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label runat="server" ID="lblSegmento">Segmento<b>*</b>:</asp:Label>
-                            </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbSegmento" runat="server" Width="190px"
-                                    Skin="Web20" Enabled="False" AutoPostBack="True" 
-                                    onselectedindexchanged="cmbSegmento_SelectedIndexChanged">
-                                </telerik:RadComboBox>
-                            </td>
-                            <td>
-                                <br />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblNombreComercial">Nombre Comercial<b>*</b>:</asp:Label>
-                            </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtNombreComercial" runat="server" Width="240px" 
-                                    Skin="Web20" Enabled="False" 
-                                    ontextchanged="txtNombreComercial_TextChanged" Visible="False" 
-                                    MaxLength="60">
-                                </telerik:RadTextBox>
-
-                                <telerik:RadComboBox ID="cmbNombreComercial" runat="server" 
-                                    AllowCustomText="True" AutoPostBack="true" Enabled="false" Filter="Contains" 
-                                    Skin="Web20" Width="240px" 
-                                    onselectedindexchanged="cmbNombreComercial_SelectedIndexChanged">
-                                </telerik:RadComboBox>
                             </td>
                         </tr>
                         <tr>
@@ -199,10 +171,22 @@
                                 <br />
                             </td>
                             <td>
-                                <asp:Label runat="server" ID="lblRazonSocial">Razon Social<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblNombreComercial">Nombre Comercial:</asp:Label>
                             </td>
-                            <td style="margin-left: 40px">
-                                <telerik:RadTextBox ID="txtRazonSocial" runat="server" Width="240px"
+                            <td>
+                                <telerik:RadTextBox ID="txtNombreComercial" runat="server" Width="190px" 
+                                    Skin="Web20" Enabled="False" Visible="False" 
+                                    MaxLength="60">
+                                </telerik:RadTextBox>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label runat="server" ID="lblRazonSocial">Razon Social:</asp:Label>
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="txtRazonSocial" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" ontextchanged="txtRazonSocial_TextChanged" 
                                     MaxLength="60">
                                 </telerik:RadTextBox>
@@ -218,17 +202,17 @@
                     <table>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblDireccion">Direccion<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblDireccion">Direccion:</asp:Label>
                             </td>
                             <td colspan="4">
-                                <telerik:RadTextBox ID="txtDireccion" runat="server" Width="480px"
+                                <telerik:RadTextBox ID="txtDireccion" runat="server" Width="99%"
                                     Skin="Web20" Enabled="False" ontextchanged="txtDireccion_TextChanged">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblBarrio">Barrio/Distrito<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblBarrio">Barrio/Distrito:</asp:Label>
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtBarrio" runat="server" Width="190px"
@@ -240,7 +224,7 @@
                                 <br />
                             </td>
                             <td>
-                                <asp:Label runat="server" ID="lblTelefono">Telefono<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblTelefono">Telefono:</asp:Label>
                             </td>
                             <td>
                                 <telerik:RadNumericTextBox ID="txtTelefono" runat="server" Width="190px"
@@ -253,7 +237,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblDepartamento">Estado<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblDepartamento">Estado:</asp:Label>
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cmbDepartamento" runat="server" Width="190px"
@@ -276,7 +260,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblCiudad">Ciudad<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblCiudad">Ciudad:</asp:Label>
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cmbCiudad" runat="server" Width="190px"
@@ -497,7 +481,7 @@
                     <table>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblPersonaContacto">Persona de Contacto<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblPersonaContacto">Persona de Contacto:</asp:Label>
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtPersonaContacto" runat="server" Width="190px"
@@ -509,7 +493,7 @@
                                 <br />
                             </td>
                             <td>
-                                <asp:Label runat="server" ID="lblTelefonoContacto">Telefono Contacto<b>*</b>:</asp:Label>
+                                <asp:Label runat="server" ID="lblTelefonoContacto">Telefono Contacto:</asp:Label>
                             </td>
                             <td>
                                 <telerik:RadNumericTextBox ID="txtTelefonoContacto" runat="server" Width="190px"
