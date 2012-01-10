@@ -231,6 +231,7 @@
     <Content Include="Imagenes\Clean.png" />
     <Content Include="Imagenes\KCPLogos.png" />
     <Content Include="Imagenes\Logo CTM.png" />
+    <Content Include="Imagenes\requerido.png" />
     <Content Include="Imagenes\right_bg.gif" />
     <Content Include="Imagenes\right_bot.gif" />
     <Content Include="Imagenes\right_top.gif" />

@@ -35,7 +35,6 @@ namespace Dispenser
                 {
                     Session.Add("userid", usuario);
                     Session.Add("rol", conexion.getUsersInfo("ID_ROL", "USER_ID", usuario));
-                    Session.Add("eventos", String.Empty);
 
                     nombreUsuario = conexion.getUser(usuario);
                     estadoCuenta = Convert.ToBoolean(conexion.getStatus(usuario));
@@ -74,9 +73,6 @@ namespace Dispenser
                     LoginUser.FailureText = "Error de conexion con el servidor, intentelo mas tarde.";
                     return;
                 }
-
-                logId = conexion.getLogID(usuario);
-                Session.Add("logid", Convert.ToInt32(logId));
 
                 FormsAuthentication.RedirectFromLoginPage(nombreUsuario, LoginUser.RememberMeSet);
             }

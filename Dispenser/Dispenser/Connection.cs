@@ -350,15 +350,6 @@ namespace Dispenser
         public string storeLogin(string userLogID, string userName)
         {
             SqlConnection bridge = new SqlConnection(getConnectionString());
-            DateTime hoy = DateTime.Now;
-            string año = Convert.ToString(hoy.Year);
-            string mes = (hoy.Month >= 1 && hoy.Month <= 9) ? "0" + Convert.ToString(hoy.Month) : Convert.ToString(hoy.Month);
-            string dia = (hoy.Day >= 1 && hoy.Day <= 9) ? "0" + Convert.ToString(hoy.Day) : Convert.ToString(hoy.Day);
-            //string hora = (hoy.Hour >= 1 && hoy.Hour <= 9) ? "0" + Convert.ToString(hoy.Hour) : Convert.ToString(hoy.Hour);
-            //string minuto = (hoy.Minute >= 1 && hoy.Minute <= 9) ? "0" + Convert.ToString(hoy.Minute) : Convert.ToString(hoy.Minute);
-            //string segundo = (hoy.Second
-            string fecha = año + mes + dia;
-
             string query = String.Format("INSERT INTO LOGIN_LOG (LOGIN_ID, USER_NAME, LOGIN) VALUES ('{0}', '{1}', GETDATE())", userLogID, userName);
 
             try

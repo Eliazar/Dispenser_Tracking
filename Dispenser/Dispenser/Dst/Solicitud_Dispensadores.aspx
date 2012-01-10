@@ -76,8 +76,7 @@
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cmbMotivos" runat="server" Width="190px" 
-                                    Skin="Web20" AutoPostBack="true" 
-                                    onselectedindexchanged="cmbMotivos_SelectedIndexChanged" 
+                                    Skin="Web20" 
                                     LoadingMessage="Cargando...">
                                 </telerik:RadComboBox>
                             </td>
@@ -123,69 +122,94 @@
                             <td>
                                 <asp:Label ID="lblCodigoCliente" runat="server">Codigo/Nombre Cliente:</asp:Label>
                             </td>
-                            <td>
+                            <td colspan="3">
                                                         
                                 <telerik:RadComboBox ID="cmbNombreComercial" runat="server" 
-                                    AllowCustomText="True" AutoPostBack="true" Enabled="false" Filter="Contains" 
+                                    AllowCustomText="True" AutoPostBack="true" Filter="Contains" 
                                     onselectedindexchanged="cmbNombreComercial_SelectedIndexChanged" Skin="Web20" 
-                                    Width="240px" EnableAutomaticLoadOnDemand="True" ItemsPerRequest="30">
+                                    Width="99%" EnableAutomaticLoadOnDemand="True" ItemsPerRequest="10" 
+                                    EnableVirtualScrolling="True" ShowToggleImage="False">
                                 </telerik:RadComboBox>
                                                         
                             </td>
                         </tr>
                         <tr>
                             <td>
+                                <asp:Image ID="Image16" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
+                                <asp:Label runat="server" ID="lblCedulaJuridica">Cedula Juridica:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                    ErrorMessage="Cedula juridica requerida" ControlToValidate="txtCedulaJuridica" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
+                                
+                                
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="txtCedulaJuridica" runat="server" Enabled="False" 
+                                    MaxLength="15" ontextchanged="txtCedulaJuridica_TextChanged" Skin="Web20" 
+                                    Width="190px">
+                                </telerik:RadTextBox>
+                            </td>
+                            <td>
+                                <asp:Image ID="Image19" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label runat="server" ID="lblVendedor">Vendedor:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                    ControlToValidate="cmbVendedor" CssClass="failureNotification">*</asp:RequiredFieldValidator>
+                                    ControlToValidate="cmbVendedor" CssClass="failureNotification" 
+                                    ValidationGroup="TodoError" ErrorMessage="Vendedor Requerido">*</asp:RequiredFieldValidator>
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cmbVendedor" runat="server" Skin="Web20" Width="190px" 
-                                    Enabled="False" onselectedindexchanged="cmbVendedor_SelectedIndexChanged">
+                                <telerik:RadComboBox ID="cmbVendedor" runat="server" Enabled="False" 
+                                    onselectedindexchanged="cmbVendedor_SelectedIndexChanged" Skin="Web20" 
+                                    Width="190px">
                                 </telerik:RadComboBox>
-                            </td>
-                            <td>
-                                <br />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblCedulaJuridica">Cedula Juridica:</asp:Label>
-                            </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtCedulaJuridica" runat="server" Width="190px"
-                                    Skin="Web20" Enabled="False" ontextchanged="txtCedulaJuridica_TextChanged" 
-                                    MaxLength="15">
-                                </telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblSubSegmento">Sub Segmento:</asp:Label>
-                            </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbSubSegmento" runat="server" Width="190px"
-                                    Skin="Web20" Enabled="False" 
-                                    onselectedindexchanged="cmbSubSegmento_SelectedIndexChanged">
-                                </telerik:RadComboBox>
-                            </td>
-                            <td>
-                                <br />
-                            </td>
-                            <td>
+                                <asp:Image ID="Image17" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label runat="server" ID="lblNombreComercial">Nombre Comercial:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                                    ErrorMessage="Nombre comercial requerido" ControlToValidate="txtNombreComercial" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtNombreComercial" runat="server" Width="190px" 
-                                    Skin="Web20" Enabled="False" Visible="False" 
-                                    MaxLength="60">
+
+                                <telerik:RadTextBox ID="txtNombreComercial" runat="server" Enabled="False" 
+                                    MaxLength="60" Skin="Web20" Visible="False" Width="190px">
                                 </telerik:RadTextBox>
+                            </td>
+                            <td>
+                                <asp:Image ID="Image20" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
+                                <asp:Label runat="server" ID="lblSubSegmento">Segmento:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                                    ErrorMessage="Segmento requerido" ControlToValidate="cmbSubSegmento" 
+                                    CssClass="failureNotification">*
+                                </asp:RequiredFieldValidator>
+                            </td>
+                            <td>
+                                <telerik:RadComboBox ID="cmbSubSegmento" runat="server" Enabled="False" 
+                                    onselectedindexchanged="cmbSubSegmento_SelectedIndexChanged" Skin="Web20" 
+                                    Width="190px">
+                                </telerik:RadComboBox>
 
                             </td>
                         </tr>
                         <tr>
                             <td>
+                                <asp:Image ID="Image18" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label runat="server" ID="lblRazonSocial">Razon Social:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                                    ErrorMessage="Razon social requerida" ControlToValidate="txtRazonSocial" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td colspan="3">
                                 <telerik:RadTextBox ID="txtRazonSocial" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" ontextchanged="txtRazonSocial_TextChanged" 
                                     MaxLength="60">
@@ -202,9 +226,15 @@
                     <table>
                         <tr>
                             <td>
+                                <asp:Image ID="Image21" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label runat="server" ID="lblDireccion">Direccion:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                                    ErrorMessage="Direccion requerida" ControlToValidate="txtDireccion" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
-                            <td colspan="4">
+                            <td colspan="3">
                                 <telerik:RadTextBox ID="txtDireccion" runat="server" Width="99%"
                                     Skin="Web20" Enabled="False" ontextchanged="txtDireccion_TextChanged">
                                 </telerik:RadTextBox>
@@ -212,7 +242,13 @@
                         </tr>
                         <tr>
                             <td>
+                                <asp:Image ID="Image22" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label runat="server" ID="lblBarrio">Barrio/Distrito:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
+                                    ErrorMessage="Barrio/Distrito requerido" ControlToValidate="txtBarrio" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtBarrio" runat="server" Width="190px"
@@ -221,35 +257,49 @@
                                 </telerik:RadTextBox>
                             </td>
                             <td>
-                                <br />
-                            </td>
-                            <td>
+                                <asp:Image ID="Image24" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label runat="server" ID="lblTelefono">Telefono:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
+                                    ErrorMessage="Telefono requerido" ControlToValidate="txtTelefono" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadNumericTextBox ID="txtTelefono" runat="server" Width="190px"
                                     Skin="Web20" MinValue="0" Enabled="False" 
                                     ontextchanged="txtTelefono_TextChanged" DataType="System.Int32" 
                                     MaxLength="12">
+                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" 
+                                        Step="0" />
                                     <NumberFormat DecimalDigits="0" GroupSeparator="" DecimalSeparator="." />
                                 </telerik:RadNumericTextBox>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblDepartamento">Estado:</asp:Label>
+                                <asp:Image ID="Image23" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
+                                <asp:Label runat="server" ID="lblCiudad">Ciudad:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
+                                    ErrorMessage="Ciudad requerida" ControlToValidate="cmbCiudad" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cmbDepartamento" runat="server" Width="190px"
-                                    Skin="Web20" Enabled="False" AutoPostBack="True" 
-                                    onselectedindexchanged="cmbDepartamento_SelectedIndexChanged">
+                                <telerik:RadComboBox ID="cmbCiudad" runat="server" Width="190px"
+                                    Skin="Web20" Enabled="False" 
+                                    onselectedindexchanged="cmbCiudad_SelectedIndexChanged">
                                 </telerik:RadComboBox>
                             </td>
                             <td>
-                                <br />
-                            </td>
-                            <td>
+                                <asp:Image ID="Image25" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label runat="server" ID="lblEMail">Correo Electronico:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" 
+                                    ErrorMessage="Correo requerido" ControlToValidate="txtEMail" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtEMail" runat="server" Width="190px"
@@ -260,35 +310,22 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblCiudad">Ciudad:</asp:Label>
-                            </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbCiudad" runat="server" Width="190px"
-                                    Skin="Web20" Enabled="False" 
-                                    onselectedindexchanged="cmbCiudad_SelectedIndexChanged">
-                                </telerik:RadComboBox>
-                            </td>
-                            <td>
-                                <br />
-                            </td>
-                            <td>
+                                <asp:Image ID="Image26" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label ID="lblCodigoPostal" runat="server">Codigo Postal:</asp:Label>
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtCodigoPostal" runat="server" Enabled="False" 
-                                    ontextchanged="txtCodigoPostal_TextChanged" Skin="Web20" Width="190px" 
-                                    MaxLength="10">
+                                    MaxLength="10" ontextchanged="txtCodigoPostal_TextChanged" Skin="Web20" 
+                                    Width="190px">
                                 </telerik:RadTextBox>
                             </td>
-                        </tr>
-                        <tr>
                             <td colspan="2">
                                 <asp:RegularExpressionValidator ID="expresion" runat="server" 
                                     ControlToValidate="txtEMail" ErrorMessage="Formato de correo no valido" 
-                                    style="Color:#FF0000" 
+                                    SetFocusOnError="True" style="Color:#FF0000" 
                                     ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" 
-                                    SetFocusOnError="True"></asp:RegularExpressionValidator>
-                                                        
+                                    ValidationGroup="TodoError"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                     </table>
@@ -308,9 +345,6 @@
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbCondicionPago_SelectedIndexChanged">
                                 </telerik:RadComboBox>
-                            </td>
-                            <td>
-                                <br />
                             </td>
                             <td>
                                 <asp:Label runat="server" ID="lblCantidadEmpleados">Cantidad Empleado:</asp:Label>
@@ -351,9 +385,6 @@
                                 </telerik:RadComboBox>
                             </td>
                             <td>
-                                <br />
-                            </td>
-                            <td>
                                 <asp:Label runat="server" ID="lblCantidadVisitantes">Cantidad Visitantes:</asp:Label>
                             </td>
                             <td>
@@ -385,9 +416,6 @@
                                 </telerik:RadComboBox>
                             </td>
                             <td>
-                                <br />
-                            </td>
-                            <td>
                                 <asp:Label runat="server" ID="lblCantidadLavatorios">Cantidad Lavatorios:</asp:Label>
                             </td>
                             <td>
@@ -414,9 +442,6 @@
                                 </telerik:RadComboBox>
                             </td>
                             <td>
-                                <br />
-                            </td>
-                            <td>
                                 <asp:Label runat="server" ID="lblBañoHombre">Cantidad Baños (H):</asp:Label>
                             </td>
                             <td>
@@ -441,9 +466,6 @@
                                         <telerik:RadComboBoxItem runat="server" Text="Alto" Value="Alto" />
                                     </Items>
                                 </telerik:RadComboBox>
-                            </td>
-                            <td>
-                                <br />
                             </td>
                             <td>
                                 <asp:Label runat="server" ID="lblBañoMujer">Cantidad Baños (M):</asp:Label>
@@ -481,41 +503,56 @@
                     <table>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblPersonaContacto">Persona de Contacto:</asp:Label>
+                                <asp:Image ID="Image27" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
+                                <asp:Label runat="server" ID="lblPersonaContacto">Contacto:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
+                                    ErrorMessage="Contacto requerido" ControlToValidate="txtPersonaContacto" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtPersonaContacto" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" 
-                                    ontextchanged="txtPersonaContacto_TextChanged" MaxLength="50">
+                                    ontextchanged="txtPersonaContacto_TextChanged" MaxLength="50" 
+                                    EmptyMessage="Nombre de la persona de contacto">
                                 </telerik:RadTextBox>
                             </td>
                             <td>
-                                <br />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblTelefonoContacto">Telefono Contacto:</asp:Label>
+                                <asp:Image ID="Image29" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
+                                <asp:Label runat="server" ID="lblTelefonoContacto">Telefono:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" 
+                                    ErrorMessage="Telefono del contacto requerido" ControlToValidate="txtTelefonoContacto" 
+                                    CssClass="failureNotification">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadNumericTextBox ID="txtTelefonoContacto" runat="server" Width="190px"
                                     Skin="Web20" MinValue="0" Enabled="False" 
                                     ontextchanged="txtTelefonoContacto_TextChanged" DataType="System.Int32" 
-                                    MaxLength="12">
+                                    MaxLength="12" EmptyMessage="Telefono de la persona de contacto">
+                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" 
+                                        Step="0" />
                                     <NumberFormat DecimalDigits="0" GroupSeparator="" DecimalSeparator="." />
                                 </telerik:RadNumericTextBox>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblCorreoContacto">Correo Contacto:</asp:Label>
+                                <asp:Image ID="Image28" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
+                                <asp:Label runat="server" ID="lblCorreoContacto">Correo:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" 
+                                    ErrorMessage="Correo del contacto requerido" ControlToValidate="txtCorreoContacto" 
+                                    CssClass="failureNotification">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtCorreoContacto" runat="server" Width="190px"
                                     Skin="Web20" EmptyMessage="ejemplo@ejemplo.com" Enabled="False" 
                                     ontextchanged="txtCorreoContacto_TextChanged" MaxLength="30">
                                 </telerik:RadTextBox>
-                            </td>
-                            <td>
-                                <br />
                             </td>
                             <td>
                                 <asp:Label runat="server" ID="lblPosicion">Cargo:</asp:Label>
@@ -528,12 +565,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="5">
+                            <td colspan="4">
                                 <asp:RegularExpressionValidator ID="validadorEMailContacot" runat="server"
                                     ControlToValidate="txtCorreoContacto" ErrorMessage="Formato de correo no valido"
                                     ForeColor="#FF0000" 
                                     ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" 
-                                    SetFocusOnError="True"></asp:RegularExpressionValidator>
+                                    SetFocusOnError="True" ValidationGroup="TodoError"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                     </table>
@@ -623,7 +660,13 @@
                                 
         <div class="centrar">
             <asp:Button runat="server" ID="btEnviar" Text="Enviar Solicitud" 
-                onclick="btEnviar_Click" Enabled="False"/>
+                onclick="btEnviar_Click" Enabled="False" ValidationGroup="TodoError"/>
+
+            <br />
+
+            <asp:Literal runat="server" ID="Errores" />
+            <asp:ValidationSummary ID="vsErrores" runat="server" CssClass="failureNotification" HeaderText="Campos Requeridos"
+                ValidationGroup="TodoError" />
         </div>
                                 
     </asp:Panel>

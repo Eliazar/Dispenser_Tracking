@@ -19,15 +19,6 @@ namespace Dispenser.Dst
             item.Text = "Solicitud Dispensadores";
             item.NavigateUrl = "Solicitud_Dispensadores.aspx";
             menu.Items[1].ChildItems.Add(item);
-
-            if (!IsPostBack)
-            {
-                string historial = Session["historial"].ToString();
-                historial += "Seguimiento de solicitudes; ";
-                Session["historial"] = historial;
-
-                return;
-            }
         }
 
         protected void grdConsulta_NeedDataSource(object source, Telerik.Web.UI.GridNeedDataSourceEventArgs e)

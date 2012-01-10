@@ -17,7 +17,6 @@ namespace Dispenser
             try
             {
                 Connection conexion = new Connection();
-                Session.Add("historial", String.Empty);
 
                 DateTime hoy = DateTime.Now;
                 string clientId = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
@@ -118,10 +117,6 @@ namespace Dispenser
                                         "alert('Su contraseña vencera dentro de {0} dias');" +
                                      "</script>", diferencia);
                 }
-
-                string historial = Session["historial"].ToString();
-                historial += "Default; ";
-                Session["historial"] = historial;
             }
             catch (Exception error)
             {

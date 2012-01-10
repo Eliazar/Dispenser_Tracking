@@ -59,10 +59,6 @@ namespace Dispenser.Dst
                     cargarRazones();
                     cargarClientesFinales();
 
-                    string historial = Session.Contents["historial"].ToString();
-                    historial += "Solcitud de Dispensadores; ";
-                    Session.Contents["historial"] = historial;
-
                     //Listas para los cambios de datos
                     datos = new List<string>();
                     campos = new List<string>();
@@ -110,88 +106,80 @@ namespace Dispenser.Dst
         #region Carga de combobox
         private void cargarRazones()
         {
+            
+            cmbMotivos.Items.Clear();
+            Connection conexion = new Connection();
+
+            string query = String.Format("SELECT ID_REASON, REASON_DESCRIP FROM RAZONES");
+            string connection = conexion.getConnectionString();
+
             try
             {
-                cmbMotivos.Items.Clear();
-                Connection conexion = new Connection();
+                SqlConnection bridge = new SqlConnection(connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(query, bridge);
+                DataTable datatable = new DataTable();
+                adapter.Fill(datatable);
 
-                string query = String.Format("SELECT ID_REASON, REASON_DESCRIP FROM RAZONES");
-                string connection = conexion.getConnectionString();
+                RadComboBoxItem temp = new RadComboBoxItem();
+                temp.Text = String.Empty;
+                temp.Value = String.Empty;
+                cmbMotivos.Items.Add(temp);
 
-                try
+                foreach (DataRow dataRow in datatable.Rows)
                 {
-                    SqlConnection bridge = new SqlConnection(connection);
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, bridge);
-                    DataTable datatable = new DataTable();
-                    adapter.Fill(datatable);
+                    RadComboBoxItem item = new RadComboBoxItem();
+                    item.Text = dataRow["REASON_DESCRIP"].ToString();
+                    item.Value = dataRow["ID_REASON"].ToString();
 
-                    RadComboBoxItem temp = new RadComboBoxItem();
-                    temp.Text = String.Empty;
-                    temp.Value = String.Empty;
-                    cmbMotivos.Items.Add(temp);
+                    cmbMotivos.Items.Add(item);
+                    item.DataBind();
 
-                    foreach (DataRow dataRow in datatable.Rows)
-                    {
-                        RadComboBoxItem item = new RadComboBoxItem();
-                        item.Text = dataRow["REASON_DESCRIP"].ToString();
-                        item.Value = dataRow["ID_REASON"].ToString();
-
-                        cmbMotivos.Items.Add(item);
-                        item.DataBind();
-
-                    }
-                }
-                catch (SqlException)
-                {
                 }
             }
-            catch (Exception error)
+            catch (SqlException error)
             {
-                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
+                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('No se pudo cargar los motivos: {0}');", error.Message));
             }
+            
         }
 
         private void cargarClientesFinales()
         {
+            
+            Connection conexion = new Connection();
+
+            string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
+            string query = String.Format("SELECT END_USER_ID, TRADE_NAME FROM CLIENTES_FINALES WHERE CLIENT_ID = '{0}' AND CLIENT_STATUS = 1 ORDER BY TRADE_NAME", clientid);
+            string connection = conexion.getConnectionString();
+
             try
             {
-                Connection conexion = new Connection();
+                SqlConnection bridge = new SqlConnection(connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(query, bridge);
+                DataTable datatable = new DataTable();
+                adapter.Fill(datatable);
 
-                string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
-                string query = String.Format("SELECT END_USER_ID, TRADE_NAME FROM CLIENTES_FINALES WHERE CLIENT_ID = '{0}' AND CLIENT_STATUS = 1 ORDER BY TRADE_NAME", clientid);
-                string connection = conexion.getConnectionString();
+                RadComboBoxItem temp = new RadComboBoxItem();
+                temp.Text = String.Empty;
+                temp.Value = String.Empty;
+                cmbNombreComercial.Items.Add(temp);
 
-                try
+                foreach (DataRow dataRow in datatable.Rows)
                 {
-                    SqlConnection bridge = new SqlConnection(connection);
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, bridge);
-                    DataTable datatable = new DataTable();
-                    adapter.Fill(datatable);
+                    RadComboBoxItem item = new RadComboBoxItem();
+                    item.Text = dataRow["END_USER_ID"].ToString() + " | " + dataRow["TRADE_NAME"].ToString();
+                    item.Value = dataRow["END_USER_ID"].ToString();
 
-                    RadComboBoxItem temp = new RadComboBoxItem();
-                    temp.Text = String.Empty;
-                    temp.Value = String.Empty;
-                    cmbNombreComercial.Items.Add(temp);
+                    cmbNombreComercial.Items.Add(item);
+                    item.DataBind();
 
-                    foreach (DataRow dataRow in datatable.Rows)
-                    {
-                        RadComboBoxItem item = new RadComboBoxItem();
-                        item.Text = dataRow["TRADE_NAME"].ToString();
-                        item.Value = dataRow["END_USER_ID"].ToString();
-
-                        cmbNombreComercial.Items.Add(item);
-                        item.DataBind();
-
-                    }
-                }
-                catch (SqlException)
-                {
                 }
             }
-            catch (Exception error)
+            catch (SqlException error)
             {
-                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
+                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('No se pudo cargar los clientes: {0}');", error.Message));
             }
+
         }
 
         //Cuando el usuario ya existe
@@ -1296,20 +1284,17 @@ namespace Dispenser.Dst
         protected void porDefecto()
         {
             cmbVendedor.Enabled = false;
-            txtCodigoClienteFinal.Text = String.Empty;
             txtNombreComercial.Enabled = false;
             txtNombreComercial.Text = String.Empty;
             txtRazonSocial.Enabled = false;
             txtRazonSocial.Text = String.Empty;
             txtCedulaJuridica.Enabled = false;
             txtCedulaJuridica.Text = String.Empty;
-            cmbSegmento.Enabled = false;
             cmbSubSegmento.Enabled = false;
             txtDireccion.Enabled = false;
             txtDireccion.Text = String.Empty;
             txtBarrio.Enabled = false;
             txtBarrio.Text = String.Empty;
-            cmbDepartamento.Enabled = false;
             cmbCiudad.Enabled = false;
             txtCodigoPostal.Enabled = false;
             txtCodigoPostal.Text = String.Empty;
@@ -1345,9 +1330,7 @@ namespace Dispenser.Dst
             btEnviar.Enabled = false;
 
             cmbVendedor.Items.Clear();
-            cmbSegmento.Items.Clear();
             cmbSubSegmento.Items.Clear();
-            cmbDepartamento.Items.Clear();
             cmbCiudad.Items.Clear();
             cmbCondicionPago.Items.Clear();
             cmbNombreComercial.Items.FindItemByValue(String.Empty, true).Selected = true;
