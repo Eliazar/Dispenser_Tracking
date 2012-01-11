@@ -19,9 +19,18 @@ namespace Dispenser
                 if (Session.Contents["rol"].ToString().Equals("DSTADM"))
                 {
                     MenuItem childItem = new MenuItem();
+                    MenuItem childItem1 = new MenuItem();
+                    MenuItem childItem2 = new MenuItem();
+
+                    childItem1.Text = "Clientes Existentes";
+                    childItem1.NavigateUrl = "Dst/Solicitud_Dispensadores.aspx";
+                    childItem2.Text = "Clientes Nuevos";
+                    childItem2.NavigateUrl = "Dst/Solicitud_Dispensadores.aspx";
+                    childItem.ChildItems.Add(childItem2);
+                    childItem.ChildItems.Add(childItem1);
 
                     childItem.Text = "Solicitud Dispensadores";
-                    childItem.NavigateUrl = "Dst/Solicitud_Dispensadores.aspx";
+                    //childItem.NavigateUrl = "Dst/Solicitud_Dispensadores.aspx";
                     NavigationMenu.Items[1].ChildItems.AddAt(0, childItem);
                     NavigationMenu.Items[1].ChildItems[1].NavigateUrl = "Dst/SeguimientoSolicitudes.aspx";
 

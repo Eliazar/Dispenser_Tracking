@@ -42,8 +42,18 @@ namespace Dispenser.Dst
             {
                 Menu menu = Master.FindControl("NavigationMenu") as Menu;
                 MenuItem item = new MenuItem();
+                MenuItem item2 = new MenuItem();
+                MenuItem item3 = new MenuItem();
+
+                item3.Text = "Clientes Nuevos";
+                item3.NavigateUrl = "Solicitud_Dispensadores.aspx";
+
+                item2.ChildItems.Add(item3);
+                item2.Text = "Solicitud Dispensadores";
+                
                 item.Text = "Seguimiento Solicitudes";
                 item.NavigateUrl = "SeguimientoSolicitudes.aspx";
+                menu.Items[1].ChildItems.Add(item2);
                 menu.Items[1].ChildItems.Add(item);
 
                 Connection conexion = new Connection();
@@ -110,7 +120,7 @@ namespace Dispenser.Dst
             cmbMotivos.Items.Clear();
             Connection conexion = new Connection();
 
-            string query = String.Format("SELECT ID_REASON, REASON_DESCRIP FROM RAZONES");
+            string query = String.Format("SELECT ID_REASON, REASON_DESCRIP FROM RAZONES WHERE ID_REASON <> 3");
             string connection = conexion.getConnectionString();
 
             try
@@ -220,8 +230,9 @@ namespace Dispenser.Dst
                     }
 
                 }
-                catch (SqlException)
+                catch (SqlException sqlException)
                 {
+                    radajaxmanager.ResponseScripts.Add(String.Format("alert('No se pudo cargar los motivos: {0}');", sqlException.Message));
                 }
             }
             catch (Exception error)
@@ -230,61 +241,7 @@ namespace Dispenser.Dst
             }
         }
 
-        private void cargarSegmentos(string codigoClienteFinal)
-        {
-            try
-            {
-                Connection conexion = new Connection();
-
-                cmbSegmento.Items.Clear();
-                cmbSubSegmento.Items.Clear();
-
-                string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
-                string segmentoActual = conexion.getEndClientInfo("SEGMENT_ID", "END_USER_ID", codigoClienteFinal, "CLIENT_ID", clientid);
-                string query = String.Format("SELECT SEGMENT_ID, SEGMENT_NAME FROM SEGMENTOS WHERE SEGMENT_ID <> '0'");
-                string connection = conexion.getConnectionString();
-
-                try
-                {
-                    SqlConnection bridge = new SqlConnection(connection);
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, bridge);
-                    DataTable datatable = new DataTable();
-                    adapter.Fill(datatable);
-
-                    RadComboBoxItem temp = new RadComboBoxItem();
-                    temp.Text = String.Empty;
-                    temp.Value = String.Empty;
-
-                    cmbSegmento.Items.Add(temp);
-
-                    foreach (DataRow dataRow in datatable.Rows)
-                    {
-                        RadComboBoxItem item = new RadComboBoxItem();
-                        item.Text = dataRow["SEGMENT_NAME"].ToString();
-                        item.Value = dataRow["SEGMENT_ID"].ToString();
-
-                        if (item.Value.Equals(segmentoActual))
-                        {
-                            item.Selected = true;
-                            cargarSubsegmentos(item.Value, codigoClienteFinal);
-                        }
-
-                        cmbSegmento.Items.Add(item);
-                        item.DataBind();
-
-                    }
-                }
-                catch (SqlException)
-                {
-                }
-            }
-            catch (Exception error)
-            {
-                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
-            }
-        }
-
-        protected void cargarSubsegmentos(string codigoSegmento, string codigoClienteFinal)
+        protected void cargarSubsegmentos(string codigoClienteFinal)
         {
             try
             {
@@ -293,7 +250,7 @@ namespace Dispenser.Dst
 
                 string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
                 string subSegmentoActual = conexion.getEndClientInfo("SUB_SEGMENT_ID", "END_USER_ID", codigoClienteFinal, "CLIENT_ID", clientid);
-                string query = String.Format("SELECT SUB_SEGMENT_ID, SUB_SEGMENT_NAME FROM SUB_SEGMENTOS WHERE SEGMENT_ID = '{0}'", codigoSegmento);
+                string query = String.Format("SELECT SUB_SEGMENT_ID, SUB_SEGMENT_NAME FROM SUB_SEGMENTOS");
                 string connection = conexion.getConnectionString();
 
                 try
@@ -322,8 +279,9 @@ namespace Dispenser.Dst
 
                     }
                 }
-                catch (SqlException)
+                catch (SqlException sqlError)
                 {
+                    radajaxmanager.ResponseScripts.Add(String.Format("alert('No se pudo cargar los segmentos. {0}');", sqlError));
                 }
             }
             catch (Exception error)
@@ -332,60 +290,7 @@ namespace Dispenser.Dst
             }
         }
 
-        protected void cargarDepartamentos(string codigoClienteFinal)
-        {
-            try
-            {
-                Connection conexion = new Connection();
-                cmbDepartamento.Items.Clear();
-                cmbCiudad.Items.Clear();
-
-                string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
-                string estadoActual = conexion.getEndClientInfo("STATE", "END_USER_ID", codigoClienteFinal, "CLIENT_ID", clientid);
-                string idpais = conexion.getUserCountry(Session["userid"].ToString());
-                string query = String.Format("SELECT DISTINCT DIVISION_ID, DIVISION_NAME FROM DIVISION_TERRITORIAL WHERE COUNTRY_ID = '{0}'", idpais);
-                string connection = conexion.getConnectionString();
-
-                try
-                {
-                    SqlConnection bridge = new SqlConnection(connection);
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, bridge);
-                    DataTable datatable = new DataTable();
-                    adapter.Fill(datatable);
-
-                    RadComboBoxItem temp = new RadComboBoxItem();
-                    temp.Text = String.Empty;
-                    temp.Value = String.Empty;
-                    cmbDepartamento.Items.Add(temp);
-
-                    foreach (DataRow dataRow in datatable.Rows)
-                    {
-                        RadComboBoxItem item = new RadComboBoxItem();
-                        item.Text = dataRow["DIVISION_NAME"].ToString();
-                        item.Value = dataRow["DIVISION_NAME"].ToString();
-
-                        if (item.Value.Equals(estadoActual))
-                        {
-                            item.Selected = true;
-                            cargarCiudades(dataRow["DIVISION_ID"].ToString(), codigoClienteFinal);
-                        }
-
-                        cmbDepartamento.Items.Add(item);
-                        item.DataBind();
-
-                    }
-                }
-                catch (SqlException)
-                {
-                }
-            }
-            catch (Exception error)
-            {
-                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
-            }
-        }
-
-        protected void cargarCiudades(string codigoDepartamento, string codigoClienteFinal)
+        protected void cargarCiudades(string codigoClienteFinal)
         {
             try
             {
@@ -395,7 +300,7 @@ namespace Dispenser.Dst
                 string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
                 string ciudadActual = conexion.getEndClientInfo("CITY", "END_USER_ID", codigoClienteFinal, "CLIENT_ID", clientid);
                 string idpais = conexion.getUserCountry(Session["userid"].ToString());
-                string query = String.Format("SELECT CITY_NAME FROM DIVISION_TERRITORIAL WHERE COUNTRY_ID = '{0}' AND DIVISION_ID = '{1}'", idpais, codigoDepartamento);
+                string query = String.Format("SELECT CITY_NAME, DIVISION_ID, DIVISION_NAME FROM DIVISION_TERRITORIAL WHERE COUNTRY_ID = '{0}'", idpais);
                 string connection = conexion.getConnectionString();
 
                 try
@@ -413,10 +318,11 @@ namespace Dispenser.Dst
                     foreach (DataRow dataRow in datatable.Rows)
                     {
                         RadComboBoxItem item = new RadComboBoxItem();
-                        item.Text = dataRow["CITY_NAME"].ToString();
-                        item.Value = dataRow["CITY_NAME"].ToString();
+                        item.Text = dataRow["CITY_NAME"].ToString() + " | " + dataRow["DIVISION_NAME"].ToString();
+                        string temporal = ciudadActual + " | " + dataRow["DIVISION_NAME"].ToString();
+                        item.Value = dataRow["DIVISION_ID"].ToString();
 
-                        if (item.Value.Equals(ciudadActual))
+                        if (item.Value.Equals(temporal))
                             item.Selected = true;
 
                         cmbCiudad.Items.Add(item);
@@ -424,8 +330,9 @@ namespace Dispenser.Dst
 
                     }
                 }
-                catch (SqlException)
+                catch (SqlException sqlError)
                 {
+                    radajaxmanager.ResponseScripts.Add(String.Format("alert('No se pudo cargar las ciudades. {0}');", sqlError));
                 }
             }
             catch (Exception error)
@@ -467,8 +374,9 @@ namespace Dispenser.Dst
 
                     }
                 }
-                catch (SqlException)
+                catch (SqlException sqlError)
                 {
+                    radajaxmanager.ResponseScripts.Add(String.Format("alert('No se pudo cargar las codiciones de pago. {0}');", sqlError));
                 }
             }
             catch (Exception error)
@@ -525,7 +433,7 @@ namespace Dispenser.Dst
             }
         }
 
-        private void cargarSegmentos()
+        /*private void cargarSegmentos()
         {
             try
             {
@@ -568,7 +476,7 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
+        }*/
 
         protected void cargarSubsegmentos(string codigoSegmento)
         {
@@ -613,7 +521,7 @@ namespace Dispenser.Dst
             }
         }
 
-        protected void cargarDepartamentos()
+        /*protected void cargarDepartamentos()
         {
             try
             {
@@ -657,7 +565,7 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
+        }*/
 
         protected void cargarCiudades(string codigoDepartamento)
         {
@@ -744,55 +652,8 @@ namespace Dispenser.Dst
         #endregion
 
         #region Eventos
-        protected void cmbMotivos_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            try
-            {
-                Connection conexion = new Connection();
 
-                codigoDispensadores.Clear();
-                codigoProducto.Clear();
-                cantidadDispensadores.Clear();
-                cantidadProductos.Clear();
-                costoDetalle.Clear();
-                datos.Clear();
-                campos.Clear();
-
-                if (cmbMotivos.Text.Equals(String.Empty))
-                {
-                    porDefecto();
-                    txtCodigoClienteFinal.Enabled = false;
-                    txtNombreComercial.Visible = false;
-                    cmbNombreComercial.Visible = true;
-                    cmbNombreComercial.Enabled = false;
-                    return;
-                }
-                else if (cmbMotivos.SelectedValue.Equals("3"))
-                {
-                    porDefecto();
-                    txtCodigoClienteFinal.Enabled = true;
-                    cmbNombreComercial.Enabled = false;
-                    cmbNombreComercial.Visible = false;
-                    txtNombreComercial.Visible = true;
-                    grdDispensadoresProducto.Enabled = false;
-                }
-                else
-                {
-                    porDefecto();
-                    txtCodigoClienteFinal.Enabled = true;
-                    cmbNombreComercial.Enabled = true;
-                    cmbNombreComercial.Visible = true;
-                    txtNombreComercial.Visible = false;
-                    grdDispensadoresProducto.Enabled = false;
-                }
-            }
-            catch (Exception error)
-            {
-                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
-            }
-        }
-
-        protected void txtCodigoClienteFinal_TextChanged(object sender, EventArgs e)
+        /*protected void txtCodigoClienteFinal_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -855,7 +716,7 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
+        }*/
 
         protected void cmbNombreComercial_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
@@ -875,13 +736,10 @@ namespace Dispenser.Dst
                     return;
                 }
 
-                txtCodigoClienteFinal.Text = cmbNombreComercial.SelectedValue;
-                cargarData(txtCodigoClienteFinal.Text);
+                cargarData(cmbNombreComercial.SelectedValue);
 
                 inicializarComponentes();
                 cargarVendedores(cmbNombreComercial.SelectedValue);
-                cargarSegmentos(cmbNombreComercial.SelectedValue);
-                cargarDepartamentos(cmbNombreComercial.SelectedValue);
                 cargarCondicionesPago(cmbNombreComercial.SelectedValue);
             }
             catch (Exception error)
@@ -908,7 +766,7 @@ namespace Dispenser.Dst
             }
         }
 
-        protected void cmbSegmento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
+        /*protected void cmbSegmento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             try
             {
@@ -923,9 +781,9 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
+        }*/
 
-        protected void cmbDepartamento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
+        /*protected void cmbDepartamento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
 
             try
@@ -946,7 +804,7 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
+        }*/
 
         protected void btEnviar_Click(object sender, EventArgs e)
         {
@@ -957,18 +815,6 @@ namespace Dispenser.Dst
                 string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
                 bool paraSiguienteMes = false;
                 bool esEditable = true;
-
-                if (!validaciones())
-                {
-                    /*codigoDispensadores.Clear();
-                    codigoProducto.Clear();
-                    cantidadDispensadores.Clear();
-                    cantidadProductos.Clear();
-                    datos.Clear();
-                    campos.Clear();*/
-                    return;
-                }
-
 
                 int inconsistencias = 0;
 
@@ -1066,7 +912,7 @@ namespace Dispenser.Dst
                     esEditable = false;
                 }
 
-                if (cmbMotivos.SelectedValue.Equals("3"))
+                /*if (cmbMotivos.SelectedValue.Equals("3"))
                 {
                     string queryUser = "INSERT INTO CLIENTES_FINALES (END_USER_ID, CLIENT_ID, TRADE_NAME, SOCIAL_REASON, CORPORATE_ID, E_MAIL, TELEPHONE," +
                     " SEGMENT_ID, SUB_SEGMENT_ID, ADDRESS, NEIGHBOR, STATE, CITY, POSTAL_CODE, ID_PAYMENT_CONDITION, PURCHASE_FREQUENCY, MAINTENANCE_FREQUENCY, " +
@@ -1109,27 +955,36 @@ namespace Dispenser.Dst
                     esEditable + "')";
                 }
                 else
-                {
+                {*/
                     verificarUpdates();
+
+                    string queryTemp = String.Format("SELECT SEGMENT_ID FROM SUB_SEGMENTOS WHERE SUB_SEGMENT_ID = '{0}'", cmbSubSegmento.SelectedValue);
+                    DataTable tablaTemp = conexion.getGridDataSource(queryTemp);
+
+                    queryTemp = String.Format("SELECT DIVISION_NAME FROM DIVISION_TERRITORIAL WHERE DIVISION_ID = '{0}'", cmbCiudad.SelectedValue);
+                    tablaTemp = conexion.getGridDataSource(queryTemp);
+
+                    int delimitador = cmbCiudad.Text.IndexOf(" |");
+                    string ciudad = cmbCiudad.Text.Substring(0, delimitador);
 
                     query = "INSERT INTO SOLICITUD_DISPENSADORES (DATE_REQUEST, ID_COUNTRY, REASON_ID, INSTALL_DATE, CLIENT_ID, SALES_ID, COMMENTS, END_USER_ID, SEGMENT_ID, SUB_SEGMENT_ID, ADDRESS, NEIGHBORHOOD, CITY, "
                     + "STATE, POSTAL_CODE, CONTACT_TELEPHONE, CONTACT_NAME, CONTACT_EMAIL, CONTACT_POSITION, ID_PAYMENT_CONDITION, PURCHASE_FREQUENCY, MAINTENANCE_FREQUENCY, "
                     + "STRATEGIC_CUSTOMER, TRAFFIC_TYPE, TERTIARY_CLEANING, EMPLOYEES, VISITORS, WASHBASIN, MALE_BATHROOM, FEMALE_BATHROOM, STATUS_ID, INVER_SOLICITADA, "
                     + "NEXT_MONTH, IS_EDITABLE) VALUES ('" + hoy.ToString("yyyMMdd") + "', '" + idpais + "', '" + cmbMotivos.SelectedValue + "', '"
                     + fechaRequerida.ToString("yyyMMdd") + "', '" + clientid + "', '" + cmbVendedor.SelectedValue + "', '" + txtComentarios.Text + "', '" +
-                    txtCodigoClienteFinal.Text + "', '" + cmbSegmento.SelectedValue + "', '" + cmbSubSegmento.SelectedValue + "', '" + txtDireccion.Text + "', '" +
-                    txtBarrio.Text + "', '" + cmbCiudad.SelectedValue + "', '" + cmbDepartamento.SelectedValue + "', '" + txtCodigoPostal.Text + "', '" +
+                    cmbNombreComercial.SelectedValue + "', '" + tablaTemp.Rows[0]["SEGMENT_ID"].ToString() + "', '" + cmbSubSegmento.SelectedValue + "', '" + txtDireccion.Text + "', '" +
+                    txtBarrio.Text + "', '" + ciudad + "', '" + tablaTemp.Rows[0]["DIVISION_NAME"].ToString() + "', '" + txtCodigoPostal.Text + "', '" +
                     txtTelefono.Text + "', '" + txtPersonaContacto.Text + "', '" + txtCorreoContacto.Text + "', '" + txtPosicion.Text + "', '" +
                     cmbCondicionPago.SelectedValue + "', '" + cmbFrecuenciaCompra.SelectedValue + "', '" + cmbFrecuenciaMantenimiento.SelectedValue + "', '" +
                     cmbClienteEstrategico.SelectedValue + "', '" + cmbTipoTrafico.SelectedValue + "', '" + cmbLimpiezaTercerizada.SelectedValue + "', " +
                     Convert.ToInt32(txtCantidadEmpleados.Text) + ", " + Convert.ToInt32(txtCantidadVisitantes.Text) + ", " + Convert.ToInt32(txtCantidadLavatorios.Text) + ", " +
                     Convert.ToInt32(txtBañoHombre.Text) + ", " + Convert.ToInt32(txtBañoMujer.Text) + ", 1, " + valorDetalle2 + ", '" + paraSiguienteMes + "', '" +
                     esEditable + "')";
-                }
+                //}
                 #endregion
 
                 #region Inserccion
-                string dispenserId;
+                string dispenserId = String.Empty;
 
                 //Lista para el correo
                 List<string> datosGenerales = new List<string>();
@@ -1156,7 +1011,7 @@ namespace Dispenser.Dst
 
                         //Para el correo electronico
                         datosGenerales.Add(nombrecliente);//Indice 0
-                        datosGenerales.Add(conexion.getEndClientInfo("TRADE_NAME", "END_USER_ID", txtCodigoClienteFinal.Text, "CLIENT_ID", clientid)); //Indice 1
+                        datosGenerales.Add(conexion.getEndClientInfo("TRADE_NAME", "END_USER_ID", cmbNombreComercial.SelectedValue, "CLIENT_ID", clientid)); //Indice 1
                         datosGenerales.Add(conexion.getUsersInfo("USER_NAME", "USER_ID", Session.Contents["userid"].ToString()));//indice 2
                         datosGenerales.Add(hoy.ToString("dd/MM/yyy"));//indice 3
                         datosGenerales.Add(fechaRequerida.ToString("dd/MM/yyy"));//indice 4
@@ -1344,78 +1199,75 @@ namespace Dispenser.Dst
 
                 DataTable clientesFinales = conexion.getGridDataSource(query);
 
-                foreach (DataRow fila in clientesFinales.Rows)
+                cmbNombreComercial.FindItemByText(clientesFinales.Rows[0]["TRADE_NAME"].ToString(), true).Selected = true;
+
+                txtRazonSocial.Text = clientesFinales.Rows[0]["SOCIAL_REASON"].ToString();
+                if (txtRazonSocial.Text.Equals("N/A"))
                 {
-                    cmbNombreComercial.FindItemByText(fila["TRADE_NAME"].ToString(), true).Selected = true;
-
-                    txtRazonSocial.Text = fila["SOCIAL_REASON"].ToString();
-                    if (txtRazonSocial.Text.Equals("N/A"))
-                    {
-                        txtRazonSocial.Text = fila["TRADE_NAME"].ToString();
-                        conexion.Actualizar(String.Format("UPDATE CLIENTES_FINALES SET SOCIAL_REASON = '{0}' WHERE CLIENT_ID = '{1}' AND END_USER_ID = '{2}'"
-                            , txtRazonSocial.Text, clientid, codigo));
-                    }
-
-
-                    txtCedulaJuridica.Text = fila["CORPORATE_ID"].ToString();
-                    if (txtCedulaJuridica.Text.Equals("N/A"))
-                        txtCedulaJuridica.Text = String.Empty;
-
-                    txtDireccion.Text = fila["ADDRESS"].ToString();
-                    if (txtDireccion.Text.Equals("N/A"))
-                        txtDireccion.Text = String.Empty;
-
-                    txtBarrio.Text = fila["NEIGHBOR"].ToString();
-                    if (txtBarrio.Text.Equals("N/A"))
-                        txtBarrio.Text = String.Empty;
-
-                    txtCodigoPostal.Text = fila["POSTAL_CODE"].ToString();
-                    if (txtCodigoPostal.Text.Equals("N/A"))
-                        txtCodigoPostal.Text = String.Empty;
-
-                    txtTelefono.Text = fila["TELEPHONE"].ToString();
-
-                    txtEMail.Text = fila["E_MAIL"].ToString();
-                    if (txtEMail.Text.Equals("N/A"))
-                        txtEMail.Text = String.Empty;
-
-                    txtCantidadEmpleados.Text = fila["EMPLOYEES"].ToString();
-                    txtCantidadVisitantes.Text = fila["VISITORS"].ToString();
-                    txtCantidadLavatorios.Text = fila["WASHBASIN"].ToString();
-                    txtBañoHombre.Text = fila["MALE_BATH"].ToString();
-                    txtBañoMujer.Text = fila["FEMALE_BATH"].ToString();
-
-                    txtPersonaContacto.Text = fila["CONTACT_PERSON"].ToString();
-                    if (txtPersonaContacto.Text.Equals("N/A"))
-                        txtPersonaContacto.Text = String.Empty;
-
-                    txtTelefonoContacto.Text = fila["CONTACT_TELEPHONE"].ToString();
-                    if (txtTelefonoContacto.Text.Equals("N/A"))
-                        txtTelefonoContacto.Text = String.Empty;
-
-                    txtCorreoContacto.Text = fila["CONTACT_MAIL"].ToString();
-                    if (txtCorreoContacto.Text.Equals("N/A"))
-                        txtCorreoContacto.Text = String.Empty;
-
-                    txtPosicion.Text = fila["CONTACT_POSITION"].ToString();
-                    if (txtPosicion.Text.Equals("N/A"))
-                        txtPosicion.Text = String.Empty;
-
-                    listasDesplegables = fila["PURCHASE_FREQUENCY"].ToString();
-                    cmbFrecuenciaCompra.FindItemByText(listasDesplegables, true).Selected = true;
-
-                    listasDesplegables = fila["MAINTENANCE_FREQUENCY"].ToString();
-                    cmbFrecuenciaMantenimiento.FindItemByValue(listasDesplegables, true).Selected = true;
-
-                    listasDesplegables = fila["STRATEGIC_CUSTOMER"].ToString();
-                    cmbClienteEstrategico.FindItemByValue(listasDesplegables, true).Selected = true;
-
-                    listasDesplegables = fila["TRAFFIC_TYPE"].ToString();
-                    cmbTipoTrafico.FindItemByText(listasDesplegables, true).Selected = true;
-
-                    listasDesplegables = fila["TERTIARY_CLEANING"].ToString();
-                    cmbLimpiezaTercerizada.FindItemByValue(listasDesplegables, true).Selected = true;
+                    txtRazonSocial.Text = clientesFinales.Rows[0]["TRADE_NAME"].ToString();
+                    conexion.Actualizar(String.Format("UPDATE CLIENTES_FINALES SET SOCIAL_REASON = '{0}' WHERE CLIENT_ID = '{1}' AND END_USER_ID = '{2}'"
+                        , clientesFinales.Rows[0]["TRADE_NAME"].ToString(), clientid, codigo));
                 }
+
+
+                txtCedulaJuridica.Text = clientesFinales.Rows[0]["CORPORATE_ID"].ToString();
+                if (txtCedulaJuridica.Text.Equals("N/A"))
+                    txtCedulaJuridica.Text = String.Empty;
+
+                txtDireccion.Text = clientesFinales.Rows[0]["ADDRESS"].ToString();
+                if (txtDireccion.Text.Equals("N/A"))
+                    txtDireccion.Text = String.Empty;
+
+                txtBarrio.Text = clientesFinales.Rows[0]["NEIGHBOR"].ToString();
+                if (txtBarrio.Text.Equals("N/A"))
+                    txtBarrio.Text = String.Empty;
+
+                txtCodigoPostal.Text = clientesFinales.Rows[0]["POSTAL_CODE"].ToString();
+                if (txtCodigoPostal.Text.Equals("N/A"))
+                    txtCodigoPostal.Text = String.Empty;
+
+                txtTelefono.Text = clientesFinales.Rows[0]["TELEPHONE"].ToString();
+
+                txtEMail.Text = clientesFinales.Rows[0]["E_MAIL"].ToString();
+                if (txtEMail.Text.Equals("N/A"))
+                    txtEMail.Text = String.Empty;
+
+                txtCantidadEmpleados.Text = clientesFinales.Rows[0]["EMPLOYEES"].ToString();
+                txtCantidadVisitantes.Text = clientesFinales.Rows[0]["VISITORS"].ToString();
+                txtCantidadLavatorios.Text = clientesFinales.Rows[0]["WASHBASIN"].ToString();
+                txtBañoHombre.Text = clientesFinales.Rows[0]["MALE_BATH"].ToString();
+                txtBañoMujer.Text = clientesFinales.Rows[0]["FEMALE_BATH"].ToString();
+
+                txtPersonaContacto.Text = clientesFinales.Rows[0]["CONTACT_PERSON"].ToString();
+                if (txtPersonaContacto.Text.Equals("N/A"))
+                    txtPersonaContacto.Text = String.Empty;
+
+                txtTelefonoContacto.Text = clientesFinales.Rows[0]["CONTACT_TELEPHONE"].ToString();
+                if (txtTelefonoContacto.Text.Equals("N/A"))
+                    txtTelefonoContacto.Text = String.Empty;
+
+                txtCorreoContacto.Text = clientesFinales.Rows[0]["CONTACT_MAIL"].ToString();
+                if (txtCorreoContacto.Text.Equals("N/A"))
+                    txtCorreoContacto.Text = String.Empty;
+
+                txtPosicion.Text = clientesFinales.Rows[0]["CONTACT_POSITION"].ToString();
+                if (txtPosicion.Text.Equals("N/A"))
+                    txtPosicion.Text = String.Empty;
+
+                listasDesplegables = clientesFinales.Rows[0]["PURCHASE_FREQUENCY"].ToString();
+                cmbFrecuenciaCompra.FindItemByText(listasDesplegables, true).Selected = true;
+
+                listasDesplegables = clientesFinales.Rows[0]["MAINTENANCE_FREQUENCY"].ToString();
+                cmbFrecuenciaMantenimiento.FindItemByValue(listasDesplegables, true).Selected = true;
+
+                listasDesplegables = clientesFinales.Rows[0]["STRATEGIC_CUSTOMER"].ToString();
+                cmbClienteEstrategico.FindItemByValue(listasDesplegables, true).Selected = true;
+
+                listasDesplegables = clientesFinales.Rows[0]["TRAFFIC_TYPE"].ToString();
+                cmbTipoTrafico.FindItemByText(listasDesplegables, true).Selected = true;
+
+                listasDesplegables = clientesFinales.Rows[0]["TERTIARY_CLEANING"].ToString();
+                cmbLimpiezaTercerizada.FindItemByValue(listasDesplegables, true).Selected = true;
 
                 grdDispensadoresProducto.Enabled = true;
                 btEnviar.Enabled = true;
@@ -1435,11 +1287,9 @@ namespace Dispenser.Dst
             txtNombreComercial.Enabled = true;
             txtRazonSocial.Enabled = true;
             txtCedulaJuridica.Enabled = true;
-            cmbSegmento.Enabled = true;
             cmbSubSegmento.Enabled = true;
             txtDireccion.Enabled = true;
             txtBarrio.Enabled = true;
-            cmbDepartamento.Enabled = true;
             cmbCiudad.Enabled = true;
             txtCodigoPostal.Enabled = true;
             txtTelefono.Enabled = true;
@@ -1481,108 +1331,6 @@ namespace Dispenser.Dst
             return new DataTable();
         }
 
-        protected bool validaciones()
-        {
-
-            if (dpFechaSolicitada.IsEmpty)
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('La informacion de la fecha de solicitud de servicio es necesaria.');");
-                return false;
-            }
-
-            if (cmbVendedor.Text.Equals(String.Empty))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('No ha seleccionado un vendedor.');");
-                return false;
-            }
-
-            if (cmbMotivos.SelectedValue.Equals("3"))
-            {
-                if (txtNombreComercial.Text.Equals(String.Empty) || txtNombreComercial.Text.Equals("N/A"))
-                {
-                    radajaxmanager.ResponseScripts.Add(@"alert('El nombre comercial es necesario.');");
-                    return false;
-                }
-            }
-
-            if (txtCedulaJuridica.Text.Equals(String.Empty) || txtCedulaJuridica.Text.Equals("N/A"))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('El numero tributario es necesario.');");
-                return false;
-            }
-
-            if (txtRazonSocial.Text.Equals(String.Empty) || txtRazonSocial.Text.Equals("N/A"))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('La razon social es necesaria.');");
-                return false;
-            }
-
-            if (cmbSegmento.Text.Equals(String.Empty))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('No ha seleccionado un segmento.');");
-                return false;
-            }
-
-            if (txtDireccion.Text.Equals(String.Empty) || txtDireccion.Text.Equals("N/A"))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('La direccion es necesaria.');");
-                return false;
-            }
-
-            if (txtBarrio.Text.Equals(String.Empty) || txtBarrio.Text.Equals("N/A"))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('El barrio o colonia es necesario.');");
-                return false;
-            }
-
-            if (cmbDepartamento.Text.Equals(String.Empty))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('No ha seleccionado un departamento.');");
-                return false;
-            }
-
-            if (cmbCiudad.Text.Equals(String.Empty))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('No ha seleccionado una ciudad.');");
-                return false;
-            }
-
-            if (txtTelefono.Text.Equals(String.Empty) || txtTelefono.Text.Equals("0"))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('El telefono es necesario.');");
-                return false;
-            }
-
-            if (txtPersonaContacto.Text.Equals(String.Empty) || txtPersonaContacto.Text.Equals("N/A"))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('La persona de contacto es necesario.');");
-                return false;
-            }
-
-            if (txtTelefonoContacto.Text.Equals(String.Empty) || txtTelefonoContacto.Text.Equals("0"))
-            {
-                radajaxmanager.ResponseScripts.Add(@"alert('La informacion, telefono del contacto es requerida.');");
-                return false;
-            }
-
-            if (txtCantidadEmpleados.Text.Equals(String.Empty))
-                txtCantidadEmpleados.Text = "0";
-
-            if (txtCantidadVisitantes.Text.Equals(String.Empty))
-                txtCantidadVisitantes.Text = "0";
-
-            if (txtCantidadLavatorios.Text.Equals(String.Empty))
-                txtCantidadLavatorios.Text = "0";
-
-            if (txtBañoHombre.Text.Equals(String.Empty))
-                txtBañoHombre.Text = "0";
-
-            if (txtBañoMujer.Text.Equals(String.Empty))
-                txtBañoMujer.Text = "0";
-
-            return true;
-        }
-
         protected void verificarUpdates()
         {
 
@@ -1606,7 +1354,7 @@ namespace Dispenser.Dst
                 Connection conexion = new Connection();
 
                 string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
-                string query = String.Format("UPDATE CLIENTES_FINALES SET {0} = '{1}' WHERE CLIENT_ID = '{2}' AND END_USER_ID = '{3}'", campo, valor, clientid, txtCodigoClienteFinal.Text);
+                string query = String.Format("UPDATE CLIENTES_FINALES SET {0} = '{1}' WHERE CLIENT_ID = '{2}' AND END_USER_ID = '{3}'", campo, valor, clientid, cmbNombreComercial.SelectedValue);
 
                 if (conexion.updateClientesFinales(query))
                     return true;
@@ -1908,6 +1656,14 @@ namespace Dispenser.Dst
 
         protected void cmbSubSegmento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
+            Connection conexion = new Connection();
+
+            string query = String.Format("SELECT SEGMENT_ID FROM SUB_SEGMENTOS WHERE SUB_SEGMENT_ID = '{0}'", cmbSubSegmento.SelectedValue);
+            DataTable segmento = conexion.getGridDataSource(query);
+            
+            campos.Add("SEGMENT_ID");
+            datos.Add(segmento.Rows[0]["SEGMENT_ID"].ToString());
+
             campos.Add("SUB_SEGMENT_ID");
             datos.Add(cmbSubSegmento.SelectedValue);
         }
@@ -1944,6 +1700,16 @@ namespace Dispenser.Dst
 
         protected void cmbCiudad_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
+            Connection conexion = new Connection();
+
+            string query = String.Format("SELECT DIVISION_NAME FROM DIVISION_TERRITORIAL WHERE DIVISION_ID = '{0}'", cmbCiudad.SelectedValue);
+            DataTable departamento = conexion.getGridDataSource(query);
+            
+            campos.Add("STATE");
+            datos.Add(departamento.Rows[0]["DIVISION_NAME"].ToString());
+
+            int delimitador = cmbCiudad.Text.IndexOf(" |");
+            string ciudad = cmbCiudad.Text.Substring(0, delimitador);
             campos.Add("CITY");
             datos.Add(cmbCiudad.SelectedValue);
         }

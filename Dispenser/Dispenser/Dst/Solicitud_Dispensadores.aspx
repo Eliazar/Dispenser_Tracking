@@ -84,7 +84,12 @@
                                 <br />
                             </td>
                             <td>
+                                <asp:Image ID="Image30" runat="server" Height="15px" 
+                                    ImageUrl="~/Imagenes/requerido.png" Width="10px" />
                                 <asp:Label ID="lblFechaRequerida" runat="server">Fecha de servicio:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" 
+                                    ControlToValidate="dpFechaSolicitada" CssClass="failureNotification" 
+                                    ErrorMessage="Fecha de servicio requerida." ValidationGroup="TodoError">*</asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadDatePicker ID="dpFechaSolicitada" runat="server" Culture="es-HN" 
@@ -163,7 +168,8 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbVendedor" runat="server" Enabled="False" 
                                     onselectedindexchanged="cmbVendedor_SelectedIndexChanged" Skin="Web20" 
-                                    Width="190px">
+                                    Width="190px" AllowCustomText="True" EnableAutomaticLoadOnDemand="True" 
+                                    EnableVirtualScrolling="True" Filter="Contains" ItemsPerRequest="10">
                                 </telerik:RadComboBox>
                             </td>
                         </tr>
@@ -195,7 +201,8 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbSubSegmento" runat="server" Enabled="False" 
                                     onselectedindexchanged="cmbSubSegmento_SelectedIndexChanged" Skin="Web20" 
-                                    Width="190px">
+                                    Width="190px" AllowCustomText="True" EnableAutomaticLoadOnDemand="True" 
+                                    EnableVirtualScrolling="True" Filter="Contains" ItemsPerRequest="10">
                                 </telerik:RadComboBox>
 
                             </td>
@@ -290,7 +297,9 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbCiudad" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" 
-                                    onselectedindexchanged="cmbCiudad_SelectedIndexChanged">
+                                    onselectedindexchanged="cmbCiudad_SelectedIndexChanged" 
+                                    AllowCustomText="True" EnableAutomaticLoadOnDemand="True" 
+                                    EnableVirtualScrolling="True" Filter="Contains" ItemsPerRequest="10">
                                 </telerik:RadComboBox>
                             </td>
                             <td>
@@ -344,7 +353,8 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbCondicionPago" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" 
-                                    onselectedindexchanged="cmbCondicionPago_SelectedIndexChanged">
+                                    onselectedindexchanged="cmbCondicionPago_SelectedIndexChanged" 
+                                    EnableAutomaticLoadOnDemand="True" ItemsPerRequest="10">
                                 </telerik:RadComboBox>
                             </td>
                             <td>
@@ -366,7 +376,8 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbFrecuenciaCompra" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" 
-                                    onselectedindexchanged="cmbFrecuenciaCompra_SelectedIndexChanged">
+                                    onselectedindexchanged="cmbFrecuenciaCompra_SelectedIndexChanged" 
+                                    EnableAutomaticLoadOnDemand="True" ItemsPerRequest="5">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="30 días" Value="30 días" />
                                         <telerik:RadComboBoxItem runat="server" Text="7 días" Value="7 días" />
@@ -404,7 +415,8 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbFrecuenciaMantenimiento" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" 
-                                    onselectedindexchanged="cmbFrecuenciaMantenimiento_SelectedIndexChanged">
+                                    onselectedindexchanged="cmbFrecuenciaMantenimiento_SelectedIndexChanged" 
+                                    EnableAutomaticLoadOnDemand="True" ItemsPerRequest="5">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="30 días" Value="30 días" />
                                         <telerik:RadComboBoxItem runat="server" Text="7 días" Value="7 días" />
