@@ -128,7 +128,8 @@
                                     AllowCustomText="True" AutoPostBack="true" Filter="Contains" 
                                     onselectedindexchanged="cmbNombreComercial_SelectedIndexChanged" Skin="Web20" 
                                     Width="99%" EnableAutomaticLoadOnDemand="True" ItemsPerRequest="10" 
-                                    EnableVirtualScrolling="True" ShowToggleImage="False">
+                                    EnableVirtualScrolling="True" ShowToggleImage="False" 
+                                    EmptyMessage="Escriba el codigo o el nombre del cliente">
                                 </telerik:RadComboBox>
                                                         
                             </td>

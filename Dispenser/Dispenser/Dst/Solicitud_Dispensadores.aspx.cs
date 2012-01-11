@@ -120,11 +120,6 @@ namespace Dispenser.Dst
                 DataTable datatable = new DataTable();
                 adapter.Fill(datatable);
 
-                RadComboBoxItem temp = new RadComboBoxItem();
-                temp.Text = String.Empty;
-                temp.Value = String.Empty;
-                cmbMotivos.Items.Add(temp);
-
                 foreach (DataRow dataRow in datatable.Rows)
                 {
                     RadComboBoxItem item = new RadComboBoxItem();
