@@ -50,6 +50,7 @@ namespace Dispenser.Dst
 
                 item2.ChildItems.Add(item3);
                 item2.Text = "Solicitud Dispensadores";
+                item2.Selectable = false;
                 
                 item.Text = "Seguimiento Solicitudes";
                 item.NavigateUrl = "SeguimientoSolicitudes.aspx";
@@ -156,6 +157,7 @@ namespace Dispenser.Dst
             string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
             string query = String.Format("SELECT END_USER_ID, TRADE_NAME FROM CLIENTES_FINALES WHERE CLIENT_ID = '{0}' AND CLIENT_STATUS = 1 ORDER BY TRADE_NAME", clientid);
             string connection = conexion.getConnectionString();
+
 
             try
             {
@@ -478,7 +480,7 @@ namespace Dispenser.Dst
             }
         }*/
 
-        protected void cargarSubsegmentos(string codigoSegmento)
+        /*protected void cargarSubsegmentos(string codigoSegmento)
         {
             try
             {
@@ -519,7 +521,7 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
+        }*/
 
         /*protected void cargarDepartamentos()
         {
@@ -567,7 +569,7 @@ namespace Dispenser.Dst
             }
         }*/
 
-        protected void cargarCiudades(string codigoDepartamento)
+        /*protected void cargarCiudades(string codigoDepartamento)
         {
             try
             {
@@ -610,7 +612,7 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
+        }*/
 
         protected void cargarCondicionesPago()
         {

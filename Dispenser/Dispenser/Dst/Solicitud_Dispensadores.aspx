@@ -130,11 +130,10 @@
                             <td colspan="3">
                                                         
                                 <telerik:RadComboBox ID="cmbNombreComercial" runat="server" 
-                                    AllowCustomText="True" AutoPostBack="true" Filter="Contains" 
+                                    AllowCustomText="True" AutoPostBack="True" Filter="Contains" 
                                     onselectedindexchanged="cmbNombreComercial_SelectedIndexChanged" Skin="Web20" 
-                                    Width="99%" EnableAutomaticLoadOnDemand="True" ItemsPerRequest="10" 
-                                    EnableVirtualScrolling="True" ShowToggleImage="False" 
-                                    EmptyMessage="Escriba el codigo o el nombre del cliente">
+                                    Width="99%" ItemsPerRequest="20" 
+                                    EnableVirtualScrolling="True" MaxHeight="40%">
                                 </telerik:RadComboBox>
                                                         
                             </td>
@@ -186,7 +185,7 @@
                             <td>
 
                                 <telerik:RadTextBox ID="txtNombreComercial" runat="server" Enabled="False" 
-                                    MaxLength="60" Skin="Web20" Visible="False" Width="190px">
+                                    MaxLength="60" Skin="Web20" Width="190px">
                                 </telerik:RadTextBox>
                             </td>
                             <td>
