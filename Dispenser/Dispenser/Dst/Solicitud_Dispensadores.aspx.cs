@@ -252,7 +252,7 @@ namespace Dispenser.Dst
 
                 string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
                 string subSegmentoActual = conexion.getEndClientInfo("SUB_SEGMENT_ID", "END_USER_ID", codigoClienteFinal, "CLIENT_ID", clientid);
-                string query = String.Format("SELECT SUB_SEGMENT_ID, SUB_SEGMENT_NAME FROM SUB_SEGMENTOS");
+                string query = String.Format("SELECT SUB_SEGMENT_ID, SUB_SEGMENT_NAME FROM SUB_SEGMENTOS WHERE SUB_SEGMENT_ID <> 0");
                 string connection = conexion.getConnectionString();
 
                 try
@@ -302,7 +302,7 @@ namespace Dispenser.Dst
                 string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
                 string ciudadActual = conexion.getEndClientInfo("CITY", "END_USER_ID", codigoClienteFinal, "CLIENT_ID", clientid);
                 string idpais = conexion.getUserCountry(Session["userid"].ToString());
-                string query = String.Format("SELECT CITY_NAME, DIVISION_ID, DIVISION_NAME FROM DIVISION_TERRITORIAL WHERE COUNTRY_ID = '{0}'", idpais);
+                string query = String.Format("SELECT CITY_NAME, DIVISION_ID, DIVISION_NAME FROM DIVISION_TERRITORIAL WHERE COUNTRY_ID = '{0}' ORDER BY DIVISION_NAME", idpais);
                 string connection = conexion.getConnectionString();
 
                 try
@@ -389,7 +389,7 @@ namespace Dispenser.Dst
 
         //Cuando el usuario no existe
 
-        private void cargarVendedores()
+        /*private void cargarVendedores()
         {
             try
             {
@@ -433,7 +433,7 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
+        }*/
 
         /*private void cargarSegmentos()
         {
@@ -738,11 +738,14 @@ namespace Dispenser.Dst
                     return;
                 }
 
-                cargarData(cmbNombreComercial.SelectedValue);
-
                 inicializarComponentes();
+
+                cargarData(cmbNombreComercial.SelectedValue);
                 cargarVendedores(cmbNombreComercial.SelectedValue);
                 cargarCondicionesPago(cmbNombreComercial.SelectedValue);
+                cargarSubsegmentos(cmbNombreComercial.SelectedValue);
+                cargarCiudades(cmbNombreComercial.SelectedValue);
+
             }
             catch (Exception error)
             {
@@ -1201,7 +1204,9 @@ namespace Dispenser.Dst
 
                 DataTable clientesFinales = conexion.getGridDataSource(query);
 
-                cmbNombreComercial.FindItemByText(clientesFinales.Rows[0]["TRADE_NAME"].ToString(), true).Selected = true;
+                string clienteEscogido = clientesFinales.Rows[0]["END_USER_ID"].ToString() + " | " + clientesFinales.Rows[0]["TRADE_NAME"].ToString();
+
+                cmbNombreComercial.FindItemByText(clienteEscogido, true).Selected = true;
 
                 txtRazonSocial.Text = clientesFinales.Rows[0]["SOCIAL_REASON"].ToString();
                 if (txtRazonSocial.Text.Equals("N/A"))

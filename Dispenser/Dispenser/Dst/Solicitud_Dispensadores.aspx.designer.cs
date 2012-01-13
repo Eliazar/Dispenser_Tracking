@@ -85,15 +85,6 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadComboBox cmbMotivos;
         
         /// <summary>
-        /// Image30 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image30;
-        
-        /// <summary>
         /// lblFechaRequerida control.
         /// </summary>
         /// <remarks>
@@ -166,15 +157,6 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadComboBox cmbNombreComercial;
         
         /// <summary>
-        /// Image16 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image16;
-        
-        /// <summary>
         /// lblCedulaJuridica control.
         /// </summary>
         /// <remarks>
@@ -200,15 +182,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox txtCedulaJuridica;
-        
-        /// <summary>
-        /// Image19 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image19;
         
         /// <summary>
         /// lblVendedor control.
@@ -238,15 +211,6 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadComboBox cmbVendedor;
         
         /// <summary>
-        /// Image17 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image17;
-        
-        /// <summary>
         /// lblNombreComercial control.
         /// </summary>
         /// <remarks>
@@ -274,15 +238,6 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadTextBox txtNombreComercial;
         
         /// <summary>
-        /// Image20 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image20;
-        
-        /// <summary>
         /// lblSubSegmento control.
         /// </summary>
         /// <remarks>
@@ -308,15 +263,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadComboBox cmbSubSegmento;
-        
-        /// <summary>
-        /// Image18 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image18;
         
         /// <summary>
         /// lblRazonSocial control.
@@ -355,15 +301,6 @@ namespace Dispenser.Dst {
         protected global::System.Web.UI.WebControls.Panel Direccion;
         
         /// <summary>
-        /// Image21 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image21;
-        
-        /// <summary>
         /// lblDireccion control.
         /// </summary>
         /// <remarks>
@@ -389,15 +326,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox txtDireccion;
-        
-        /// <summary>
-        /// Image22 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image22;
         
         /// <summary>
         /// lblBarrio control.
@@ -427,15 +355,6 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadTextBox txtBarrio;
         
         /// <summary>
-        /// Image24 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image24;
-        
-        /// <summary>
         /// lblTelefono control.
         /// </summary>
         /// <remarks>
@@ -461,15 +380,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadNumericTextBox txtTelefono;
-        
-        /// <summary>
-        /// Image23 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image23;
         
         /// <summary>
         /// lblCiudad control.
@@ -499,15 +409,6 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadComboBox cmbCiudad;
         
         /// <summary>
-        /// Image25 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image25;
-        
-        /// <summary>
         /// lblEMail control.
         /// </summary>
         /// <remarks>
@@ -533,15 +434,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox txtEMail;
-        
-        /// <summary>
-        /// Image26 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image26;
         
         /// <summary>
         /// lblCodigoPostal control.
@@ -787,15 +679,6 @@ namespace Dispenser.Dst {
         protected global::System.Web.UI.WebControls.Panel PersonaContacto;
         
         /// <summary>
-        /// Image27 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image27;
-        
-        /// <summary>
         /// lblPersonaContacto control.
         /// </summary>
         /// <remarks>
@@ -823,15 +706,6 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadTextBox txtPersonaContacto;
         
         /// <summary>
-        /// Image29 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image29;
-        
-        /// <summary>
         /// lblTelefonoContacto control.
         /// </summary>
         /// <remarks>
@@ -857,15 +731,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadNumericTextBox txtTelefonoContacto;
-        
-        /// <summary>
-        /// Image28 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image28;
         
         /// <summary>
         /// lblCorreoContacto control.

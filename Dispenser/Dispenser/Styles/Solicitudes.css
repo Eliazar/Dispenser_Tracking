@@ -390,3 +390,15 @@ ul
     padding: 0 5px 0 0;
     line-height: 14px;
 }
+
+.celdasRequeridas
+{
+    border-left-color: Blue;
+    border-left-width: thick;
+    background-color: ButtonFace;
+}
+
+.celdas
+{
+    background-color: ButtonFace;
+}

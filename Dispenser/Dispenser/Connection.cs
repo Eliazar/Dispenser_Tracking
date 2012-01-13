@@ -21,8 +21,8 @@ namespace Dispenser
 
         public Connection()
         {
-            connection = ConfigurationManager.ConnectionStrings["Casa"].ConnectionString;
-            //connection = ConfigurationManager.ConnectionStrings["KCPConexion"].ConnectionString;
+            //connection = ConfigurationManager.ConnectionStrings["Casa"].ConnectionString;
+            connection = ConfigurationManager.ConnectionStrings["KCPConexion"].ConnectionString;
             //connection = ConfigurationManager.ConnectionStrings["ServerConexion"].ConnectionString;
         }
 
