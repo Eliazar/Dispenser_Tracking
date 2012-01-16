@@ -82,6 +82,13 @@
     <Compile Include="Dst\SeguimientoSolicitudes.aspx.designer.cs">
       <DependentUpon>SeguimientoSolicitudes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dst\Solicitud_Clientes_Nuevos.aspx.cs">
+      <DependentUpon>Solicitud_Clientes_Nuevos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dst\Solicitud_Clientes_Nuevos.aspx.designer.cs">
+      <DependentUpon>Solicitud_Clientes_Nuevos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dst\Solicitud_Dispensadores.aspx.cs">
       <DependentUpon>Solicitud_Dispensadores.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -223,6 +230,7 @@
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="Dst\SeguimientoSolicitudes.aspx" />
+    <Content Include="Dst\Solicitud_Clientes_Nuevos.aspx" />
     <Content Include="Dst\Solicitud_Dispensadores.aspx" />
     <Content Include="Imagenes\Arte-Nuevo-de-KCP.png" />
     <Content Include="Imagenes\bg.jpg" />
@@ -257,6 +265,7 @@
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\Autorizaciones.css" />
+    <Content Include="Styles\ListboxMultiCampo.css" />
     <Content Include="Styles\Mantenimiento.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\Solicitudes.css" />

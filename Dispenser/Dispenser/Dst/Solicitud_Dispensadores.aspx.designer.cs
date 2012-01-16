@@ -31,6 +31,60 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadWindowManager RadWindowManager1;
         
         /// <summary>
+        /// sqlCiudad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlCiudad;
+        
+        /// <summary>
+        /// sqlMotivos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlMotivos;
+        
+        /// <summary>
+        /// sqlClientes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlClientes;
+        
+        /// <summary>
+        /// sqlVendedores control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlVendedores;
+        
+        /// <summary>
+        /// sqlCondicionesPago control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlCondicionesPago;
+        
+        /// <summary>
+        /// sqlSegmento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource sqlSegmento;
+        
+        /// <summary>
         /// Cargar control.
         /// </summary>
         /// <remarks>
@@ -382,31 +436,22 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadNumericTextBox txtTelefono;
         
         /// <summary>
-        /// lblCiudad control.
+        /// lblCodigoPostal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCiudad;
+        protected global::System.Web.UI.WebControls.Label lblCodigoPostal;
         
         /// <summary>
-        /// RequiredFieldValidator8 control.
+        /// txtCodigoPostal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
-        
-        /// <summary>
-        /// cmbCiudad control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadComboBox cmbCiudad;
+        protected global::Telerik.Web.UI.RadTextBox txtCodigoPostal;
         
         /// <summary>
         /// lblEMail control.
@@ -436,22 +481,31 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadTextBox txtEMail;
         
         /// <summary>
-        /// lblCodigoPostal control.
+        /// lblCiudad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCodigoPostal;
+        protected global::System.Web.UI.WebControls.Label lblCiudad;
         
         /// <summary>
-        /// txtCodigoPostal control.
+        /// RequiredFieldValidator8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCodigoPostal;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        
+        /// <summary>
+        /// cmbCiudad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadComboBox cmbCiudad;
         
         /// <summary>
         /// expresion control.

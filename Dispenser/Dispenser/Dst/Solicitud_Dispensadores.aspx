@@ -14,6 +14,13 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Web20">
     </telerik:RadWindowManager>
     
+    <asp:SqlDataSource ID="sqlCiudad" runat="server"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="sqlMotivos" runat="server"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="sqlClientes" runat="server"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="sqlVendedores" runat="server"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="sqlCondicionesPago" runat="server"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="sqlSegmento" runat="server"></asp:SqlDataSource>
+    
     <telerik:RadAjaxLoadingPanel runat="server" ID="Cargar" Skin="Web20">
     </telerik:RadAjaxLoadingPanel>
 
@@ -77,7 +84,9 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbMotivos" runat="server" Width="190px" 
                                     Skin="Web20" 
-                                    LoadingMessage="Cargando...">
+                                    LoadingMessage="Cargando..." DataSourceID="sqlMotivos" 
+                                    onitemdatabound="cmbMotivos_ItemDataBound">
+                                    
                                 </telerik:RadComboBox>
                             </td>
                             <td class="celdasRequeridas">
@@ -120,14 +129,29 @@
                     <table border="1" cellspacing="0px" cellpadding="0px" width="100%">
                         <tr>
                             <td class="celdas">
-                                <asp:Label ID="lblCodigoCliente" runat="server">Codigo/Nombre Cliente:</asp:Label>
+                                <asp:Label ID="lblCodigoCliente" runat="server">Nombre Cliente:</asp:Label>
                             </td>
                             <td colspan="3">
                                                         
                                 <telerik:RadComboBox ID="cmbNombreComercial" Runat="server" 
                                     AllowCustomText="True" AutoPostBack="True" Filter="Contains" 
                                     onselectedindexchanged="cmbNombreComercial_SelectedIndexChanged" Skin="Web20" 
-                                    Width="99%">
+                                    Width="100%" DataSourceID="sqlClientes" EnableLoadOnDemand="True" 
+                                    Height="190px" HighlightTemplatedItems="True" 
+                                    onitemdatabound="cmbNombreComercial_ItemDataBound" 
+                                    onitemsrequested="cmbNombreComercial_ItemsRequested" Sort="Ascending">
+                                    <HeaderTemplate>
+                                        <ul>
+                                            <li class="col1">Codigo</li>
+                                            <li class="col2">Cliente</li>
+                                        </ul>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <ul>
+                                            <li class="col1"><%# DataBinder.Eval(Container.DataItem, "END_USER_ID")%></li>
+                                            <li class="col2"><%# DataBinder.Eval(Container.DataItem, "TRADE_NAME")%></li>
+                                        </ul>
+                                    </ItemTemplate>
                                 </telerik:RadComboBox>
                                                         
                             </td>
@@ -157,7 +181,8 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbVendedor" runat="server" Enabled="False" 
                                     onselectedindexchanged="cmbVendedor_SelectedIndexChanged" Skin="Web20" 
-                                    Width="190px" AllowCustomText="True" Filter="Contains">
+                                    Width="190px" AllowCustomText="True" Filter="Contains" 
+                                    DataSourceID="sqlVendedores" onitemdatabound="cmbVendedor_ItemDataBound">
                                 </telerik:RadComboBox>
                             </td>
                         </tr>
@@ -186,7 +211,9 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbSubSegmento" runat="server" Enabled="False" 
                                     onselectedindexchanged="cmbSubSegmento_SelectedIndexChanged" Skin="Web20" 
-                                    Width="190px" AllowCustomText="True" Filter="Contains">
+                                    Width="190px" AllowCustomText="True" Filter="Contains" 
+                                    DataSourceID="sqlSegmento" EnableLoadOnDemand="True" Height="100px" 
+                                    onitemdatabound="cmbSubSegmento_ItemDataBound">
                                 </telerik:RadComboBox>
 
                             </td>
@@ -261,19 +288,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="celdasRequeridas">
-                                <asp:Label runat="server" ID="lblCiudad">Ciudad:</asp:Label>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
-                                    ErrorMessage="Ciudad requerida" ControlToValidate="cmbCiudad" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
-                                </asp:RequiredFieldValidator>
+                            <td class="celdas">
+                                <asp:Label runat="server" ID="lblCodigoPostal">Codigo<br />Postal:</asp:Label>
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cmbCiudad" runat="server" Width="190px"
-                                    Skin="Web20" Enabled="False" 
-                                    onselectedindexchanged="cmbCiudad_SelectedIndexChanged" 
-                                    AllowCustomText="True" Filter="Contains">
-                                </telerik:RadComboBox>
+                                <telerik:RadTextBox ID="txtCodigoPostal" runat="server" Enabled="False" 
+                                    MaxLength="10" ontextchanged="txtCodigoPostal_TextChanged" Skin="Web20" 
+                                    Width="190px">
+                                </telerik:RadTextBox>
                             </td>
                             <td class="celdasRequeridas">
                                 <asp:Label runat="server" ID="lblEMail">Correo<br />Electronico:</asp:Label>
@@ -290,14 +312,34 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="celdas">
-                                <asp:Label ID="lblCodigoPostal" runat="server">Codigo<br />Postal:</asp:Label>
+                            <td class="celdasRequeridas">
+                                <asp:Label ID="lblCiudad" runat="server">Estado:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
+                                    ControlToValidate="cmbCiudad" CssClass="failureNotification" 
+                                    ErrorMessage="Ciudad requerida" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtCodigoPostal" runat="server" Enabled="False" 
-                                    MaxLength="10" ontextchanged="txtCodigoPostal_TextChanged" Skin="Web20" 
-                                    Width="190px">
-                                </telerik:RadTextBox>
+                                <telerik:RadComboBox ID="cmbCiudad" Runat="server" AllowCustomText="True" 
+                                    DataSourceID="sqlCiudad" Enabled="False" EnableLoadOnDemand="True" 
+                                    Filter="Contains" Height="190px" HighlightTemplatedItems="True" 
+                                    MarkFirstMatch="True" onitemdatabound="cmbCiudad_ItemDataBound" 
+                                    onitemsrequested="cmbCiudad_ItemsRequested" 
+                                    onselectedindexchanged="cmbCiudad_SelectedIndexChanged" Skin="Web20" 
+                                    Sort="Ascending" Width="265px">
+                                    <HeaderTemplate>
+                                        <ul>
+                                            <li class="col2">Estado</li>
+                                            <li class="col1">Ciudad</li>
+                                        </ul>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <ul>
+                                            <li class="col2"><%# DataBinder.Eval(Container.DataItem, "DIVISION_NAME")%></li>
+                                            <li class="col1"><%# DataBinder.Eval(Container.DataItem, "CITY_NAME")%></li>
+                                        </ul>
+                                    </ItemTemplate>
+                                </telerik:RadComboBox>
                             </td>
                             <td colspan="2">
                                 <asp:RegularExpressionValidator ID="expresion" runat="server" 
@@ -322,7 +364,9 @@
                             <td>
                                 <telerik:RadComboBox ID="cmbCondicionPago" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" 
-                                    onselectedindexchanged="cmbCondicionPago_SelectedIndexChanged">
+                                    onselectedindexchanged="cmbCondicionPago_SelectedIndexChanged" 
+                                    DataSourceID="sqlCondicionesPago" Height="100px" 
+                                    onitemdatabound="cmbCondicionPago_ItemDataBound">
                                 </telerik:RadComboBox>
                             </td>
                             <td class="celdas">

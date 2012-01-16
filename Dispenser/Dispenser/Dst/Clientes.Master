@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
     <title></title>
     <link href="../Styles/Solicitudes.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/ListboxMultiCampo.css" rel="Stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
