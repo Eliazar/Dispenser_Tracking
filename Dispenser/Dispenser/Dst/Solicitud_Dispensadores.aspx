@@ -172,7 +172,8 @@
                             <td>
 
                                 <telerik:RadTextBox ID="txtNombreComercial" runat="server" Enabled="False" 
-                                    MaxLength="60" Skin="Web20" Width="190px">
+                                    MaxLength="60" Skin="Web20" Width="190px" 
+                                    ontextchanged="txtNombreComercial_TextChanged1">
                                 </telerik:RadTextBox>
                             </td>
                             <td class="celdasRequeridas">
@@ -289,7 +290,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label ID="lblCodigoPostal" runat="server">Codigo<br />Postal:</asp:Label>
                             </td>
                             <td>

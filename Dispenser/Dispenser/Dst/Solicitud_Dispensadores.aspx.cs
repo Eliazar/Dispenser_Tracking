@@ -967,7 +967,7 @@ namespace Dispenser.Dst
                     DataTable tablaTemp = conexion.getGridDataSource(queryTemp);
 
                     queryTemp = String.Format("SELECT DIVISION_NAME FROM DIVISION_TERRITORIAL WHERE DIVISION_ID = '{0}'", cmbCiudad.SelectedValue);
-                    tablaTemp = conexion.getGridDataSource(queryTemp);
+                    DataTable tablaTemp1 = conexion.getGridDataSource(queryTemp);
 
                     int delimitador = cmbCiudad.Text.IndexOf(" |");
                     string ciudad = cmbCiudad.Text.Substring(0, delimitador);
@@ -978,7 +978,7 @@ namespace Dispenser.Dst
                     + "NEXT_MONTH, IS_EDITABLE) VALUES ('" + hoy.ToString("yyyMMdd") + "', '" + idpais + "', '" + cmbMotivos.SelectedValue + "', '"
                     + fechaRequerida.ToString("yyyMMdd") + "', '" + clientid + "', '" + cmbVendedor.SelectedValue + "', '" + txtComentarios.Text + "', '" +
                     cmbNombreComercial.SelectedValue + "', '" + tablaTemp.Rows[0]["SEGMENT_ID"].ToString() + "', '" + cmbSubSegmento.SelectedValue + "', '" + txtDireccion.Text + "', '" +
-                    txtBarrio.Text + "', '" + ciudad + "', '" + tablaTemp.Rows[0]["DIVISION_NAME"].ToString() + "', '" + txtCodigoPostal.Text + "', '" +
+                    txtBarrio.Text + "', '" + ciudad + "', '" + tablaTemp1.Rows[0]["DIVISION_NAME"].ToString() + "', '" + txtCodigoPostal.Text + "', '" +
                     txtTelefono.Text + "', '" + txtPersonaContacto.Text + "', '" + txtCorreoContacto.Text + "', '" + txtPosicion.Text + "', '" +
                     cmbCondicionPago.SelectedValue + "', '" + cmbFrecuenciaCompra.SelectedValue + "', '" + cmbFrecuenciaMantenimiento.SelectedValue + "', '" +
                     cmbClienteEstrategico.SelectedValue + "', '" + cmbTipoTrafico.SelectedValue + "', '" + cmbLimpiezaTercerizada.SelectedValue + "', " +
@@ -1828,6 +1828,13 @@ namespace Dispenser.Dst
             campos.Add("CONTACT_POSITION");
             datos.Add(txtPosicion.Text);
         }
+
+        protected void txtNombreComercial_TextChanged1(object sender, EventArgs e)
+        {
+            campos.Add("TRADE_NAME");
+            datos.Add(txtNombreComercial.Text);
+        }
         #endregion
+
     }
 }
