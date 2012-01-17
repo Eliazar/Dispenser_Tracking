@@ -1789,23 +1789,18 @@ namespace Dispenser.Dst
 
         protected void cmbCiudad_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
-            /*Connection conexion = new Connection();
+            Connection conexion = new Connection();
 
             string departamentoActual = conexion.getEndClientInfo("STATE", "END_USER_ID", cmbNombreComercial.SelectedValue, "CLIENT_ID", conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString()));
             
-            string query = String.Format("SELECT DIVISION_NAME FROM DIVISION_TERRITORIAL WHERE DIVISION_ID = '{0}'", cmbCiudad.SelectedValue);
-            DataTable departamento = conexion.getGridDataSource(query);
-
-            if (departamentoActual.Equals(departamento.Rows[0]["DIVISION_NAME"].ToString()))
+            if (!departamentoActual.Equals(cmbCiudad.Text))
             {
                 campos.Add("STATE");
-                datos.Add(departamento.Rows[0]["DIVISION_NAME"].ToString());
+                datos.Add(cmbCiudad.Text);
             }
 
-            int delimitador = cmbCiudad.Text.IndexOf(" |");
-            string ciudad = cmbCiudad.Text.Substring(0, delimitador);
             campos.Add("CITY");
-            datos.Add(cmbCiudad.Text);*/
+            datos.Add(cmbCiudad.SelectedValue);
         }
 
         protected void txtCodigoPostal_TextChanged(object sender, EventArgs e)

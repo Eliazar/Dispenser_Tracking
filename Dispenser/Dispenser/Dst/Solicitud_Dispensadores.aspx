@@ -76,7 +76,7 @@
             <fieldset>
                 <legend>Motivos</legend>
                 <asp:Panel ID="header" runat="server">
-                    <table border="1" cellspacing="0px" cellpadding="0px" width="100%">
+                    <table width="100%" border="1" cellspacing="0px" cellpadding="0px">
                         <tr>
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblMotivo">Motivo de<br />Instalacion:</asp:Label>

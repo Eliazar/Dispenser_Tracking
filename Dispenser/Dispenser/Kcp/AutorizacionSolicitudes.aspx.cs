@@ -14,7 +14,7 @@ namespace Dispenser.Kcp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            /*try
             {
                 if (!IsPostBack)
                 {
@@ -26,7 +26,7 @@ namespace Dispenser.Kcp
             catch (Exception error)
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
-            }
+            }*/
         }
 
         #region Todo del grid
