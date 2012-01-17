@@ -1303,12 +1303,19 @@ namespace Dispenser.Dst
                     txtPosicion.Text = String.Empty;
 
                 listasDesplegables = clientesFinales.Rows[0]["SELLER_ID"].ToString();
-                cmbVendedor.FindItemByValue(listasDesplegables, true).Selected = true;
+                if(!listasDesplegables.Equals("N/A"))
+                    cmbVendedor.FindItemByValue(listasDesplegables, true).Selected = true;
 
                 listasDesplegables = clientesFinales.Rows[0]["SUB_SEGMENT_ID"].ToString();
-                cmbSubSegmento.FindItemByValue(listasDesplegables, true).Selected = true;
+                if(!listasDesplegables.Equals("0"))
+                    cmbSubSegmento.FindItemByValue(listasDesplegables, true).Selected = true;
 
-                //Trabajar en la listas de ciudad
+                listasDesplegables = clientesFinales.Rows[0]["CITY"].ToString();
+                if(!listasDesplegables.Equals("N/A"))
+                    cmbCiudad.FindItemByValue(listasDesplegables, true).Selected = true;
+
+                listasDesplegables = clientesFinales.Rows[0]["ID_PAYMENT_CONDITION"].ToString();
+                cmbCondicionPago.FindItemByValue(listasDesplegables, true).Selected = true;
                 
                 listasDesplegables = clientesFinales.Rows[0]["PURCHASE_FREQUENCY"].ToString();
                 cmbFrecuenciaCompra.FindItemByText(listasDesplegables, true).Selected = true;
