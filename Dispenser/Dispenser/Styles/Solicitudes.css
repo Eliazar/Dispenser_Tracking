@@ -393,12 +393,19 @@ ul
 
 .celdasRequeridas
 {
-    border-left-color: Blue;
+    border-left-color: Red;
     border-left-width: thick;
     background-color: ButtonFace;
+    text-align: center;
 }
 
 .celdas
 {
+    background-color: ButtonFace;
+}
+
+.campos
+{
+    text-align: center;
     background-color: ButtonFace;
 }

@@ -3,7 +3,6 @@
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
-    <script type="text/javascript" src="../Scripts/Advertencia.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server"> 
     
@@ -24,7 +23,8 @@
     <telerik:RadAjaxLoadingPanel runat="server" ID="Cargar" Skin="Web20">
     </telerik:RadAjaxLoadingPanel>
 
-    <telerik:RadAjaxManager ID="radajaxmanager" runat="server">
+    <telerik:RadAjaxManager ID="radajaxmanager" runat="server" 
+        DefaultLoadingPanelID="Cargar">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="cmbMotivos">
                 <UpdatedControls>
@@ -76,28 +76,28 @@
             <fieldset>
                 <legend>Motivos</legend>
                 <asp:Panel ID="header" runat="server">
-                    <table width="100%" border="1" cellspacing="0px" cellpadding="0px">
+                    <table width="100%" border="1" cellspacing="3px" cellpadding="2px">
                         <tr>
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblMotivo">Motivo de<br />Instalacion:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbMotivos" runat="server" Width="190px" 
+                            <td class="campos">
+                                <telerik:RadComboBox ID="cmbMotivos" runat="server" Width="200px" 
                                     Skin="Web20" 
                                     LoadingMessage="Cargando..." DataSourceID="sqlMotivos" 
                                     onitemdatabound="cmbMotivos_ItemDataBound">
                                     
                                 </telerik:RadComboBox>
                             </td>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label ID="lblFechaRequerida" runat="server">Fecha de<br />Servicio:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" 
                                     ControlToValidate="dpFechaSolicitada" CssClass="failureNotification" 
                                     ErrorMessage="Fecha de servicio requerida." ValidationGroup="TodoError">*</asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadDatePicker ID="dpFechaSolicitada" runat="server" Culture="es-HN" 
-                                    Skin="Web20" Width="190px">
+                                    Skin="Web20" Width="200px">
                                     <Calendar Skin="Web20" UseColumnHeadersAsSelectors="False" 
                                         UseRowHeadersAsSelectors="False" ViewSelectorText="x">
                                     </Calendar>
@@ -111,10 +111,10 @@
                             <td class="celdas">
                                 <asp:Label ID="lblComentario" runat="server">Comentarios:</asp:Label>
                             </td>
-                            <td colspan="4">
+                            <td colspan="4" class="campos">
 
                                 <telerik:RadTextBox ID="txtComentarios" runat="server" Skin="Web20" 
-                                    TextMode="MultiLine" Width="470px">
+                                    TextMode="MultiLine" Width="490px">
                                 </telerik:RadTextBox>
 
                             </td>
@@ -126,7 +126,7 @@
             <fieldset>
                 <legend>Informacion Especifica Del Cliente</legend>
                 <asp:Panel ID="infoCliente" runat="server">
-                    <table border="1" cellspacing="3px" cellpadding="3px" width="100%">
+                    <table border="1" cellspacing="3px" width="100%">
                         <tr>
                             <td class="celdas" style="border: 1px">
                                 <asp:Label ID="lblCodigoCliente" runat="server">Nombre Cliente:</asp:Label>
@@ -157,7 +157,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblCedulaJuridica">Cedula<br />Juridica:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                     ErrorMessage="Cedula juridica requerida" ControlToValidate="txtCedulaJuridica" 
@@ -166,19 +166,19 @@
                                 
                                 
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtCedulaJuridica" runat="server" Enabled="False" 
                                     MaxLength="15" ontextchanged="txtCedulaJuridica_TextChanged" Skin="Web20" 
                                     Width="190px">
                                 </telerik:RadTextBox>
                             </td>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblVendedor">Vendedor:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                     ControlToValidate="cmbVendedor" CssClass="failureNotification" 
                                     ValidationGroup="TodoError" ErrorMessage="Vendedor Requerido">*</asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadComboBox ID="cmbVendedor" runat="server" Enabled="False" 
                                     onselectedindexchanged="cmbVendedor_SelectedIndexChanged" Skin="Web20" 
                                     Width="190px" AllowCustomText="True" Filter="Contains" 
@@ -187,28 +187,28 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblNombreComercial">Nombre<br />Comercial:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                     ErrorMessage="Nombre comercial requerido" ControlToValidate="txtNombreComercial" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
 
                                 <telerik:RadTextBox ID="txtNombreComercial" runat="server" Enabled="False" 
                                     MaxLength="60" Skin="Web20" Width="190px" 
                                     ontextchanged="txtNombreComercial_TextChanged1">
                                 </telerik:RadTextBox>
                             </td>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblSubSegmento">Segmento:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                     ErrorMessage="Segmento requerido" ControlToValidate="cmbSubSegmento" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadComboBox ID="cmbSubSegmento" runat="server" Enabled="False" 
                                     onselectedindexchanged="cmbSubSegmento_SelectedIndexChanged" Skin="Web20" 
                                     Width="190px" AllowCustomText="True" Filter="Contains" 
@@ -219,14 +219,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblRazonSocial">Razon<br />Social:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                                     ErrorMessage="Razon social requerida" ControlToValidate="txtRazonSocial" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td colspan="3">
+                            <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtRazonSocial" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" ontextchanged="txtRazonSocial_TextChanged" 
                                     MaxLength="60">
@@ -240,43 +240,43 @@
             <fieldset>
                 <legend>Informacion General Del Cliente</legend>
                 <asp:Panel runat="server" ID="Direccion">
-                    <table border="1" cellspacing="0px" cellpadding="0px" width="100%">
+                    <table border="1" cellspacing="3px" width="100%">
                         <tr>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblDireccion">Direccion:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
                                     ErrorMessage="Direccion requerida" ControlToValidate="txtDireccion" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td colspan="3">
+                            <td colspan="3" class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtDireccion" runat="server" Width="99%"
                                     Skin="Web20" Enabled="False" ontextchanged="txtDireccion_TextChanged">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td class="celdasRequeridas">
-                                <asp:Label runat="server" ID="lblBarrio">Barrio<br />Distrito:</asp:Label>
+                            <td class="celdas">
+                                <asp:Label runat="server" ID="lblBarrio">Barrio Distrito:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
                                     ErrorMessage="Barrio/Distrito requerido" ControlToValidate="txtBarrio" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtBarrio" runat="server" Width="190px"
+                            <td class="celdasRequeridas">
+                                <telerik:RadTextBox ID="txtBarrio" runat="server" Width="265px"
                                     Skin="Web20" Enabled="False" ontextchanged="txtBarrio_TextChanged" 
                                     MaxLength="50">
                                 </telerik:RadTextBox>
                             </td>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblTelefono">Telefono:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
                                     ErrorMessage="Telefono requerido" ControlToValidate="txtTelefono" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadNumericTextBox ID="txtTelefono" runat="server" Width="190px"
                                     Skin="Web20" MinValue="0" Enabled="False" 
                                     ontextchanged="txtTelefono_TextChanged" DataType="System.Int32" 
@@ -289,37 +289,13 @@
                         </tr>
                         <tr>
                             <td class="celdas">
-                                <asp:Label runat="server" ID="lblCodigoPostal">Codigo<br />Postal:</asp:Label>
-                            </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtCodigoPostal" runat="server" Enabled="False" 
-                                    MaxLength="10" ontextchanged="txtCodigoPostal_TextChanged" Skin="Web20" 
-                                    Width="190px">
-                                </telerik:RadTextBox>
-                            </td>
-                            <td class="celdasRequeridas">
-                                <asp:Label runat="server" ID="lblEMail">Correo<br />Electronico:</asp:Label>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" 
-                                    ErrorMessage="Correo requerido" ControlToValidate="txtEMail" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
-                                </asp:RequiredFieldValidator>
-                            </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtEMail" runat="server" Width="190px"
-                                    Skin="Web20" EmptyMessage="ejemplo@ejemplo.com" Enabled="False" 
-                                    ontextchanged="txtEMail_TextChanged" MaxLength="30">
-                                </telerik:RadTextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="celdasRequeridas">
-                                <asp:Label ID="lblCiudad" runat="server">Estado:</asp:Label>
+                                <asp:Label runat="server" ID="lblCiudad">Estado:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
                                     ControlToValidate="cmbCiudad" CssClass="failureNotification" 
                                     ErrorMessage="Ciudad requerida" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadComboBox ID="cmbCiudad" Runat="server" AllowCustomText="True" 
                                     DataSourceID="sqlCiudad" Enabled="False" EnableLoadOnDemand="True" 
                                     Filter="Contains" Height="190px" HighlightTemplatedItems="True" 
@@ -341,12 +317,48 @@
                                     </ItemTemplate>
                                 </telerik:RadComboBox>
                             </td>
+                            <td class="celdas">
+                                <asp:Label runat="server" ID="lblEMail">Correo<br />Electronico:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" 
+                                    ErrorMessage="Correo requerido" ControlToValidate="txtEMail" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
+                            </td>
+                            <td class="celdasRequeridas">
+                                <telerik:RadTextBox ID="txtEMail" runat="server" Width="190px"
+                                    Skin="Web20" EmptyMessage="ejemplo@ejemplo.com" Enabled="False" 
+                                    ontextchanged="txtEMail_TextChanged" MaxLength="30">
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="celdas">
+                                <asp:Label ID="lblCodigoPostal" runat="server">Codigo<br />Postal:</asp:Label>
+                            </td>
+                            <td class="celdas">
+                                <telerik:RadTextBox ID="txtCodigoPostal" runat="server" Enabled="False" 
+                                    MaxLength="10" ontextchanged="txtCodigoPostal_TextChanged" Skin="Web20" 
+                                    Width="190px">
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
                             <td colspan="2">
                                 <asp:RegularExpressionValidator ID="expresion" runat="server" 
-                                    ControlToValidate="txtEMail" ErrorMessage="Formato de correo no valido" 
-                                    SetFocusOnError="True" style="Color:#FF0000" 
+                                    ControlToValidate="txtEMail" CssClass="failureNotification" 
+                                    ErrorMessage="Formato de correo no valido" SetFocusOnError="True" 
+                                    style="Color:#FF0000" 
                                     ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" 
                                     ValidationGroup="TodoError"></asp:RegularExpressionValidator>
+                                <br />
+                                <asp:CustomValidator ID="CustomValidator1" runat="server" 
+                                    ControlToValidate="txtDireccion" CssClass="failureNotification" 
+                                    
+                                    ErrorMessage="No se pemiten los siguientes simbolos en la direccion  , ' - ;" 
+                                    ClientValidationFunction="validarSimbolos" 
+                                    onservervalidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
                             </td>
                         </tr>
                     </table>
@@ -356,13 +368,13 @@
             <fieldset>
                 <legend>Datos Adicionales Del Cliente</legend>
                 <asp:Panel runat="server" ID="DatosAdicionales">
-                    <table border="1" cellspacing="0px" cellpadding="0px" width="100%">
+                    <table border="1" cellspacing="3px" cellpadding="3px" width="100%">
                         <tr>
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblCondicionesPago">Condicion<br />De pago:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbCondicionPago" runat="server" Width="190px"
+                            <td class="campos">
+                                <telerik:RadComboBox ID="cmbCondicionPago" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbCondicionPago_SelectedIndexChanged" 
                                     DataSourceID="sqlCondicionesPago" Height="100px" 
@@ -372,11 +384,12 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblCantidadEmpleados">Cantidad<br />Empleado:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadNumericTextBox ID="txtCantidadEmpleados" runat="server" Width="190px"
+                            <td class="campos">
+                                <telerik:RadNumericTextBox ID="txtCantidadEmpleados" runat="server" Width="210px"
                                     Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     Enabled="False" ontextchanged="txtCantidadEmpleados_TextChanged" 
                                     MaxLength="5">
+                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
                                 </telerik:RadNumericTextBox>
                             </td>
@@ -385,8 +398,8 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblFrecuenciaCompra">Frecuencia<br />Compra:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbFrecuenciaCompra" runat="server" Width="190px"
+                            <td class="campos">
+                                <telerik:RadComboBox ID="cmbFrecuenciaCompra" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbFrecuenciaCompra_SelectedIndexChanged">
                                     <Items>
@@ -410,11 +423,12 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblCantidadVisitantes">Cantidad<br />Visitantes:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadNumericTextBox ID="txtCantidadVisitantes" runat="server" Width="190px"
+                            <td class="campos">
+                                <telerik:RadNumericTextBox ID="txtCantidadVisitantes" runat="server" Width="210px"
                                     Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     Enabled="False" ontextchanged="txtCantidadVisitantes_TextChanged" 
                                     MaxLength="5">
+                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
                                 </telerik:RadNumericTextBox>
                             </td>
@@ -423,8 +437,8 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblFrecuenciaMantenimiento">Frecuencia<br />Mantenimiento:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbFrecuenciaMantenimiento" runat="server" Width="190px"
+                            <td class="celdas">
+                                <telerik:RadComboBox ID="cmbFrecuenciaMantenimiento" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbFrecuenciaMantenimiento_SelectedIndexChanged">
                                     <Items>
@@ -441,11 +455,12 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblCantidadLavatorios">Cantidad<br />Lavatorios:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadNumericTextBox ID="txtCantidadLavatorios" runat="server" Width="190px"
+                            <td class="campos">
+                                <telerik:RadNumericTextBox ID="txtCantidadLavatorios" runat="server" Width="210px"
                                     Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     Enabled="False" ontextchanged="txtCantidadLavatorios_TextChanged" 
                                     MaxLength="5">
+                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
                                 </telerik:RadNumericTextBox>
                             </td>
@@ -454,8 +469,8 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblClienteEstrategico">Cliente<br />Estrategico:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbClienteEstrategico" runat="server" Width="190px"
+                            <td class="celdas">
+                                <telerik:RadComboBox ID="cmbClienteEstrategico" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbClienteEstrategico_SelectedIndexChanged">
                                     <Items>
@@ -467,10 +482,11 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblBañoHombre">Cantidad<br />Baños(H):</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadNumericTextBox ID="txtBañoHombre" runat="server" Width="190px"
+                            <td class="celdas">
+                                <telerik:RadNumericTextBox ID="txtBañoHombre" runat="server" Width="210px"
                                     Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     Enabled="False" ontextchanged="txtBañoHombre_TextChanged" MaxLength="5">
+                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
                                 </telerik:RadNumericTextBox>
                             </td>
@@ -479,8 +495,8 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblTipoTrafico">Tipo de<br />trafico:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbTipoTrafico" runat="server" Width="190px"
+                            <td class="celdas">
+                                <telerik:RadComboBox ID="cmbTipoTrafico" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbTipoTrafico_SelectedIndexChanged">
                                     <Items>
@@ -493,10 +509,11 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblBañoMujer">Cantidad<br />Baños(M):</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadNumericTextBox ID="txtBañoMujer" runat="server" Width="190px"
+                            <td class="campos">
+                                <telerik:RadNumericTextBox ID="txtBañoMujer" runat="server" Width="210px"
                                     Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     Enabled="False" ontextchanged="txtBañoMujer_TextChanged" MaxLength="5">
+                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
                                 </telerik:RadNumericTextBox>
                             </td>
@@ -505,8 +522,8 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblLimpiezaTercerizada">Limpieza<br />Tercerizada:</asp:Label>
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cmbLimpiezaTercerizada" runat="server" Width="190px"
+                            <td class="celdas">
+                                <telerik:RadComboBox ID="cmbLimpiezaTercerizada" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbLimpiezaTercerizada_SelectedIndexChanged">
                                     <Items>
@@ -523,30 +540,30 @@
             <fieldset>
                 <legend>Informacion De La Persona De Contacto</legend>
                 <asp:Panel runat="server" ID="PersonaContacto">
-                    <table border="1" cellspacing="0px" cellpadding="0px" width="100%">
+                    <table border="1" cellspacing="3px" cellpadding="3px" width="100%">
                         <tr>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblPersonaContacto">Contacto:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
                                     ErrorMessage="Contacto requerido" ControlToValidate="txtPersonaContacto" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtPersonaContacto" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" 
                                     ontextchanged="txtPersonaContacto_TextChanged" MaxLength="50" 
                                     EmptyMessage="Nombre de la persona de contacto">
                                 </telerik:RadTextBox>
                             </td>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblTelefonoContacto">Telefono:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" 
                                     ErrorMessage="Telefono del contacto requerido" ControlToValidate="txtTelefonoContacto" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadNumericTextBox ID="txtTelefonoContacto" runat="server" Width="190px"
                                     Skin="Web20" MinValue="0" Enabled="False" 
                                     ontextchanged="txtTelefonoContacto_TextChanged" DataType="System.Int32" 
@@ -558,14 +575,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="celdasRequeridas">
+                            <td class="celdas">
                                 <asp:Label runat="server" ID="lblCorreoContacto">Correo:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" 
                                     ErrorMessage="Correo del contacto requerido" ControlToValidate="txtCorreoContacto" 
                                     CssClass="failureNotification" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
-                            <td>
+                            <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtCorreoContacto" runat="server" Width="190px"
                                     Skin="Web20" EmptyMessage="ejemplo@ejemplo.com" Enabled="False" 
                                     ontextchanged="txtCorreoContacto_TextChanged" MaxLength="30">
@@ -574,20 +591,23 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblPosicion">Cargo:</asp:Label>
                             </td>
-                            <td>
+                            <td class="campos">
                                 <telerik:RadTextBox ID="txtPosicion" runat="server" Width="190px"
                                     Skin="Web20" Enabled="False" ontextchanged="txtPosicion_TextChanged" 
                                     MaxLength="50">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
+                    </table>
+                    <table>
                         <tr>
                             <td colspan="4">
                                 <asp:RegularExpressionValidator ID="validadorEMailContacot" runat="server"
                                     ControlToValidate="txtCorreoContacto" ErrorMessage="Formato de correo no valido"
                                     ForeColor="#FF0000" 
                                     ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" 
-                                    SetFocusOnError="True" ValidationGroup="TodoError"></asp:RegularExpressionValidator>
+                                    SetFocusOnError="True" ValidationGroup="TodoError" 
+                                    CssClass="failureNotification"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                     </table>
@@ -686,6 +706,5 @@
                 CssClass="failureNotification" HeaderText="----- Campos Requeridos -----"
                 ValidationGroup="TodoError" />
         </div>
-                                
     </asp:Panel>
 </asp:Content>
