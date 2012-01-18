@@ -126,9 +126,9 @@
             <fieldset>
                 <legend>Informacion Especifica Del Cliente</legend>
                 <asp:Panel ID="infoCliente" runat="server">
-                    <table border="1" cellspacing="0px" cellpadding="0px" width="100%">
+                    <table border="1" cellspacing="3px" cellpadding="3px" width="100%">
                         <tr>
-                            <td class="celdas">
+                            <td class="celdas" style="border: 1px">
                                 <asp:Label ID="lblCodigoCliente" runat="server">Nombre Cliente:</asp:Label>
                             </td>
                             <td colspan="3">
