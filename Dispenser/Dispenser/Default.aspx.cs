@@ -93,8 +93,6 @@ namespace Dispenser
 
                         if (Convert.ToDouble(((inversion + inversionF) / tp) * 100) > 100)
                             lblInvUsada.ForeColor = System.Drawing.Color.Red;
-
-                        //Agregar los custom validators
                         
                         Session.Add("presupuesto", tp);
                         Session.Add("aprobado", inversion);
