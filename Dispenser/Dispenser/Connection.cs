@@ -1236,7 +1236,7 @@ namespace Dispenser
         }
 
         public bool enviarEmail(List<string> datosGrl, List<string> codigosDis, List<string> codigoPro, List<int> cantidadDis, List<int> cantidadPro,
-            string idPais, string filePath, string clientId, bool nextMonth)
+            string idPais, string clientId, bool nextMonth)
         {
             #region Cuerpo del correo
             StringBuilder cuerpo = new StringBuilder();

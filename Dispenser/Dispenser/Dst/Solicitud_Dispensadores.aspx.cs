@@ -18,7 +18,6 @@ namespace Dispenser.Dst
     {
 
         #region Globales
-        static string pathAbsoluto = String.Empty;
 
         //Listas para los cambios de datos
         static List<string> datos;
@@ -46,7 +45,7 @@ namespace Dispenser.Dst
                 MenuItem item3 = new MenuItem();
 
                 item3.Text = "Clientes Nuevos";
-                item3.NavigateUrl = "Solicitud_Dispensadores.aspx";
+                item3.NavigateUrl = "Solicitud_Clientes_Nuevos.aspx";
 
                 item2.ChildItems.Add(item3);
                 item2.Text = "Solicitud Dispensadores";
@@ -1024,7 +1023,7 @@ namespace Dispenser.Dst
                         datosGenerales.Add(txtComentarios.Text);//indice 9
 
                         if (conexion.enviarEmail(datosGenerales, codigoDispensadores, codigoProducto, cantidadDispensadores, cantidadProductos, idpais,
-                            pathAbsoluto, clientid, paraSiguienteMes))
+                            clientid, paraSiguienteMes))
                         {
                             datosGenerales.Clear();
                             codigoDispensadores.Clear();

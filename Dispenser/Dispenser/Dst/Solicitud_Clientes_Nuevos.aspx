@@ -13,8 +13,6 @@
     </telerik:RadWindowManager>
     
     <asp:SqlDataSource ID="sqlCiudad" runat="server"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="sqlMotivos" runat="server"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="sqlClientes" runat="server"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sqlVendedores" runat="server"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sqlCondicionesPago" runat="server"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sqlSegmento" runat="server"></asp:SqlDataSource>
@@ -144,7 +142,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtCedulaJuridica" runat="server" 
-                                    MaxLength="15" ontextchanged="txtCedulaJuridica_TextChanged" Skin="Web20" 
+                                    MaxLength="15" Skin="Web20" 
                                     Width="190px">
                                 </telerik:RadTextBox>
                             </td>
@@ -156,8 +154,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadComboBox ID="cmbVendedor" runat="server" 
-                                    onselectedindexchanged="cmbVendedor_SelectedIndexChanged" Skin="Web20" 
-                                    Width="190px" AllowCustomText="True" Filter="Contains" 
+                                    Skin="Web20" Width="190px" AllowCustomText="True" Filter="Contains" 
                                     DataSourceID="sqlVendedores" onitemdatabound="cmbVendedor_ItemDataBound">
                                 </telerik:RadComboBox>
                             </td>
@@ -171,10 +168,8 @@
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td class="celdasRequeridas">
-
                                 <telerik:RadTextBox ID="txtNombreComercial" runat="server" 
-                                    MaxLength="60" Skin="Web20" Width="190px" 
-                                    ontextchanged="txtNombreComercial_TextChanged1">
+                                    MaxLength="60" Skin="Web20" Width="190px">
                                 </telerik:RadTextBox>
                             </td>
                             <td class="celdas">
@@ -186,12 +181,10 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadComboBox ID="cmbSubSegmento" runat="server" 
-                                    onselectedindexchanged="cmbSubSegmento_SelectedIndexChanged" Skin="Web20" 
-                                    Width="190px" AllowCustomText="True" Filter="Contains" 
+                                    Skin="Web20" Width="190px" AllowCustomText="True" Filter="Contains" 
                                     DataSourceID="sqlSegmento" EnableLoadOnDemand="True" Height="100px" 
                                     onitemdatabound="cmbSubSegmento_ItemDataBound">
                                 </telerik:RadComboBox>
-
                             </td>
                         </tr>
                         <tr>
@@ -204,8 +197,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtRazonSocial" runat="server" Width="190px"
-                                    Skin="Web20" ontextchanged="txtRazonSocial_TextChanged" 
-                                    MaxLength="60">
+                                    Skin="Web20" MaxLength="60">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -227,7 +219,7 @@
                             </td>
                             <td colspan="3" class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtDireccion" runat="server" Width="99%"
-                                    Skin="Web20" ontextchanged="txtDireccion_TextChanged">
+                                    Skin="Web20">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -241,7 +233,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtBarrio" runat="server" Width="265px"
-                                    Skin="Web20" ontextchanged="txtBarrio_TextChanged" 
+                                    Skin="Web20" 
                                     MaxLength="50">
                                 </telerik:RadTextBox>
                             </td>
@@ -254,8 +246,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadNumericTextBox ID="txtTelefono" runat="server" Width="190px"
-                                    Skin="Web20" MinValue="0" 
-                                    ontextchanged="txtTelefono_TextChanged" DataType="System.Int32" 
+                                    Skin="Web20" MinValue="0" DataType="System.Int32" 
                                     MaxLength="12">
                                     <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" 
                                         Step="0" />
@@ -276,8 +267,7 @@
                                     DataSourceID="sqlCiudad" EnableLoadOnDemand="True" 
                                     Filter="Contains" Height="190px" HighlightTemplatedItems="True" 
                                     MarkFirstMatch="True" onitemdatabound="cmbCiudad_ItemDataBound" 
-                                    onitemsrequested="cmbCiudad_ItemsRequested" 
-                                    onselectedindexchanged="cmbCiudad_SelectedIndexChanged" Skin="Web20" 
+                                    onitemsrequested="cmbCiudad_ItemsRequested" Skin="Web20" 
                                     Sort="Ascending" Width="265px">
                                     <HeaderTemplate>
                                         <ul>
@@ -302,8 +292,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtEMail" runat="server" Width="190px"
-                                    Skin="Web20" EmptyMessage="ejemplo@ejemplo.com" 
-                                    ontextchanged="txtEMail_TextChanged" MaxLength="30">
+                                    Skin="Web20" EmptyMessage="ejemplo@ejemplo.com" MaxLength="30">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -313,7 +302,7 @@
                             </td>
                             <td class="celdas">
                                 <telerik:RadTextBox ID="txtCodigoPostal" runat="server" 
-                                    MaxLength="10" ontextchanged="txtCodigoPostal_TextChanged" Skin="Web20" 
+                                    MaxLength="10" Skin="Web20" 
                                     Width="190px">
                                 </telerik:RadTextBox>
                             </td>
@@ -352,7 +341,6 @@
                             <td class="campos">
                                 <telerik:RadComboBox ID="cmbCondicionPago" runat="server" Width="210px"
                                     Skin="Web20" 
-                                    onselectedindexchanged="cmbCondicionPago_SelectedIndexChanged" 
                                     DataSourceID="sqlCondicionesPago" Height="100px" 
                                     onitemdatabound="cmbCondicionPago_ItemDataBound">
                                 </telerik:RadComboBox>
@@ -362,7 +350,7 @@
                             </td>
                             <td class="campos">
                                 <telerik:RadNumericTextBox ID="txtCantidadEmpleados" runat="server" Width="210px"
-                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" ontextchanged="txtCantidadEmpleados_TextChanged" 
+                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     MaxLength="5">
                                     <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
@@ -375,8 +363,7 @@
                             </td>
                             <td class="campos">
                                 <telerik:RadComboBox ID="cmbFrecuenciaCompra" runat="server" Width="210px"
-                                    Skin="Web20" 
-                                    onselectedindexchanged="cmbFrecuenciaCompra_SelectedIndexChanged">
+                                    Skin="Web20">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="30 días" Value="30 días" />
                                         <telerik:RadComboBoxItem runat="server" Text="7 días" Value="7 días" />
@@ -400,7 +387,7 @@
                             </td>
                             <td class="campos">
                                 <telerik:RadNumericTextBox ID="txtCantidadVisitantes" runat="server" Width="210px"
-                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" ontextchanged="txtCantidadVisitantes_TextChanged" 
+                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     MaxLength="5">
                                     <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
@@ -413,8 +400,7 @@
                             </td>
                             <td class="celdas">
                                 <telerik:RadComboBox ID="cmbFrecuenciaMantenimiento" runat="server" Width="210px"
-                                    Skin="Web20" 
-                                    onselectedindexchanged="cmbFrecuenciaMantenimiento_SelectedIndexChanged">
+                                    Skin="Web20">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="30 días" Value="30 días" />
                                         <telerik:RadComboBoxItem runat="server" Text="7 días" Value="7 días" />
@@ -431,7 +417,7 @@
                             </td>
                             <td class="campos">
                                 <telerik:RadNumericTextBox ID="txtCantidadLavatorios" runat="server" Width="210px"
-                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" ontextchanged="txtCantidadLavatorios_TextChanged" 
+                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     MaxLength="5">
                                     <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
@@ -444,8 +430,7 @@
                             </td>
                             <td class="celdas">
                                 <telerik:RadComboBox ID="cmbClienteEstrategico" runat="server" Width="210px"
-                                    Skin="Web20" 
-                                    onselectedindexchanged="cmbClienteEstrategico_SelectedIndexChanged">
+                                    Skin="Web20">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="SI" Value="TRUE" />
                                         <telerik:RadComboBoxItem runat="server" Text="NO" Value="FALSE" />
@@ -457,8 +442,7 @@
                             </td>
                             <td class="celdas">
                                 <telerik:RadNumericTextBox ID="txtBañoHombre" runat="server" Width="210px"
-                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
-                                    ontextchanged="txtBañoHombre_TextChanged" MaxLength="5">
+                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" MaxLength="5">
                                     <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
                                 </telerik:RadNumericTextBox>
@@ -470,8 +454,7 @@
                             </td>
                             <td class="celdas">
                                 <telerik:RadComboBox ID="cmbTipoTrafico" runat="server" Width="210px"
-                                    Skin="Web20" 
-                                    onselectedindexchanged="cmbTipoTrafico_SelectedIndexChanged">
+                                    Skin="Web20">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="Bajo" Value="Bajo" />
                                         <telerik:RadComboBoxItem runat="server" Text="Medio" Value="Medio" />
@@ -484,8 +467,7 @@
                             </td>
                             <td class="campos">
                                 <telerik:RadNumericTextBox ID="txtBañoMujer" runat="server" Width="210px"
-                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
-                                    ontextchanged="txtBañoMujer_TextChanged" MaxLength="5">
+                                    Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" MaxLength="5">
                                     <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
                                 </telerik:RadNumericTextBox>
@@ -497,8 +479,7 @@
                             </td>
                             <td class="celdas">
                                 <telerik:RadComboBox ID="cmbLimpiezaTercerizada" runat="server" Width="210px"
-                                    Skin="Web20" 
-                                    onselectedindexchanged="cmbLimpiezaTercerizada_SelectedIndexChanged">
+                                    Skin="Web20">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="NO" Value="FALSE" />
                                         <telerik:RadComboBoxItem runat="server" Text="SI" Value="TRUE" />
@@ -524,8 +505,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtPersonaContacto" runat="server" Width="190px"
-                                    Skin="Web20" 
-                                    ontextchanged="txtPersonaContacto_TextChanged" MaxLength="50" 
+                                    Skin="Web20" MaxLength="50" 
                                     EmptyMessage="Nombre de la persona de contacto">
                                 </telerik:RadTextBox>
                             </td>
@@ -538,8 +518,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadNumericTextBox ID="txtTelefonoContacto" runat="server" Width="190px"
-                                    Skin="Web20" MinValue="0" 
-                                    ontextchanged="txtTelefonoContacto_TextChanged" DataType="System.Int32" 
+                                    Skin="Web20" MinValue="0" DataType="System.Int32" 
                                     MaxLength="12" EmptyMessage="Telefono de la persona de contacto">
                                     <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" 
                                         Step="0" />
@@ -557,8 +536,7 @@
                             </td>
                             <td class="celdasRequeridas">
                                 <telerik:RadTextBox ID="txtCorreoContacto" runat="server" Width="190px"
-                                    Skin="Web20" EmptyMessage="ejemplo@ejemplo.com" 
-                                    ontextchanged="txtCorreoContacto_TextChanged" MaxLength="30">
+                                    Skin="Web20" EmptyMessage="ejemplo@ejemplo.com" MaxLength="30">
                                 </telerik:RadTextBox>
                             </td>
                             <td class="celdas">
@@ -566,8 +544,7 @@
                             </td>
                             <td class="campos">
                                 <telerik:RadTextBox ID="txtPosicion" runat="server" Width="190px"
-                                    Skin="Web20" ontextchanged="txtPosicion_TextChanged" 
-                                    MaxLength="50">
+                                    Skin="Web20" MaxLength="50">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -641,11 +618,19 @@
                                         <telerik:RadComboBox ID="cmbProducto" runat="server" Skin="Web20"
                                             DataTextField="PRODUCT_DESCRIP" onitemdatabound="cmbProducto_ItemDataBound"
                                             DataSource='<%# funcion( (string)DataBinder.Eval(Container.DataItem, "ID_DISPENSER")) %>'
-                                            HighlightTemplatedItems="true">
+                                            HighlightTemplatedItems="true" DropDownWidth="300px" Sort="Ascending" Height="190px"
+                                            EnableVirtualScrolling="true">
+                                            <HeaderTemplate>
+                                                <ul>
+                                                    <li class="col1"><b>Codigo</b></li>
+                                                    <li class="col2"><b>Producto</b></li>
+                                                </ul>
+                                            </HeaderTemplate>
                                             <ItemTemplate>
-                                                <b><%# DataBinder.Eval(Container.DataItem, "PRODUCT_ID")%></b>
-                                                <br />
-                                                <%# DataBinder.Eval(Container.DataItem, "PRODUCT_DESCRIP")%>
+                                                <ul>
+                                                    <li class="col1"><%# DataBinder.Eval(Container.DataItem, "PRODUCT_ID")%></li>
+                                                    <li class="col2"><%# DataBinder.Eval(Container.DataItem, "PRODUCT_DESCRIP")%></li>
+                                                </ul>
                                             </ItemTemplate>
                                         </telerik:RadComboBox>
                                     </ItemTemplate>

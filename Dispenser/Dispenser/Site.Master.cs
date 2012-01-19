@@ -26,7 +26,7 @@ namespace Dispenser
                     childItem1.NavigateUrl = "/Dst/Solicitud_Dispensadores.aspx";
 
                     childItem2.Text = "Clientes Nuevos";
-                    childItem2.NavigateUrl = "/Dst/Solicitud_Dispensadores.aspx";
+                    childItem2.NavigateUrl = "/Dst/Solicitud_Clientes_Nuevos.aspx";
 
                     childItem.ChildItems.Add(childItem2);
                     childItem.ChildItems.Add(childItem1);

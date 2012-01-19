@@ -142,8 +142,8 @@
                                     onitemsrequested="cmbNombreComercial_ItemsRequested" Sort="Ascending">
                                     <HeaderTemplate>
                                         <ul>
-                                            <li class="col1">Codigo</li>
-                                            <li class="col2">Cliente</li>
+                                            <li class="col1"><b>Codigo</b></li>
+                                            <li class="col2"><b>Cliente</b></li>
                                         </ul>
                                     </HeaderTemplate>
                                     <ItemTemplate>
@@ -305,8 +305,8 @@
                                     Sort="Ascending" Width="265px">
                                     <HeaderTemplate>
                                         <ul>
-                                            <li class="col2">Estado</li>
-                                            <li class="col1">Ciudad</li>
+                                            <li class="col2"><b>Estado</b></li>
+                                            <li class="col1"><b>Ciudad</b></li>
                                         </ul>
                                     </HeaderTemplate>
                                     <ItemTemplate>
@@ -668,11 +668,19 @@
                                         <telerik:RadComboBox ID="cmbProducto" runat="server" Skin="Web20"
                                             DataTextField="PRODUCT_DESCRIP" onitemdatabound="cmbProducto_ItemDataBound"
                                             DataSource='<%# funcion( (string)DataBinder.Eval(Container.DataItem, "ID_DISPENSER")) %>'
-                                            HighlightTemplatedItems="true">
+                                            HighlightTemplatedItems="true" DropDownWidth="300px" Sort="Ascending" Height="190px"
+                                            EnableVirtualScrolling="true">
+                                            <HeaderTemplate>
+                                                <ul>
+                                                    <li class="col1"><b>Codigo</b></li>
+                                                    <li class="col2"><b>Producto</b></li>
+                                                </ul>
+                                            </HeaderTemplate>
                                             <ItemTemplate>
-                                                <b><%# DataBinder.Eval(Container.DataItem, "PRODUCT_ID")%></b>
-                                                <br />
-                                                <%# DataBinder.Eval(Container.DataItem, "PRODUCT_DESCRIP")%>
+                                                <ul>
+                                                    <li class="col1"><%# DataBinder.Eval(Container.DataItem, "PRODUCT_ID")%></li>
+                                                    <li class="col2"><%# DataBinder.Eval(Container.DataItem, "PRODUCT_DESCRIP")%></li>
+                                                </ul>
                                             </ItemTemplate>
                                         </telerik:RadComboBox>
                                     </ItemTemplate>
