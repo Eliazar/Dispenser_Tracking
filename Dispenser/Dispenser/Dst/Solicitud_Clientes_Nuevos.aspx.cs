@@ -141,7 +141,15 @@ namespace Dispenser.Dst
         {
             try
             {
+                
                 Connection conexion = new Connection();
+
+                if (conexion.seekEndUser(conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString()), txtCodigo.Text))
+                {
+                    radajaxmanager.ResponseScripts.Add(@"alert('Codigo que ingresa ya existe.');");
+                    return;
+                }
+
                 string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
                 bool paraSiguienteMes = false;
                 bool esEditable = true;
@@ -334,9 +342,9 @@ namespace Dispenser.Dst
                             costoDetalle.Clear();
                             
                             if (!paraSiguienteMes)
-                                radajaxmanager.ResponseScripts.Add(String.Format("alerta({0});", valDetTemp));
+                                radajaxmanager.ResponseScripts.Add(String.Format("alerta3('{0}');", valDetTemp));
                             else
-                                radajaxmanager.ResponseScripts.Add(String.Format("alerta2({0});", valDetTemp));
+                                radajaxmanager.ResponseScripts.Add(String.Format("alerta4('{0}');", valDetTemp));
                         }
                         else
                         {
@@ -346,6 +354,7 @@ namespace Dispenser.Dst
                             cantidadDispensadores.Clear();
                             cantidadProductos.Clear();
                             costoDetalle.Clear();
+                            
                             if (!paraSiguienteMes)
                                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio(\"La solicitud fue creada costo total ${0}, sin aviso por correo.\");", valDetTemp));
                             else

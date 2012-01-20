@@ -94,15 +94,6 @@ namespace Dispenser.Dst {
         protected global::System.Web.UI.WebControls.Panel main;
         
         /// <summary>
-        /// header control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel header;
-        
-        /// <summary>
         /// lblMotivo control.
         /// </summary>
         /// <remarks>
@@ -164,15 +155,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox txtComentarios;
-        
-        /// <summary>
-        /// infoCliente control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel infoCliente;
         
         /// <summary>
         /// lblCodigoCliente control.
@@ -326,15 +308,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadTextBox txtRazonSocial;
-        
-        /// <summary>
-        /// Direccion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Direccion;
         
         /// <summary>
         /// lblDireccion control.
@@ -506,15 +479,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
-        
-        /// <summary>
-        /// DatosAdicionales control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel DatosAdicionales;
         
         /// <summary>
         /// lblCondicionesPago control.
@@ -715,15 +679,6 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadComboBox cmbLimpiezaTercerizada;
         
         /// <summary>
-        /// PersonaContacto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PersonaContacto;
-        
-        /// <summary>
         /// lblPersonaContacto control.
         /// </summary>
         /// <remarks>
@@ -830,15 +785,6 @@ namespace Dispenser.Dst {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator validadorEMailContacot;
-        
-        /// <summary>
-        /// panelGrid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadAjaxPanel panelGrid;
         
         /// <summary>
         /// grdDispensadoresProducto control.

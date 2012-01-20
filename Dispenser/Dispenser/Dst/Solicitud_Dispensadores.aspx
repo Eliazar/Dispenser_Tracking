@@ -3,6 +3,8 @@
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    <script type="text/javascript" src="../Scripts/Advertencia.js">
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server"> 
     
@@ -437,7 +439,7 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblFrecuenciaMantenimiento">Frecuencia<br />Mantenimiento:</asp:Label>
                             </td>
-                            <td class="celdas">
+                            <td class="campos">
                                 <telerik:RadComboBox ID="cmbFrecuenciaMantenimiento" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbFrecuenciaMantenimiento_SelectedIndexChanged">
@@ -469,7 +471,7 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblClienteEstrategico">Cliente<br />Estrategico:</asp:Label>
                             </td>
-                            <td class="celdas">
+                            <td class="campos">
                                 <telerik:RadComboBox ID="cmbClienteEstrategico" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbClienteEstrategico_SelectedIndexChanged">
@@ -482,7 +484,7 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblBañoHombre">Cantidad<br />Baños(H):</asp:Label>
                             </td>
-                            <td class="celdas">
+                            <td class="campos">
                                 <telerik:RadNumericTextBox ID="txtBañoHombre" runat="server" Width="210px"
                                     Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
                                     Enabled="False" ontextchanged="txtBañoHombre_TextChanged" MaxLength="5">
@@ -495,7 +497,7 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblTipoTrafico">Tipo de<br />trafico:</asp:Label>
                             </td>
-                            <td class="celdas">
+                            <td class="campos">
                                 <telerik:RadComboBox ID="cmbTipoTrafico" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbTipoTrafico_SelectedIndexChanged">
@@ -522,7 +524,7 @@
                             <td class="celdas">
                                 <asp:Label runat="server" ID="lblLimpiezaTercerizada">Limpieza<br />Tercerizada:</asp:Label>
                             </td>
-                            <td class="celdas">
+                            <td class="campos">
                                 <telerik:RadComboBox ID="cmbLimpiezaTercerizada" runat="server" Width="210px"
                                     Skin="Web20" Enabled="False" 
                                     onselectedindexchanged="cmbLimpiezaTercerizada_SelectedIndexChanged">

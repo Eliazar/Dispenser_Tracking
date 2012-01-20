@@ -3,34 +3,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
-    <title></title>
+<head id="Head1" runat="server">        
+    <title>Clientes Nuevos</title>
     <link href="../Styles/Solicitudes.css" rel="stylesheet" type="text/css" />
     <link href="../Styles/ListboxMultiCampo.css" rel="Stylesheet" type="text/css" />
-    <script type="text/javascript" src="../Scripts/Advertencia.js"></script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="Form1" runat="server">
-    <div class="page">
+        <div class="page">
         <div class="header">
             <div class="title">
                 <h1>
                     <img src="../Imagenes/Arte-Nuevo-de-KCP.png" alt="Logo" height="100px" />
                 </h1>
             </div>
-            
+
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                     <AnonymousTemplate>
-                        [ <a href="~/Login.aspx" ID="HeadLoginStatus" runat="server">Iniciar</a> ]
+                        [ <a href="../Login.aspx" id="HeadLoginStatus" runat="server">Iniciar</a> ]
                     </AnonymousTemplate>
                     <LoggedInTemplate>
                         Hola <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
                         [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" 
                             LogoutText="Salir" LogoutPageUrl="~/" 
-                            onloggedout="HeadLoginStatus_LoggedOut" /> ]
+                            onloggedout="HeadLoginStatus_LoggedOut" />]
                     </LoggedInTemplate>
                 </asp:LoginView>
             </div>
@@ -40,13 +39,12 @@
                     <img src="../Imagenes/Logo CTM.png" alt="CTM" height="60px" />
                 </h1>
             </div>
-            
+
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Inicio"/>
-                        <asp:MenuItem Text="Servicios" Selectable="false">
-                        </asp:MenuItem>
+                        <asp:MenuItem Text="Servicios" Selectable="false" />
                         <asp:MenuItem Text="Mantenimiento" Selectable="false">
                             <asp:MenuItem Text="Usuario" Selectable="false">
                                 <asp:MenuItem Text="Cambiar Contraseña" NavigateUrl="~/Mantenimiento/ChangePassword.aspx"/>
@@ -57,12 +55,12 @@
                             </asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/About.aspx" Text="Acerca"/>
-                    </Items>
+                        </Items>
                 </asp:Menu>
             </div>
         </div>
-        <div class="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        <div>
+            <asp:ContentPlaceHolder id="MainContent" runat="server" /> 
         </div>
         <div class="clear">
         </div>

@@ -4,8 +4,10 @@ function alerta(costo) {
     var confirmacion = confirm("Solictud enviada el costo total fue de: $" + costo + " desea enviar" + '\n' + "una nueva solicitud?");
 
     if (confirmacion == true) {
+
         window.location.href = 'Solicitud_Dispensadores.aspx';
         return;
+
     } else {
         window.location.href = '../Default.aspx';
         return;
@@ -17,8 +19,40 @@ function alerta2(costo) {
     var confirmacion = confirm("Solictud enviada el costo total fue de: $" + costo + " pero sera corrida al siguiente mes" + '\n' + "ya que excede su presupuesto actual.");
 
     if (confirmacion == true) {
+        
         window.location.href = 'Solicitud_Dispensadores.aspx';
         return;
+
+    } else {
+        window.location.href = '../Default.aspx';
+        return;
+    }
+}
+
+function alerta3(costo) {
+    //alert(document.getElementById("hdnValue").value);
+    var confirmacion = confirm("Solictud enviada el costo total fue de: $" + costo + " desea enviar" + '\n' + "una nueva solicitud?");
+
+    if (confirmacion == true) {
+
+        window.location.href = 'Solicitud_Clientes_Nuevos.aspx';
+        return;
+
+    } else {
+        window.location.href = '../Default.aspx';
+        return;
+    }
+}
+
+function alerta4(costo) {
+    //alert(document.getElementById("hdnValue").value);
+    var confirmacion = confirm("Solictud enviada el costo total fue de: $" + costo + " desea enviar" + '\n' + "una nueva solicitud?");
+
+    if (confirmacion == true) {
+
+        window.location.href = 'Solicitud_Clientes_Nuevos.aspx';
+        return;
+
     } else {
         window.location.href = '../Default.aspx';
         return;

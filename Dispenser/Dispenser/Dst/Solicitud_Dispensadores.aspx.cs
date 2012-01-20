@@ -1035,9 +1035,9 @@ namespace Dispenser.Dst
                             campos.Clear();
 
                             if (!paraSiguienteMes)
-                                radajaxmanager.ResponseScripts.Add(String.Format("alerta({0});", valDetTemp));
+                                radajaxmanager.ResponseScripts.Add(String.Format("alerta('{0}');", valDetTemp));
                             else
-                                radajaxmanager.ResponseScripts.Add(String.Format("alerta2({0});", valDetTemp));
+                                radajaxmanager.ResponseScripts.Add(String.Format("alerta2('{0}');", valDetTemp));
                         }
                         else
                         {
@@ -1744,16 +1744,23 @@ namespace Dispenser.Dst
 
         protected void cmbSubSegmento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
-            Connection conexion = new Connection();
+            try
+            {
+                Connection conexion = new Connection();
 
-            string query = String.Format("SELECT SEGMENT_ID FROM SUB_SEGMENTOS WHERE SUB_SEGMENT_ID = '{0}'", cmbSubSegmento.SelectedValue);
-            DataTable segmento = conexion.getGridDataSource(query);
-            
-            campos.Add("SEGMENT_ID");
-            datos.Add(segmento.Rows[0]["SEGMENT_ID"].ToString());
+                string query = String.Format("SELECT SEGMENT_ID FROM SUB_SEGMENTOS WHERE SUB_SEGMENT_ID = '{0}'", cmbSubSegmento.SelectedValue);
+                DataTable segmento = conexion.getGridDataSource(query);
 
-            campos.Add("SUB_SEGMENT_ID");
-            datos.Add(cmbSubSegmento.SelectedValue);
+                campos.Add("SEGMENT_ID");
+                datos.Add(segmento.Rows[0]["SEGMENT_ID"].ToString());
+
+                campos.Add("SUB_SEGMENT_ID");
+                datos.Add(cmbSubSegmento.SelectedValue);
+            }
+            catch (Exception error)
+            {
+                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
+            }
         }
 
         protected void txtCedulaJuridica_TextChanged(object sender, EventArgs e)
