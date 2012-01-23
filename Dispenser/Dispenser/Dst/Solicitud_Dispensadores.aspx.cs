@@ -1762,8 +1762,32 @@ namespace Dispenser.Dst
 
         protected void txtDireccion_TextChanged1(object sender, EventArgs e)
         {
+            campos.Add("ADDRESS");
+            datos.Add(txtDireccion.Text);
+        }
+
+        protected void txtBarrio_TextChanged(object sender, EventArgs e)
+        {
             campos.Add("NEIGHBOR");
             datos.Add(txtBarrio.Text);
+        }
+
+        protected void txtEMail_TextChanged1(object sender, EventArgs e)
+        {
+            campos.Add("E_MAIL");
+            datos.Add(txtEMail.Text);
+        }
+
+        protected void txtPersonaContacto_TextChanged1(object sender, EventArgs e)
+        {
+            campos.Add("CONTACT_PERSON");
+            datos.Add(txtPersonaContacto.Text);
+        }
+
+        protected void txtCorreoContacto_TextChanged1(object sender, EventArgs e)
+        {
+            campos.Add("CONTACT_MAIL");
+            datos.Add(txtCorreoContacto.Text);
         }
 
         protected void cmbSubSegmento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
@@ -1785,12 +1809,6 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
-        }
-
-        protected void txtDireccion_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("ADDRESS");
-            datos.Add(txtDireccion.Text);
         }
 
         protected void cmbCiudad_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
@@ -1819,12 +1837,6 @@ namespace Dispenser.Dst
         {
             campos.Add("TELEPHONE");
             datos.Add(txtTelefono.Text);
-        }
-
-        protected void txtEMail_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("E_MAIL");
-            datos.Add(txtEMail.Text);
         }
 
         protected void cmbCondicionPago_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
@@ -1893,18 +1905,6 @@ namespace Dispenser.Dst
             datos.Add(txtBañoMujer.Text);
         }
 
-        protected void txtPersonaContacto_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("CONTACT_PERSON");
-            datos.Add(txtPersonaContacto.Text);
-        }
-
-        protected void txtCorreoContacto_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("CONTACT_MAIL");
-            datos.Add(txtCorreoContacto.Text);
-        }
-
         protected void txtTelefonoContacto_TextChanged(object sender, EventArgs e)
         {
             campos.Add("CONTACT_TELEPHONE");
@@ -1916,13 +1916,8 @@ namespace Dispenser.Dst
             campos.Add("CONTACT_POSITION");
             datos.Add(txtPosicion.Text);
         }
-
-        protected void txtNombreComercial_TextChanged1(object sender, EventArgs e)
-        {
-            campos.Add("TRADE_NAME");
-            datos.Add(txtNombreComercial.Text);
-        }
         #endregion
 
+        
     }
 }

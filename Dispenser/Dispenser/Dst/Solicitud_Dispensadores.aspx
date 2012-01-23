@@ -290,6 +290,8 @@
                                         Step="0" />
                                     <NumberFormat DecimalDigits="0" GroupSeparator="" DecimalSeparator="." />
                                 </telerik:RadNumericTextBox>
+                                <asp:TextBox ID="TextBox2" runat="server" CssClass="requerido" MaxLength="12" 
+                                    Width="190px"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -331,7 +333,7 @@
                             </td>
                             <td>
                                 <asp:TextBox ID="txtEMail" runat="server" CssClass="requerido" Enabled="False" 
-                                    ontextchanged="txtEMail_TextChanged" Rows="30" Width="190px"></asp:TextBox>
+                                    ontextchanged="txtEMail_TextChanged1" Rows="30" Width="190px"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -362,6 +364,11 @@
                                     ErrorMessage="No se pemiten los siguientes simbolos en la direccion  , ' - ;" 
                                     ClientValidationFunction="validarSimbolos" 
                                     onservervalidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
+                                <br />
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                                    ErrorMessage="No se aceptan letras en el telefono" 
+                                    ControlToValidate="TextBox2" CssClass="failureNotification" 
+                                    ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                     </table>
@@ -554,7 +561,7 @@
                             </td>
                             <td>
                                 <asp:TextBox ID="txtPersonaContacto" runat="server" CssClass="requerido" 
-                                    Enabled="False" MaxLength="50" ontextchanged="txtPersonaContacto_TextChanged" 
+                                    Enabled="False" MaxLength="50" ontextchanged="txtPersonaContacto_TextChanged1" 
                                     Width="190px"></asp:TextBox>
                             </td>
                             <td>
@@ -585,8 +592,9 @@
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
-                                <asp:TextBox ID="TextBox1" runat="server" CssClass="requerido" Enabled="False" 
-                                    MaxLength="30" Width="190px"></asp:TextBox>
+                                <asp:TextBox ID="txtCorreoContacto" runat="server" CssClass="requerido" Enabled="False" 
+                                    MaxLength="30" Width="190px" 
+                                    ontextchanged="txtCorreoContacto_TextChanged1"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:Label runat="server" ID="lblPosicion">Cargo:</asp:Label>
