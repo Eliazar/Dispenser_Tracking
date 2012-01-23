@@ -184,6 +184,15 @@ namespace Dispenser.Dst {
         protected global::Telerik.Web.UI.RadTextBox txtComentarios;
         
         /// <summary>
+        /// txtMuestra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMuestra;
+        
+        /// <summary>
         /// infoCliente control.
         /// </summary>
         /// <remarks>
@@ -235,7 +244,7 @@ namespace Dispenser.Dst {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCedulaJuridica;
+        protected global::System.Web.UI.WebControls.TextBox txtCedulaJuridica;
         
         /// <summary>
         /// lblVendedor control.
@@ -289,7 +298,7 @@ namespace Dispenser.Dst {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtNombreComercial;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreComercial;
         
         /// <summary>
         /// lblSubSegmento control.
@@ -343,7 +352,7 @@ namespace Dispenser.Dst {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtRazonSocial;
+        protected global::System.Web.UI.WebControls.TextBox txtRazonSocial;
         
         /// <summary>
         /// Direccion control.
@@ -379,7 +388,7 @@ namespace Dispenser.Dst {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtDireccion;
+        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
         
         /// <summary>
         /// lblBarrio control.
@@ -406,7 +415,7 @@ namespace Dispenser.Dst {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtBarrio;
+        protected global::System.Web.UI.WebControls.TextBox txtBarrio;
         
         /// <summary>
         /// lblTelefono control.
@@ -487,7 +496,7 @@ namespace Dispenser.Dst {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtEMail;
+        protected global::System.Web.UI.WebControls.TextBox txtEMail;
         
         /// <summary>
         /// lblCodigoPostal control.
@@ -766,7 +775,7 @@ namespace Dispenser.Dst {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtPersonaContacto;
+        protected global::System.Web.UI.WebControls.TextBox txtPersonaContacto;
         
         /// <summary>
         /// lblTelefonoContacto control.
@@ -814,13 +823,13 @@ namespace Dispenser.Dst {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator13;
         
         /// <summary>
-        /// txtCorreoContacto control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtCorreoContacto;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
         /// lblPosicion control.

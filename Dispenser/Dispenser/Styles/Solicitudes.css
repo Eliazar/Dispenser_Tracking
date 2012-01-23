@@ -391,21 +391,9 @@ ul
     line-height: 14px;
 }
 
-.celdasRequeridas
+.requerido
 {
-    border-left-color: Red;
-    border-left-width: thick;
-    background-color: ButtonFace;
-    text-align: center;
-}
-
-.celdas
-{
-    background-color: ButtonFace;
-}
-
-.campos
-{
-    text-align: center;
-    background-color: ButtonFace;
+    border-left-color: #ff0000;
+    border-left-style: solid;
+    border-left-width: 3px;
 }

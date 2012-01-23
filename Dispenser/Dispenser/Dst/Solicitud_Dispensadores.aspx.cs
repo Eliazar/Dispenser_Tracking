@@ -1742,6 +1742,30 @@ namespace Dispenser.Dst
             datos.Add(cmbVendedor.SelectedValue);
         }
 
+        protected void txtCedulaJuridica_TextChanged1(object sender, EventArgs e)
+        {
+            campos.Add("CORPORATE_ID");
+            datos.Add(txtCedulaJuridica.Text);
+        }
+
+        protected void txtNombreComercial_TextChanged2(object sender, EventArgs e)
+        {
+            campos.Add("TRADE_NAME");
+            datos.Add(txtNombreComercial.Text);
+        }
+
+        protected void txtRazonSocial_TextChanged1(object sender, EventArgs e)
+        {
+            campos.Add("SOCIAL_REASON");
+            datos.Add(txtRazonSocial.Text);
+        }
+
+        protected void txtDireccion_TextChanged1(object sender, EventArgs e)
+        {
+            campos.Add("NEIGHBOR");
+            datos.Add(txtBarrio.Text);
+        }
+
         protected void cmbSubSegmento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             try
@@ -1763,34 +1787,10 @@ namespace Dispenser.Dst
             }
         }
 
-        protected void txtCedulaJuridica_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("CORPORATE_ID");
-            datos.Add(txtCedulaJuridica.Text);
-        }
-
-        protected void txtNombreComercial_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("TRADE_NAME");
-            datos.Add(txtNombreComercial.Text);
-        }
-
-        protected void txtRazonSocial_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("SOCIAL_REASON");
-            datos.Add(txtRazonSocial.Text);
-        }
-
         protected void txtDireccion_TextChanged(object sender, EventArgs e)
         {
             campos.Add("ADDRESS");
             datos.Add(txtDireccion.Text);
-        }
-
-        protected void txtBarrio_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("NEIGHBOR");
-            datos.Add(txtBarrio.Text);
         }
 
         protected void cmbCiudad_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
