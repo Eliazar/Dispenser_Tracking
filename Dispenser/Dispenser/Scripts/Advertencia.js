@@ -133,12 +133,15 @@ function validarSimbolos(oSrc, args)
     var direccion = args.Value.toString();
 
     for (i = 0; i < direccion.length; i++) {
+        var algo = direccion.charAt(i);
         if (direccion.charAt(i) == "," || direccion.charAt(i) == "'" || direccion.charAt(i) == "-" || direccion.charAt(i) == ";") {
             args.IsValid = false;
+            return;
         }
     }
 
     args.IsValid = true;
+
 }
 
 function longitudTelefono(oSrc, args) {

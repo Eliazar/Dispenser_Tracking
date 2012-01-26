@@ -95,7 +95,8 @@
                                 <asp:Label ID="lblFechaRequerida" runat="server">Fecha de<br />Servicio:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" 
                                     ControlToValidate="dpFechaSolicitada" CssClass="failureNotification" 
-                                    ErrorMessage="Fecha de servicio requerida." ValidationGroup="TodoError">*</asp:RequiredFieldValidator>
+                                    ErrorMessage="Fecha de servicio requerida." ValidationGroup="TodoError" 
+                                    Display="Dynamic">*</asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadDatePicker ID="dpFechaSolicitada" runat="server" Culture="es-HN" 
@@ -126,7 +127,7 @@
             </fieldset>
 
             <div class="centrar">
-                <div style="padding-left: 25%; padding-right: 20%">
+                <div style="padding-left: 20%">
                     <asp:TextBox ID="txtMuestra" runat="server" CssClass="requerido" 
                         Enabled="False" Font-Size="X-Small" Width="100px">Campo Requerido</asp:TextBox>
                 </div>
@@ -170,7 +171,8 @@
                                 <asp:Label runat="server" ID="lblCedulaJuridica">Cedula Juridica:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                                     ErrorMessage="Cedula juridica requerida" ControlToValidate="txtCedulaJuridica" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                                 
                                 
@@ -184,7 +186,8 @@
                                 <asp:Label runat="server" ID="lblVendedor">Vendedor:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                                     ControlToValidate="cmbVendedor" CssClass="failureNotification" 
-                                    ValidationGroup="TodoError" ErrorMessage="Vendedor Requerido">*</asp:RequiredFieldValidator>
+                                    ValidationGroup="TodoError" ErrorMessage="Vendedor Requerido" 
+                                    Display="Dynamic">*</asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cmbVendedor" runat="server" Enabled="False" 
@@ -200,7 +203,8 @@
                                 <asp:Label runat="server" ID="lblNombreComercial">Nombre Comercial:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
                                     ErrorMessage="Nombre comercial requerido" ControlToValidate="txtNombreComercial" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
@@ -213,7 +217,8 @@
                                 <asp:Label runat="server" ID="lblSubSegmento">Segmento:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
                                     ErrorMessage="Segmento requerido" ControlToValidate="cmbSubSegmento" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
@@ -231,13 +236,33 @@
                                 <asp:Label runat="server" ID="lblRazonSocial">Razon Social:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
                                     ErrorMessage="Razon social requerida" ControlToValidate="txtRazonSocial" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <asp:TextBox ID="txtRazonSocial" runat="server" CssClass="requerido" 
                                     Enabled="False" MaxLength="60" ontextchanged="txtRazonSocial_TextChanged1" 
                                     Width="190px"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <asp:CustomValidator ID="CustomValidator2" runat="server" 
+                                    ControlToValidate="txtNombreComercial" CssClass="failureNotification"     
+                                    ErrorMessage="No se pemiten simbolos en el campo &quot;Nombre Comercial&quot;" 
+                                    ClientValidationFunction="validarSimbolos" 
+                                    onservervalidate="CustomValidator_ServerValidate" 
+                                    ValidationGroup="TodoError"></asp:CustomValidator>
+                                <br />
+                                <asp:CustomValidator ID="CustomValidator3" runat="server" 
+                                    ControlToValidate="txtRazonSocial" CssClass="failureNotification"     
+                                    ErrorMessage="No se pemiten simbolos en el campo &quot;Razon social&quot;" 
+                                    ClientValidationFunction="validarSimbolos" 
+                                    onservervalidate="CustomValidator_ServerValidate" 
+                                    ValidationGroup="TodoError"></asp:CustomValidator>
                             </td>
                         </tr>
                     </table>
@@ -253,7 +278,8 @@
                                 <asp:Label runat="server" ID="lblDireccion">Direccion:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
                                     ErrorMessage="Direccion requerida" ControlToValidate="txtDireccion" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td colspan="3">
@@ -264,52 +290,21 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:Label runat="server" ID="lblBarrio">Barrio Distrito:</asp:Label>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
-                                    ErrorMessage="Barrio/Distrito requerido" ControlToValidate="txtBarrio" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
-                                </asp:RequiredFieldValidator>
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtBarrio" runat="server" CssClass="requerido" Enabled="False" 
-                                    MaxLength="50" Width="190px" ontextchanged="txtBarrio_TextChanged"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblTelefono">Telefono:</asp:Label>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
-                                    ErrorMessage="Telefono requerido" ControlToValidate="txtTelefono" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
-                                </asp:RequiredFieldValidator>
-                            </td>
-                            <td>
-                                <telerik:RadNumericTextBox ID="txtTelefono" runat="server" Width="190px"
-                                    Skin="Web20" MinValue="0" Enabled="False" 
-                                    ontextchanged="txtTelefono_TextChanged" DataType="System.Int32" 
-                                    MaxLength="12" CssClass="requerido">
-                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" 
-                                        Step="0" />
-                                    <NumberFormat DecimalDigits="0" GroupSeparator="" DecimalSeparator="." />
-                                </telerik:RadNumericTextBox>
-                                <asp:TextBox ID="TextBox2" runat="server" CssClass="requerido" MaxLength="12" 
-                                    Width="190px"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:Label runat="server" ID="lblCiudad">Estado:</asp:Label>
+                                <asp:Label ID="lblCiudad" runat="server">Estado:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
-                                    ControlToValidate="cmbCiudad" CssClass="failureNotification" 
+                                    ControlToValidate="cmbCiudad" CssClass="failureNotification" Display="Dynamic" 
                                     ErrorMessage="Ciudad requerida" ValidationGroup="TodoError">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cmbCiudad" Runat="server" AllowCustomText="True" 
-                                    DataSourceID="sqlCiudad" Enabled="False" EnableLoadOnDemand="True" 
-                                    Filter="Contains" Height="190px" HighlightTemplatedItems="True" 
-                                    MarkFirstMatch="True" onitemdatabound="cmbCiudad_ItemDataBound" 
+                                    CssClass="requerido" DataSourceID="sqlCiudad" Enabled="False" 
+                                    EnableLoadOnDemand="True" Filter="Contains" Height="190px" 
+                                    HighlightTemplatedItems="True" MarkFirstMatch="True" 
+                                    onitemdatabound="cmbCiudad_ItemDataBound" 
                                     onitemsrequested="cmbCiudad_ItemsRequested" 
                                     onselectedindexchanged="cmbCiudad_SelectedIndexChanged" Skin="Web20" 
-                                    Sort="Ascending" Width="265px" CssClass="requerido">
+                                    Sort="Ascending" Width="265px">
                                     <HeaderTemplate>
                                         <ul>
                                             <li class="col2"><b>Estado</b></li>
@@ -325,15 +320,42 @@
                                 </telerik:RadComboBox>
                             </td>
                             <td>
+                                <asp:Label runat="server" ID="lblTelefono">Telefono:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
+                                    ErrorMessage="Telefono requerido" ControlToValidate="txtTelefono" 
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
+                                </asp:RequiredFieldValidator>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtTelefono" runat="server" CssClass="requerido" MaxLength="12" 
+                                    Width="190px" Enabled="False" ontextchanged="txtTelefono_TextChanged1"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Label ID="lblBarrio" runat="server">Barrio Distrito:</asp:Label>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
+                                    ControlToValidate="txtBarrio" CssClass="failureNotification" Display="Dynamic" 
+                                    ErrorMessage="Barrio/Distrito requerido" ValidationGroup="TodoError">*
+                                </asp:RequiredFieldValidator>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtBarrio" runat="server" CssClass="requerido" Enabled="False" 
+                                    MaxLength="50" ontextchanged="txtBarrio_TextChanged" Width="190px"></asp:TextBox>
+                            </td>
+                            <td>
                                 <asp:Label runat="server" ID="lblEMail">Correo<br />Electronico:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" 
                                     ErrorMessage="Correo requerido" ControlToValidate="txtEMail" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <asp:TextBox ID="txtEMail" runat="server" CssClass="requerido" Enabled="False" 
-                                    ontextchanged="txtEMail_TextChanged1" Rows="30" Width="190px"></asp:TextBox>
+                                    ontextchanged="txtEMail_TextChanged1" Rows="30" Width="190px" 
+                                    MaxLength="50"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -360,15 +382,23 @@
                                 <br />
                                 <asp:CustomValidator ID="CustomValidator1" runat="server" 
                                     ControlToValidate="txtDireccion" CssClass="failureNotification" 
-                                    
-                                    ErrorMessage="No se pemiten los siguientes simbolos en la direccion  , ' - ;" 
+                                    ErrorMessage="No se pemiten simbolos en campo &quot;Direccion&quot;" 
                                     ClientValidationFunction="validarSimbolos" 
-                                    onservervalidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
+                                    onservervalidate="CustomValidator_ServerValidate" 
+                                    ValidationGroup="TodoError"></asp:CustomValidator>
+                                <br />
+                                <asp:CustomValidator ID="CustomValidator4" runat="server" 
+                                    ControlToValidate="txtBarrio" CssClass="failureNotification" 
+                                    ErrorMessage="No se pemiten simbolos en el campo &quot;Barrio o distrito&quot;" 
+                                    ClientValidationFunction="validarSimbolos" 
+                                    onservervalidate="CustomValidator_ServerValidate" 
+                                    ValidationGroup="TodoError"></asp:CustomValidator>
                                 <br />
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
                                     ErrorMessage="No se aceptan letras en el telefono" 
-                                    ControlToValidate="TextBox2" CssClass="failureNotification" 
-                                    ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                                    ControlToValidate="txtTelefono" CssClass="failureNotification" 
+                                    ValidationExpression="^\d+$" ValidationGroup="TodoError"></asp:RegularExpressionValidator>
+                                
                             </td>
                         </tr>
                     </table>
@@ -556,7 +586,8 @@
                                 <asp:Label runat="server" ID="lblPersonaContacto">Contacto:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
                                     ErrorMessage="Contacto requerido" ControlToValidate="txtPersonaContacto" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
@@ -568,19 +599,14 @@
                                 <asp:Label runat="server" ID="lblTelefonoContacto">Telefono:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" 
                                     ErrorMessage="Telefono del contacto requerido" ControlToValidate="txtTelefonoContacto" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
-                                <telerik:RadNumericTextBox ID="txtTelefonoContacto" runat="server" Width="190px"
-                                    Skin="Web20" MinValue="0" Enabled="False" 
-                                    ontextchanged="txtTelefonoContacto_TextChanged" DataType="System.Int32" 
-                                    MaxLength="12" EmptyMessage="Telefono de la persona de contacto" 
-                                    CssClass="requerido">
-                                    <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" 
-                                        Step="0" />
-                                    <NumberFormat DecimalDigits="0" GroupSeparator="" DecimalSeparator="." />
-                                </telerik:RadNumericTextBox>
+                                <asp:TextBox ID="txtTelefonoContacto" runat="server" CssClass="requerido" 
+                                    Enabled="False" MaxLength="12" ontextchanged="txtTelefonoContacto_TextChanged" 
+                                    Width="190px"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -588,12 +614,13 @@
                                 <asp:Label runat="server" ID="lblCorreoContacto">Correo:</asp:Label>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" 
                                     ErrorMessage="Correo del contacto requerido" ControlToValidate="txtCorreoContacto" 
-                                    CssClass="failureNotification" ValidationGroup="TodoError">*
+                                    CssClass="failureNotification" ValidationGroup="TodoError" 
+                                    Display="Dynamic">*
                                 </asp:RequiredFieldValidator>
                             </td>
                             <td>
                                 <asp:TextBox ID="txtCorreoContacto" runat="server" CssClass="requerido" Enabled="False" 
-                                    MaxLength="30" Width="190px" 
+                                    MaxLength="50" Width="190px" 
                                     ontextchanged="txtCorreoContacto_TextChanged1"></asp:TextBox>
                             </td>
                             <td>
@@ -616,6 +643,26 @@
                                     ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" 
                                     SetFocusOnError="True" ValidationGroup="TodoError" 
                                     CssClass="failureNotification"></asp:RegularExpressionValidator>
+
+                                <br />
+                                <asp:CustomValidator ID="CustomValidator5" runat="server" 
+                                    ControlToValidate="txtPersonaContacto" CssClass="failureNotification" 
+                                    ErrorMessage="No se permiten simbolos en el campo &quot;contacto&quot;" 
+                                    ClientValidationFunction="validarSimbolos" 
+                                    onservervalidate="CustomValidator_ServerValidate" 
+                                    ValidationGroup="TodoError"></asp:CustomValidator>
+                                <br />
+                                <asp:CustomValidator ID="CustomValidator6" runat="server" 
+                                    ControlToValidate="txtPosicion" CssClass="failureNotification" 
+                                    ErrorMessage="No se permiten simbolos en el campo &quot;cargo&quot;" 
+                                    ClientValidationFunction="validarSimbolos" 
+                                    onservervalidate="CustomValidator_ServerValidate" 
+                                    ValidationGroup="TodoError"></asp:CustomValidator>
+                                <br />
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+                                    ErrorMessage="No se aceptan letras en el telefono" 
+                                    CssClass="failureNotification" ValidationExpression="^\d+$" 
+                                    ValidationGroup="TodoError" ControlToValidate="txtTelefonoContacto"></asp:RegularExpressionValidator>
                             </td>
                         </tr>
                     </table>
@@ -715,11 +762,11 @@
                 onclick="btEnviar_Click" Enabled="False" ValidationGroup="TodoError"/>
 
             <br />
-
+                        
             <asp:Literal runat="server" ID="Errores" />
             <asp:ValidationSummary ID="vsErrores" runat="server" 
                 CssClass="failureNotification" HeaderText="----- Campos Requeridos -----"
-                ValidationGroup="TodoError" />
+                ValidationGroup="TodoError" ShowMessageBox="True" ShowSummary="False" />
         </div>
     </asp:Panel>
 </asp:Content>

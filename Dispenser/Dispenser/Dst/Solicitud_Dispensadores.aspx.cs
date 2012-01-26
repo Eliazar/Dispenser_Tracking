@@ -818,6 +818,12 @@ namespace Dispenser.Dst
 
             try
             {
+                if (!CustomValidator1.IsValid || !CustomValidator2.IsValid || !CustomValidator3.IsValid || !CustomValidator4.IsValid)
+                {
+                    radajaxmanager.ResponseScripts.Add(@"alert('Existen conflictos en campos requeridos favor verifique.');");
+                    return;
+                }
+                
                 Connection conexion = new Connection();
                 string clientid = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session["userid"].ToString());
                 bool paraSiguienteMes = false;
@@ -1100,19 +1106,19 @@ namespace Dispenser.Dst
 
         }
 
-        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        protected void CustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
             try
             {
-                char[] cadena = txtDireccion.Text.ToCharArray();
 
-                for (int i = 0; i < cadena.Length; i++)
+                CustomValidator custom = (CustomValidator)source;
+
+                TextBox textbox = (TextBox)custom.FindControl(custom.ControlToValidate);
+
+                if (textbox.Text.Contains(',') || textbox.Text.Contains('\'') || textbox.Text.Contains('-') || textbox.Text.Contains(';'))
                 {
-                    if (cadena[i].Equals('\'') || cadena[i].Equals(',') || cadena[i].Equals('-') || cadena.Equals(';'))
-                    {
-                        args.IsValid = false;
-                        return;
-                    }
+                    args.IsValid = false;
+                    return;
                 }
 
                 args.IsValid = true;
@@ -1306,12 +1312,22 @@ namespace Dispenser.Dst
                     cmbVendedor.FindItemByValue(listasDesplegables, true).Selected = true;
 
                 listasDesplegables = clientesFinales.Rows[0]["SUB_SEGMENT_ID"].ToString();
-                if(!listasDesplegables.Equals("0"))
-                    cmbSubSegmento.FindItemByValue(listasDesplegables, true).Selected = true;
-
+                if (!listasDesplegables.Equals("0"))
+                    cmbSubSegmento.FindItemByValue(listasDesplegables, false).Selected = true;
+                else
+                {
+                    cmbSubSegmento.Text = String.Empty;
+                    cmbSubSegmento.ClearSelection();
+                }
+                
                 listasDesplegables = clientesFinales.Rows[0]["CITY"].ToString();
-                if(!listasDesplegables.Equals("N/A"))
+                if (!listasDesplegables.Equals("N/A"))
                     cmbCiudad.FindItemByValue(listasDesplegables, true).Selected = true;
+                else
+                {
+                    cmbCiudad.Text = String.Empty;
+                    cmbCiudad.ClearSelection();
+                }
 
                 listasDesplegables = clientesFinales.Rows[0]["ID_PAYMENT_CONDITION"].ToString();
                 cmbCondicionPago.FindItemByValue(listasDesplegables, true).Selected = true;
@@ -1736,11 +1752,6 @@ namespace Dispenser.Dst
         #endregion
 
         #region Eventos de cambio de datos (modificacion)
-        protected void cmbVendedor_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
-        {
-            campos.Add("SELLER_ID");
-            datos.Add(cmbVendedor.SelectedValue);
-        }
 
         protected void txtCedulaJuridica_TextChanged1(object sender, EventArgs e)
         {
@@ -1790,6 +1801,66 @@ namespace Dispenser.Dst
             datos.Add(txtCorreoContacto.Text);
         }
 
+        protected void txtTelefonoContacto_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("CONTACT_TELEPHONE");
+            datos.Add(txtTelefonoContacto.Text);
+        }
+
+        protected void txtCodigoPostal_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("POSTAL_CODE");
+            datos.Add(txtCodigoPostal.Text);
+        }
+
+        protected void txtTelefono_TextChanged1(object sender, EventArgs e)
+        {
+            campos.Add("TELEPHONE");
+            datos.Add(txtTelefono.Text);
+        }
+
+        protected void txtCantidadEmpleados_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("EMPLOYEES");
+            datos.Add(txtCantidadEmpleados.Text);
+        }
+
+        protected void txtCantidadVisitantes_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("VISITORS");
+            datos.Add(txtCantidadVisitantes.Text);
+        }
+
+        protected void txtCantidadLavatorios_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("WASHBASIN");
+            datos.Add(txtCantidadLavatorios.Text);
+        }
+
+        protected void txtBañoHombre_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("MALE_BATH");
+            datos.Add(txtBañoHombre.Text);
+        }
+
+        protected void txtBañoMujer_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("FEMALE_BATH");
+            datos.Add(txtBañoMujer.Text);
+        }
+
+        protected void txtPosicion_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("CONTACT_POSITION");
+            datos.Add(txtPosicion.Text);
+        }
+
+        protected void cmbVendedor_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
+        {
+            campos.Add("SELLER_ID");
+            datos.Add(cmbVendedor.SelectedValue);
+        }
+
         protected void cmbSubSegmento_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             try
@@ -1825,18 +1896,6 @@ namespace Dispenser.Dst
 
             campos.Add("CITY");
             datos.Add(cmbCiudad.SelectedValue);
-        }
-
-        protected void txtCodigoPostal_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("POSTAL_CODE");
-            datos.Add(txtCodigoPostal.Text);
-        }
-
-        protected void txtTelefono_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("TELEPHONE");
-            datos.Add(txtTelefono.Text);
         }
 
         protected void cmbCondicionPago_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
@@ -1875,49 +1934,7 @@ namespace Dispenser.Dst
             datos.Add(cmbLimpiezaTercerizada.SelectedValue);
         }
 
-        protected void txtCantidadEmpleados_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("EMPLOYEES");
-            datos.Add(txtCantidadEmpleados.Text);
-        }
-
-        protected void txtCantidadVisitantes_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("VISITORS");
-            datos.Add(txtCantidadVisitantes.Text);
-        }
-
-        protected void txtCantidadLavatorios_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("WASHBASIN");
-            datos.Add(txtCantidadLavatorios.Text);
-        }
-
-        protected void txtBañoHombre_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("MALE_BATH");
-            datos.Add(txtBañoHombre.Text);
-        }
-
-        protected void txtBañoMujer_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("FEMALE_BATH");
-            datos.Add(txtBañoMujer.Text);
-        }
-
-        protected void txtTelefonoContacto_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("CONTACT_TELEPHONE");
-            datos.Add(txtTelefonoContacto.Text);
-        }
-
-        protected void txtPosicion_TextChanged(object sender, EventArgs e)
-        {
-            campos.Add("CONTACT_POSITION");
-            datos.Add(txtPosicion.Text);
-        }
         #endregion
-
         
     }
 }
