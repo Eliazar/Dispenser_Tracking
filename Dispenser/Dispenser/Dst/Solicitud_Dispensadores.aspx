@@ -149,7 +149,8 @@
                                     Width="100%" DataSourceID="sqlClientes" EnableLoadOnDemand="True" 
                                     Height="190px" HighlightTemplatedItems="True" 
                                     onitemdatabound="cmbNombreComercial_ItemDataBound" 
-                                    onitemsrequested="cmbNombreComercial_ItemsRequested" Sort="Ascending">
+                                    onitemsrequested="cmbNombreComercial_ItemsRequested" Sort="Ascending" 
+                                    EnableVirtualScrolling="True" ShowMoreResultsBox="True">
                                     <HeaderTemplate>
                                         <ul>
                                             <li class="col1"><b>Codigo</b></li>
@@ -342,7 +343,7 @@
                             </td>
                             <td>
                                 <asp:TextBox ID="txtBarrio" runat="server" CssClass="requerido" Enabled="False" 
-                                    MaxLength="50" ontextchanged="txtBarrio_TextChanged" Width="190px"></asp:TextBox>
+                                    MaxLength="50" ontextchanged="txtBarrio_TextChanged" Width="265px"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:Label runat="server" ID="lblEMail">Correo<br />Electronico:</asp:Label>
