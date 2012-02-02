@@ -151,6 +151,11 @@ function longitudTelefono(oSrc, args) {
 function inversion(oSrc, args) {
     args.IsValid = (args.Value > 100);
 }
+
+function sinTP() {
+    alert('No hay TP imposible hacer solicitudes.');
+    window.location.href = '../Default.aspx';
+}
 //------------------------------------------
 
 //-------------- Editar Vendedor --------------

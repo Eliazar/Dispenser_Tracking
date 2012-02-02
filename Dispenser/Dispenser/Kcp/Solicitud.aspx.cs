@@ -537,7 +537,7 @@ namespace Dispenser.Kcp
                 if (campoDetalle.Equals("STATUS_ID"))
                 {
                     string estadoActual = conexion.getDetalleSol("STATUS_ID", dispensador, producto, Session.Contents["solicitud"].ToString());
-                    if (Convert.ToInt32(valorDetalle) == 3)
+                    if (valorDetalle.Equals("3"))
                     {
                         conexion.updateClientesFinales(String.Format("UPDATE DESCRIPCION_DISPENSADORES SET INVERSION = 0 WHERE DR_ID = {0} AND DISPENSER_ID = '{1}' AND PRODUCT_ID = '{2}'",
                             Session.Contents["solicitud"].ToString(), dispensador, producto));

@@ -85,7 +85,7 @@ namespace Dispenser
                         else
                         {
                             lblRestante.ForeColor = System.Drawing.Color.Red;
-                            lblRestante.Text = "$0.0";
+                            lblRestante.Text = "Presupuesto Restante: <b>$0.0</b>";
                         }
 
                         if (porcentaje > 0)
@@ -93,7 +93,7 @@ namespace Dispenser
                         else
                         {
                             lblInvUsada.ForeColor = System.Drawing.Color.Red;
-                            lblInvUsada.Text = "0%";
+                            lblInvUsada.Text = "% Disponibilidad: <b>0%</b>";
                         }
 
                         

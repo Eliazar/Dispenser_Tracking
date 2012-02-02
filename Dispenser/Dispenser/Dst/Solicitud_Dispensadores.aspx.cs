@@ -58,6 +58,9 @@ namespace Dispenser.Dst
 
                 Connection conexion = new Connection();
 
+                if (Convert.ToDouble(Session.Contents["presupuesto"].ToString()) <= 0)
+                    radajaxmanager.ResponseScripts.Add(@"sinTP();");
+
                 if (!IsPostBack)
                 {
 

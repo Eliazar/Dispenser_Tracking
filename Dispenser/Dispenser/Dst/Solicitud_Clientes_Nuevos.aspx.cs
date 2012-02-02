@@ -50,8 +50,11 @@ namespace Dispenser.Dst
                 item.NavigateUrl = "SeguimientoSolicitudes.aspx";
                 menu.Items[1].ChildItems.Add(item2);
                 menu.Items[1].ChildItems.Add(item);
-
+                
                 Connection conexion = new Connection();
+
+                if (Convert.ToDouble(Session.Contents["presupuesto"].ToString()) <= 0)
+                    radajaxmanager.ResponseScripts.Add(@"sinTP();");
 
                 if (!IsPostBack)
                 {

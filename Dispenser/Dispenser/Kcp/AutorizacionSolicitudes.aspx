@@ -57,8 +57,8 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     
-    <telerik:RadAjaxPanel runat="server" ID="pnlGrid">
-        <table>
+    <telerik:RadAjaxPanel runat="server" ID="pnlGrid" Width="100%">
+        <table width="100%">
             <tr>
                 <td>
                     <telerik:RadGrid runat="server" ID="grdAutorizaciones" Skin="Web20" AutoGenerateColumns="False"
@@ -116,7 +116,7 @@
 
                             <Columns>
                                 <telerik:GridBoundColumn AutoPostBackOnFilter="true" 
-                                    CurrentFilterFunction="EqualTo" DataField="DR_ID" FilterControlWidth="50px" 
+                                    CurrentFilterFunction="EqualTo" DataField="DR_ID" FilterControlWidth="100%" 
                                     HeaderButtonType="None" HeaderStyle-Font-Bold="true" 
                                     HeaderText="Numero Solicitud" ShowFilterIcon="false" UniqueName="Codigo">
                                 </telerik:GridBoundColumn>
@@ -124,18 +124,18 @@
                                 <telerik:GridBoundColumn AutoPostBackOnFilter="true" 
                                     CurrentFilterFunction="Contains" DataField="CLIENT_ID" HeaderButtonType="None" 
                                     HeaderStyle-Font-Bold="true" HeaderText="Codigo Distribuidor" 
-                                    ShowFilterIcon="false">
+                                    ShowFilterIcon="false" FilterControlWidth="100%">
                                 </telerik:GridBoundColumn>
                                 
                                 <telerik:GridBoundColumn AutoPostBackOnFilter="true" 
                                     CurrentFilterFunction="Contains" DataField="CLIENT_NAME" 
                                     HeaderButtonType="None" HeaderStyle-Font-Bold="true" HeaderText="Distribuidor" 
-                                    ShowFilterIcon="false">
+                                    ShowFilterIcon="false" FilterControlWidth="100%">
                                 </telerik:GridBoundColumn>
                                 
                                 <telerik:GridBoundColumn AutoPostBackOnFilter="true" 
                                     CurrentFilterFunction="Contains" DataField="TRADE_NAME" 
-                                    FilterControlWidth="200px" HeaderButtonType="None" HeaderStyle-Font-Bold="true" 
+                                    FilterControlWidth="100%" HeaderButtonType="None" HeaderStyle-Font-Bold="true" 
                                     HeaderText="Cliente final" ShowFilterIcon="false">
                                 </telerik:GridBoundColumn>
                                 
@@ -146,23 +146,29 @@
                                 
                                 <telerik:GridBoundColumn AutoPostBackOnFilter="true" 
                                     CurrentFilterFunction="Contains" DataField="REASON_DESCRIP" 
-                                    FilterControlWidth="150px" HeaderButtonType="None" HeaderStyle-Font-Bold="true" 
+                                    FilterControlWidth="100%" HeaderButtonType="None" HeaderStyle-Font-Bold="true" 
                                     HeaderText="Razon Instalacion" ShowFilterIcon="false">
                                 </telerik:GridBoundColumn>
                                 
                                 <telerik:GridBoundColumn AutoPostBackOnFilter="true" 
                                     CurrentFilterFunction="Contains" DataField="STATUS_DESCRIP" 
-                                    HeaderButtonType="None" HeaderStyle-Font-Bold="true" 
+                                    HeaderButtonType="None" HeaderStyle-Font-Bold="true" FilterControlWidth="100%"
                                     HeaderText="Estado Solicitud" ShowFilterIcon="false" UniqueName="Estado">
                                 </telerik:GridBoundColumn>
 
                                 <telerik:GridNumericColumn DataField="INVER_SOLICITADA" HeaderButtonType="None" HeaderText="Inversion Solicitada"
-                                    UniqueName="inverSol" DataType="System.Double" DataFormatString="${0:N2}" HeaderStyle-Font-Bold="true">
+                                    UniqueName="inverSol" DataType="System.Double" DataFormatString="${0:N2}" HeaderStyle-Font-Bold="true"
+                                    FilterControlWidth="60%">
                                 </telerik:GridNumericColumn>
 
                                 <telerik:GridNumericColumn DataField="INVER_APRO" HeaderButtonType="None" HeaderText="Inversion Aprobada"
-                                    UniqueName="inverApro" DataType="System.Double" DataFormatString="${0:N2}" HeaderStyle-Font-Bold="true">
+                                    UniqueName="inverApro" DataType="System.Double" DataFormatString="${0:N2}" HeaderStyle-Font-Bold="true"
+                                    FilterControlWidth="60%">
                                 </telerik:GridNumericColumn>
+
+                                <telerik:GridCheckBoxColumn HeaderText="Siguiente Mes" HeaderButtonType="None" HeaderStyle-Font-Bold="true"
+                                    CurrentFilterFunction="EqualTo" ShowFilterIcon="false" AutoPostBackOnFilter="true" DataField="NEXT_MONTH">
+                                </telerik:GridCheckBoxColumn>
 
                                 <telerik:GridBoundColumn AllowFiltering="false" DataField="COMMENTS" 
                                     HeaderButtonType="None" HeaderStyle-Font-Bold="true" HeaderText="Comentarios" 
@@ -177,9 +183,6 @@
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
 
-                                <telerik:GridCheckBoxColumn HeaderText="Siguiente Mes" HeaderButtonType="None" HeaderStyle-Font-Bold="true"
-                                    CurrentFilterFunction="EqualTo" ShowFilterIcon="false" AutoPostBackOnFilter="true" DataField="NEXT_MONTH">
-                                </telerik:GridCheckBoxColumn>
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
