@@ -542,7 +542,7 @@ namespace Dispenser.Kcp
                         conexion.updateClientesFinales(String.Format("UPDATE DESCRIPCION_DISPENSADORES SET INVERSION = 0 WHERE DR_ID = {0} AND DISPENSER_ID = '{1}' AND PRODUCT_ID = '{2}'",
                             Session.Contents["solicitud"].ToString(), dispensador, producto));
                     }
-                    else if (Convert.ToInt32(estadoActual) == 3)
+                    else if (estadoActual.Equals("3"))
                     {
                         string pais = conexion.getUsersInfo("ID_COUNTRY", "USER_ID", Session.Contents["userid"].ToString());
                         string queryTemp = String.Format("SELECT DISPENSER_PRICE FROM DISPENSADOR_PAIS WHERE DISPENSER_ID = '{0}' AND COUNTRY_ID = '{1}'", dispensador, pais);

@@ -128,6 +128,9 @@
                         </td>
                         <td>
                             <asp:Label ID="lblNombreComercial" runat="server">Nombre Comercial:</asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtNombreComercial" CssClass="failureNotification" 
+                                ErrorMessage="Nombre comercial requerido" ValidationGroup="TodoError">*</asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <telerik:RadTextBox runat="server" ID="txtNombreComercial" Width="190px" 
@@ -415,10 +418,10 @@
         </div>
 
         <div class="botones">
-            <asp:Button runat="server" ID="btAprobar" Text="Programar" Width="120px" 
-                onclick="btAprobar_Click"/>
+            <asp:Button runat="server" ID="btAprobar" Text="Aprobar Cita" Width="120px" 
+                onclick="btAprobar_Click" ValidationGroup="TodoError"/>
             &nbsp;
-            <asp:Button runat="server" ID="btRechazar" Text="Rechazar" Width="120px" 
+            <asp:Button runat="server" ID="btRechazar" Text="Rechazar Cita" Width="120px" 
                 onclick="btRechazar_Click" />
             <br />
             <asp:Button runat="server" ID="btGuardar" Text="Guardar Cambios" Width="120px" 

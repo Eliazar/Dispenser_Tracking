@@ -181,6 +181,7 @@ namespace Dispenser.Dst
 
             try
             {
+                //En el caso de que falle con javascript
                 if (!CustomValidator1.IsValid || !CustomValidator2.IsValid || !CustomValidator3.IsValid || !CustomValidator4.IsValid)
                 {
                     radajaxmanager.ResponseScripts.Add(@"alert('Existen conflictos en campos requeridos favor verifique.');");
@@ -288,69 +289,25 @@ namespace Dispenser.Dst
                     esEditable = false;
                 }
 
-                /*if (cmbMotivos.SelectedValue.Equals("3"))
-                {
-                    string queryUser = "INSERT INTO CLIENTES_FINALES (END_USER_ID, CLIENT_ID, TRADE_NAME, SOCIAL_REASON, CORPORATE_ID, E_MAIL, TELEPHONE," +
-                    " SEGMENT_ID, SUB_SEGMENT_ID, ADDRESS, NEIGHBOR, STATE, CITY, POSTAL_CODE, ID_PAYMENT_CONDITION, PURCHASE_FREQUENCY, MAINTENANCE_FREQUENCY, " +
-                    "STRATEGIC_CUSTOMER, TRAFFIC_TYPE, TERTIARY_CLEANING, EMPLOYEES, VISITORS, WASHBASIN, MALE_BATH, FEMALE_BATH, CONTACT_PERSON, " +
-                    "CONTACT_TELEPHONE, CONTACT_MAIL, CONTACT_POSITION, SELLER_ID, CLIENT_STATUS) VALUES ('" + txtCodigoClienteFinal.Text + "', '" +
-                    clientid + "', '" + txtNombreComercial.Text + "', '" + txtRazonSocial.Text + "', '" + txtCedulaJuridica.Text + "', '" +
-                    txtEMail.Text + "', '" + txtTelefono.Text + "', '" + cmbSegmento.SelectedValue + "', '" + cmbSubSegmento.SelectedValue + "', '" +
-                    txtDireccion.Text + "', '" + txtBarrio.Text + "', '" + cmbDepartamento.SelectedValue + "', '" + cmbCiudad.SelectedValue + "', '" +
-                    txtCodigoPostal.Text + "', '" + cmbCondicionPago.SelectedValue + "', '" + cmbFrecuenciaCompra.SelectedValue + "', '" +
-                    cmbFrecuenciaMantenimiento.SelectedValue + "', '" + cmbClienteEstrategico.SelectedValue + "', '" + cmbTipoTrafico.SelectedValue + "', '" +
-                    cmbLimpiezaTercerizada.SelectedValue + "', '" + txtCantidadEmpleados.Text + "', '" + txtCantidadVisitantes.Text + "', '" +
-                    txtCantidadLavatorios.Text + "', '" + txtBañoHombre.Text + "', '" + txtBañoMujer.Text + "', '" + txtPersonaContacto.Text + "', '" +
-                    txtTelefonoContacto.Text + "', '" + txtCorreoContacto.Text + "', '" + txtPosicion.Text + "', '" + cmbVendedor.SelectedValue + "', '1')";
+                
+                verificarUpdates();
 
-                    if (!conexion.setNewEndUser(queryUser))
-                    {
-                        codigoDispensadores.Clear();
-                        codigoProducto.Clear();
-                        cantidadDispensadores.Clear();
-                        cantidadProductos.Clear();
-                        costoDetalle.Clear();
-                        datos.Clear();
-                        campos.Clear();
-                        radajaxmanager.ResponseScripts.Add(@"alert('Error inesperado al crear el nuevo cliente.');");
-                        return;
-                    }
+                string queryTemp = String.Format("SELECT SEGMENT_ID FROM SUB_SEGMENTOS WHERE SUB_SEGMENT_ID = '{0}'", cmbSubSegmento.SelectedValue);
+                DataTable tablaTemp = conexion.getGridDataSource(queryTemp);
 
-                    query = "INSERT INTO SOLICITUD_DISPENSADORES (DATE_REQUEST, ID_COUNTRY, REASON_ID, INSTALL_DATE, CLIENT_ID, SALES_ID, COMMENTS, END_USER_ID, SEGMENT_ID, SUB_SEGMENT_ID, ADDRESS, NEIGHBORHOOD, CITY, "
-                    + "STATE, POSTAL_CODE, CONTACT_TELEPHONE, CONTACT_NAME, CONTACT_EMAIL, CONTACT_POSITION, ID_PAYMENT_CONDITION, PURCHASE_FREQUENCY, MAINTENANCE_FREQUENCY, "
-                    + "STRATEGIC_CUSTOMER, TRAFFIC_TYPE, TERTIARY_CLEANING, EMPLOYEES, VISITORS, WASHBASIN, MALE_BATHROOM, FEMALE_BATHROOM, STATUS_ID, INVER_SOLICITADA, " +
-                    "NEXT_MONTH, IS_EDITABLE) VALUES ('" + hoy.ToString("yyyMMdd") + "', '" + idpais + "', '" + cmbMotivos.SelectedValue + "', '"
-                    + fechaRequerida.ToString("yyyMMdd") + "', '" + clientid + "', '" + cmbVendedor.SelectedValue + "', '" + txtComentarios.Text + "', '" +
-                    txtCodigoClienteFinal.Text + "', '" + cmbSegmento.SelectedValue + "', '" + cmbSubSegmento.SelectedValue + "', '" + txtDireccion.Text + "', '" +
-                    txtBarrio.Text + "', '" + cmbCiudad.SelectedValue + "', '" + cmbDepartamento.SelectedValue + "', '" + txtCodigoPostal.Text + "', '" +
-                    txtTelefono.Text + "', '" + txtPersonaContacto.Text + "', '" + txtCorreoContacto.Text + "', '" + txtPosicion.Text + "', '" +
-                    cmbCondicionPago.SelectedValue + "', '" + cmbFrecuenciaCompra.SelectedValue + "', '" + cmbFrecuenciaMantenimiento.SelectedValue + "', '" +
-                    cmbClienteEstrategico.SelectedValue + "', '" + cmbTipoTrafico.SelectedValue + "', '" + cmbLimpiezaTercerizada.SelectedValue + "', " +
-                    Convert.ToInt32(txtCantidadEmpleados.Text) + ", " + Convert.ToInt32(txtCantidadVisitantes.Text) + ", " + Convert.ToInt32(txtCantidadLavatorios.Text) + ", " +
-                    Convert.ToInt32(txtBañoHombre.Text) + ", " + Convert.ToInt32(txtBañoMujer.Text) + ", 1, " + valorDetalle2 + ", '" + paraSiguienteMes + "', '" +
-                    esEditable + "')";
-                }
-                else
-                {*/
-                    verificarUpdates();
-
-                    string queryTemp = String.Format("SELECT SEGMENT_ID FROM SUB_SEGMENTOS WHERE SUB_SEGMENT_ID = '{0}'", cmbSubSegmento.SelectedValue);
-                    DataTable tablaTemp = conexion.getGridDataSource(queryTemp);
-
-                    query = "INSERT INTO SOLICITUD_DISPENSADORES (DATE_REQUEST, ID_COUNTRY, REASON_ID, INSTALL_DATE, CLIENT_ID, SALES_ID, COMMENTS, END_USER_ID, SEGMENT_ID, SUB_SEGMENT_ID, ADDRESS, NEIGHBORHOOD, CITY, "
-                    + "STATE, POSTAL_CODE, CONTACT_TELEPHONE, CONTACT_NAME, CONTACT_EMAIL, CONTACT_POSITION, ID_PAYMENT_CONDITION, PURCHASE_FREQUENCY, MAINTENANCE_FREQUENCY, "
-                    + "STRATEGIC_CUSTOMER, TRAFFIC_TYPE, TERTIARY_CLEANING, EMPLOYEES, VISITORS, WASHBASIN, MALE_BATHROOM, FEMALE_BATHROOM, STATUS_ID, INVER_SOLICITADA, "
-                    + "NEXT_MONTH, IS_EDITABLE) VALUES ('" + hoy.ToString("yyyMMdd") + "', '" + idpais + "', '" + cmbMotivos.SelectedValue + "', '"
-                    + fechaRequerida.ToString("yyyMMdd") + "', '" + clientid + "', '" + cmbVendedor.SelectedValue + "', '" + txtComentarios.Text + "', '" +
-                    cmbNombreComercial.SelectedValue + "', '" + tablaTemp.Rows[0]["SEGMENT_ID"].ToString() + "', '" + cmbSubSegmento.SelectedValue + "', '" + txtDireccion.Text + "', '" +
-                    txtBarrio.Text + "', '" + cmbCiudad.SelectedValue + "', '" + cmbCiudad.Text + "', '" + txtCodigoPostal.Text + "', '" +
-                    txtTelefono.Text + "', '" + txtPersonaContacto.Text + "', '" + txtCorreoContacto.Text + "', '" + txtPosicion.Text + "', '" +
-                    cmbCondicionPago.SelectedValue + "', '" + cmbFrecuenciaCompra.SelectedValue + "', '" + cmbFrecuenciaMantenimiento.SelectedValue + "', '" +
-                    cmbClienteEstrategico.SelectedValue + "', '" + cmbTipoTrafico.SelectedValue + "', '" + cmbLimpiezaTercerizada.SelectedValue + "', " +
-                    Convert.ToInt32(txtCantidadEmpleados.Text) + ", " + Convert.ToInt32(txtCantidadVisitantes.Text) + ", " + Convert.ToInt32(txtCantidadLavatorios.Text) + ", " +
-                    Convert.ToInt32(txtBañoHombre.Text) + ", " + Convert.ToInt32(txtBañoMujer.Text) + ", 1, " + valorDetalle2 + ", '" + paraSiguienteMes + "', '" +
-                    esEditable + "')";
-                //}
+                query = "INSERT INTO SOLICITUD_DISPENSADORES (DATE_REQUEST, ID_COUNTRY, REASON_ID, INSTALL_DATE, CLIENT_ID, SALES_ID, COMMENTS, END_USER_ID, SEGMENT_ID, SUB_SEGMENT_ID, ADDRESS, NEIGHBORHOOD, CITY, "
+                + "STATE, POSTAL_CODE, CONTACT_TELEPHONE, CONTACT_NAME, CONTACT_EMAIL, CONTACT_POSITION, ID_PAYMENT_CONDITION, PURCHASE_FREQUENCY, MAINTENANCE_FREQUENCY, "
+                + "STRATEGIC_CUSTOMER, TRAFFIC_TYPE, TERTIARY_CLEANING, EMPLOYEES, VISITORS, WASHBASIN, MALE_BATHROOM, FEMALE_BATHROOM, STATUS_ID, INVER_SOLICITADA, "
+                + "NEXT_MONTH, IS_EDITABLE) VALUES ('" + hoy.ToString("yyyMMdd") + "', '" + idpais + "', '" + cmbMotivos.SelectedValue + "', '"
+                + fechaRequerida.ToString("yyyMMdd") + "', '" + clientid + "', '" + cmbVendedor.SelectedValue + "', '" + txtComentarios.Text + "', '" +
+                cmbNombreComercial.SelectedValue + "', '" + tablaTemp.Rows[0]["SEGMENT_ID"].ToString() + "', '" + cmbSubSegmento.SelectedValue + "', '" + txtDireccion.Text + "', '" +
+                txtBarrio.Text + "', '" + cmbCiudad.SelectedValue + "', '" + cmbCiudad.Text + "', '" + txtCodigoPostal.Text + "', '" +
+                txtTelefono.Text + "', '" + txtPersonaContacto.Text + "', '" + txtCorreoContacto.Text + "', '" + txtPosicion.Text + "', '" +
+                cmbCondicionPago.SelectedValue + "', '" + cmbFrecuenciaCompra.SelectedValue + "', '" + cmbFrecuenciaMantenimiento.SelectedValue + "', '" +
+                cmbClienteEstrategico.SelectedValue + "', '" + cmbTipoTrafico.SelectedValue + "', '" + cmbLimpiezaTercerizada.SelectedValue + "', " +
+                Convert.ToInt32(txtCantidadEmpleados.Text) + ", " + Convert.ToInt32(txtCantidadVisitantes.Text) + ", " + Convert.ToInt32(txtCantidadLavatorios.Text) + ", " +
+                Convert.ToInt32(txtBañoHombre.Text) + ", " + Convert.ToInt32(txtBañoMujer.Text) + ", 1, " + valorDetalle2 + ", '" + paraSiguienteMes + "', '" +
+                esEditable + "')";
                 #endregion
 
                 #region Inserccion

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">        
-    <title>Clientes Nuevos</title>
+    <title>Solicitud</title>
     <link href="../Styles/Solicitudes.css" rel="stylesheet" type="text/css" />
     <link href="../Styles/ListboxMultiCampo.css" rel="Stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">

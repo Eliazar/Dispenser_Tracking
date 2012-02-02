@@ -21,8 +21,8 @@ namespace Dispenser
 
         public Connection()
         {
-            connection = ConfigurationManager.ConnectionStrings["Casa"].ConnectionString;
-            //connection = ConfigurationManager.ConnectionStrings["KCPConexion"].ConnectionString;
+            //connection = ConfigurationManager.ConnectionStrings["Casa"].ConnectionString;
+            connection = ConfigurationManager.ConnectionStrings["KCPConexion"].ConnectionString;
             //connection = ConfigurationManager.ConnectionStrings["ServerConexion"].ConnectionString;
         }
 
@@ -1423,7 +1423,7 @@ namespace Dispenser
 
             MailMessage mensaje = new MailMessage();
 
-            //Se ingresa primero la copia ya que no se quiere mandar mas de una vez el correo en caso de que existieran varis customer care
+            //Se ingresa primero la copia ya que no se quiere mandar mas de una vez el correo en caso de que existieran varios Customer Care
             MailAddress copia = new MailAddress(kamInfo.Rows[0]["KAM_MAIL"].ToString(), kamInfo.Rows[0]["KAM_NAME"].ToString());
             mensaje.CC.Add(copia);
 

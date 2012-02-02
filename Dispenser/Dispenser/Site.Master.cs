@@ -33,7 +33,6 @@ namespace Dispenser
 
                     childItem.Text = "Solicitud Dispensadores";
                     childItem.Selectable = false;
-                    //childItem.NavigateUrl = "Dst/Solicitud_Dispensadores.aspx";
                     NavigationMenu.Items[1].ChildItems.AddAt(0, childItem);
                     NavigationMenu.Items[1].ChildItems[1].NavigateUrl = "Dst/SeguimientoSolicitudes.aspx";
 
