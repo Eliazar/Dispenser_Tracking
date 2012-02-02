@@ -27,6 +27,9 @@ namespace Dispenser.Mantenimiento
 
                 if (!IsPostBack)
                 {
+                    if (Session.Contents["rol"].ToString().Equals("DSTADM"))
+                        Response.Redirect("../Default.aspx");
+                    
                     Connection conexion = new Connection();
                     string query = String.Format("SELECT K.KAM_ID, K.KAM_NAME FROM KAM AS K WHERE K.COUNTRY = '{0}' AND 0 = (SELECT COUNT(U.USER_ID) FROM USUARIOS AS U WHERE U.USER_ID = K.KAM_ID AND U.STATUS = 1)"
                         , conexion.getUserCountry(Session.Contents["userid"].ToString()));

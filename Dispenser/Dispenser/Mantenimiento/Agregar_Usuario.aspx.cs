@@ -23,6 +23,9 @@ namespace Dispenser.Mantenimiento
                 {
                     Connection conexion = new Connection();
 
+                    if (Session.Contents["rol"].ToString().Equals("DSTADM"))
+                        Response.Redirect("../Default.aspx");
+
                     string query = String.Format("SELECT CLIENT_ID, CLIENT_NAME FROM CLIENTES_KC WHERE COUNTRY = '{0}' AND DIRECT_CUSTOMER = 0",
                         conexion.getUserCountry(Session.Contents["userid"].ToString()));
 

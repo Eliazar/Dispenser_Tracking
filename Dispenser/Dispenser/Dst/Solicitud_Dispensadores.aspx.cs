@@ -61,6 +61,10 @@ namespace Dispenser.Dst
                 if (!IsPostBack)
                 {
 
+                    if (Session.Contents["rol"].ToString().Equals("KCPADM") || Session.Contents["rol"].ToString().Equals("KCPCCR"))
+                        Response.Redirect("../Default.aspx");
+                    
+                    
                     DateTime hoy = DateTime.Now;
 
                     dpFechaSolicitada.MinDate = hoy.AddDays(7);

@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Dispenser.Default" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
+    <style type="text/css">
+        .style1
+        {
+            text-align: center;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     
@@ -13,23 +19,28 @@
                     <h2>Estadisticas</h2>
                     <table style="width: 100%">
                         <tr>
-                            <td>
-                                <center><asp:Label runat="server" ID="lblTP"/></center>
+                            <td class="style1">
+                                <asp:Label runat="server" ID="lblTP"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <center><asp:Label runat="server" ID="lblInvAut"/></center>
+                            <td class="style1">
+                                <asp:Label runat="server" ID="lblInvAut"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <center><asp:Label runat="server" ID="lblInvPend"/></center>
+                            <td class="style1">
+                                <asp:Label runat="server" ID="lblInvPend"/>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <center><asp:Label runat="server" ID="lblInvUsada"/></center>
+                            <td class="style1">
+                                <asp:Label runat="server" ID="lblRestante"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="style1">
+                                <asp:Label runat="server" ID="lblInvUsada"/>
                             </td>
                         </tr>
                     </table>

@@ -15,7 +15,7 @@ namespace Dispenser.Dst
     public partial class Solicitud_Clientes_Nuevos : System.Web.UI.Page
     {
 
-        #region
+        #region Globales
 
         //Listas para los productos y dispensadores
         static List<string> codigoDispensadores;
@@ -57,6 +57,9 @@ namespace Dispenser.Dst
                 {
 
                     DateTime hoy = DateTime.Now;
+
+                    if (Session.Contents["rol"].ToString().Equals("KCPADM") || Session.Contents["rol"].ToString().Equals("KCPCCR"))
+                        Response.Redirect("../Default.aspx");
 
                     dpFechaSolicitada.MinDate = hoy.AddDays(7);
                     dpFechaSolicitada.SelectedDate = hoy.AddDays(7);
@@ -141,10 +144,12 @@ namespace Dispenser.Dst
         {
             try
             {
+
+                string codigoTemp = quitarCeros(txtCodigo.Text);
                 
                 Connection conexion = new Connection();
 
-                if (conexion.seekEndUser(conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString()), txtCodigo.Text))
+                if (conexion.seekEndUser(conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString()), codigoTemp))
                 {
                     radajaxmanager.ResponseScripts.Add(@"alert('Codigo que ingresa ya existe.');");
                     return;
@@ -400,19 +405,19 @@ namespace Dispenser.Dst
             }
         }
 
-        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        protected void CustomValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
             try
             {
-                char[] cadena = txtDireccion.Text.ToCharArray();
 
-                for (int i = 0; i < cadena.Length; i++)
+                CustomValidator custom = (CustomValidator)source;
+
+                TextBox textbox = (TextBox)custom.FindControl(custom.ControlToValidate);
+
+                if (textbox.Text.Contains(',') || textbox.Text.Contains('\'') || textbox.Text.Contains('-') || textbox.Text.Contains(';'))
                 {
-                    if (cadena[i].Equals('\'') || cadena[i].Equals(',') || cadena[i].Equals('-') || cadena.Equals(';'))
-                    {
-                        args.IsValid = false;
-                        return;
-                    }
+                    args.IsValid = false;
+                    return;
                 }
 
                 args.IsValid = true;
@@ -446,6 +451,11 @@ namespace Dispenser.Dst
             {
                 radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
+        }
+
+        protected void RadScriptManager1_AsyncPostBackError(object sender, AsyncPostBackErrorEventArgs e)
+        {
+            RadScriptManager1.AsyncPostBackErrorMessage = "Error inesperado:\n" + e.Exception.Message;
         }
         #endregion
 
@@ -486,6 +496,35 @@ namespace Dispenser.Dst
 
             return new DataTable();
         }
+
+        private string quitarCeros(string codigo)
+        {
+            try
+            {
+
+                string cadena = String.Empty;
+                char []arreglo = codigo.ToCharArray();
+                int longitud = 0;
+                for (int i = 0; i < codigo.Length; i++)
+                {
+                    if (arreglo[i].Equals('0'))
+                        longitud++;
+                    else
+                        break;
+                }
+
+                cadena = codigo.Substring(longitud);
+                return cadena;
+            }
+            catch (Exception error)
+            {
+                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
+            }
+
+            return String.Empty;
+
+        }
         #endregion
+
     }
 }

@@ -17,6 +17,9 @@ namespace Dispenser.Mantenimiento
             Menu menu = Master.FindControl("NavigationMenu") as Menu;
             menu.Items[2].ChildItems[1].ChildItems.RemoveAt(0);
             menu.Items[2].ChildItems[1].ChildItems[0].NavigateUrl = "Editar_Vendedor.aspx";
+
+            if (Session.Contents["rol"].ToString().Equals("KCPADM") || Session.Contents["rol"].ToString().Equals("KCPCCR"))
+                Response.Redirect("../Default.aspx");
         }
 
         protected void btGuardar_Click(object sender, EventArgs e)

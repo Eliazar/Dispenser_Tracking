@@ -49,6 +49,15 @@ namespace Dispenser {
         protected global::System.Web.UI.WebControls.Label lblInvPend;
         
         /// <summary>
+        /// lblRestante control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRestante;
+        
+        /// <summary>
         /// lblInvUsada control.
         /// </summary>
         /// <remarks>

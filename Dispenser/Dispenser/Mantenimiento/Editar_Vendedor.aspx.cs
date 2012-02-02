@@ -23,6 +23,9 @@ namespace Dispenser.Mantenimiento
 
                 if (!IsPostBack)
                 {
+                    if (Session.Contents["rol"].ToString().Equals("KCPADM") || Session.Contents["rol"].ToString().Equals("KCPCCR"))
+                        Response.Redirect("../Default.aspx");
+                    
                     Connection conexion = new Connection();
                     string clientId = conexion.getUsersInfo("CLIENT_ID", "USER_ID", Session.Contents["userid"].ToString());
                     string query = String.Format("SELECT SALES_ID, SALES_NAME FROM VENDEDORES WHERE CLIENT_ID = '{0}'", clientId);

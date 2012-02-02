@@ -24,6 +24,9 @@ namespace Dispenser.Mantenimiento
 
                 if (!IsPostBack)
                 {
+                    if (Session.Contents["rol"].ToString().Equals("DSTADM"))
+                        Response.Redirect("../Default.aspx");
+                    
                     Connection conexion = new Connection();
 
                     string paisUsuario = conexion.getUserCountry(Session.Contents["userid"].ToString());
@@ -71,7 +74,7 @@ namespace Dispenser.Mantenimiento
             double inversion = Convert.ToDouble(nmcPresupuesto.Value);
 
             //Cuento cuantas solicitudes hay desde la ultima vez que se actualizo el TP
-            string query = String.Format("SELECT COUNT(DR_ID) AS CANTIDAD FROM SOLICITUD_DISPENSADORES WHERE (CLIENT_ID = '{0}' AND (STATUS_ID = 1 OR STATUS_ID = 5)) AND (DATE_REQUEST BETWEEN '{1}' AND '{2}')",
+            string query = String.Format("SELECT COUNT(DR_ID) AS CANTIDAD FROM SOLICITUD_DISPENSADORES WHERE (CLIENT_ID = '{0}' AND (STATUS_ID = 1 OR STATUS_ID = 5)) AND ((DATE_REQUEST BETWEEN '{1}' AND '{2}') AND ((NEXT_MONTH = 0 AND IS_EDITABLE = 1) OR (NEXT_MONTH = 1 AND IS_EDITABLE = 1)))",
                 cmbSocioComercial.SelectedValue, fechaActualizacion.ToString("yyyMMdd"), hoy.ToString("yyyMMdd"));
             DataTable solicitudesMes = conexion.getGridDataSource(query);
 
@@ -91,7 +94,7 @@ namespace Dispenser.Mantenimiento
             {
 
                 //Se buscan todas las solicitudes corridas.
-                query = String.Format("SELECT DR_ID, INVER_SOLICITADA FROM SOLICITUD_DISPENSADORES WHERE NEXT_MONTH = 1 AND IS_EDITABLE = 0 AND CLIENT_ID = '{0}'",
+                query = String.Format("SELECT DR_ID, INVER_SOLICITADA FROM SOLICITUD_DISPENSADORES WHERE (NEXT_MONTH = 1 AND IS_EDITABLE = 0) AND (STATUS_ID = 1 OR STATUS_ID = 5) AND (CLIENT_ID = '{0}') ORDER BY INVER_SOLICITADA",
                 cmbSocioComercial.SelectedValue);
                 DataTable solicitudesCorridas = conexion.getGridDataSource(query);
 

@@ -9,7 +9,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <telerik:RadScriptManager ID="RadScriptManager1" runat="server" 
-        LoadScriptsBeforeUI="False">
+        LoadScriptsBeforeUI="False" 
+        onasyncpostbackerror="RadScriptManager1_AsyncPostBackError">
     </telerik:RadScriptManager>
 
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Web20">
@@ -90,14 +91,14 @@
             <asp:Panel runat="server" ID="pnlEncabezado">
                 <table>
                     <tr>
-                        <th colspan="5"> 
+                        <th colspan="4"> 
                             <asp:Label runat="server" ID="lblSolicitud"></asp:Label>
                             <br />
                             <asp:Label ID="lblCodigo" runat="server"></asp:Label>
                         </th>
                     </tr>
                     <tr>
-                        <td colspan="5" class="clase1">
+                        <td colspan="4" class="clase1">
                             <asp:Button runat="server" ID="btAtras" Text="Atras" Width="120px" 
                                 onclick="btAtras_Click" />
                         </td>
@@ -109,12 +110,12 @@
                         <td>
                             <asp:Label runat="server" ID="lblDescripcionEstado" Font-Bold="true"></asp:Label>
                         </td>
-                        <td colspan="3" class="clase1">
+                        <td colspan="2" class="clase1">
                             
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5">
+                        <td colspan="4">
                             &nbsp;
                         </td>
                     </tr>
@@ -126,10 +127,10 @@
                             <asp:Label runat="server" ID="lblDescripcionMotivo" Font-Bold="true"></asp:Label>
                         </td>
                         <td>
-                            &nbsp;
-                        </td>
-                        <td>
                             <asp:Label ID="lblNombreComercial" runat="server">Nombre Comercial:</asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                ControlToValidate="txtNombreComercial" CssClass="failureNotification" 
+                                ErrorMessage="Nombre comercial requerido" ValidationGroup="TodoError">*</asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <telerik:RadTextBox runat="server" ID="txtNombreComercial" Width="190px" 
@@ -145,9 +146,6 @@
                             <telerik:RadDateInput ID="txtFechaSol" Runat="server" DateFormat="d/M/yyyy" 
                                 Enabled="False" Width="190px">
                             </telerik:RadDateInput>
-                        </td>
-                        <td>
-                            &nbsp;
                         </td>
                         <td>
                             <asp:Label runat="server" ID="lblRazonSocial">Razón Social:</asp:Label>
@@ -168,9 +166,6 @@
                             </telerik:RadDatePicker>
                         </td>
                         <td>
-                            &nbsp;
-                        </td>
-                        <td>
                             <asp:Label ID="lblTelefono" runat="server">Telefono:</asp:Label>
                         </td>
                         <td>
@@ -188,9 +183,6 @@
                             <telerik:RadTextBox ID="txtCedulaJuridica" runat="server" Skin="Web20" 
                                 Width="190px" ontextchanged="txtCedulaJuridica_TextChanged">
                             </telerik:RadTextBox>
-                        </td>
-                        <td>
-                            &nbsp;
                         </td>
                         <td>
                             <asp:Label ID="lblDepartamento" runat="server">Estado:</asp:Label>
@@ -213,9 +205,6 @@
                             </telerik:RadComboBox>
                         </td>
                         <td>
-                            &nbsp;
-                        </td>
-                        <td>
                             <asp:Label runat="server" ID="lblCiudad">Ciudad:</asp:Label>
                         </td>
                         <td>
@@ -234,9 +223,6 @@
                                 Width="190px" onselectedindexchanged="cmbSubSegmento_SelectedIndexChanged" 
                                 MaxHeight="100px">
                             </telerik:RadComboBox>
-                        </td>
-                        <td>
-                            &nbsp;
                         </td>
                         <td>
                             <asp:Label ID="lblTelefonoContacto" runat="server">Telefono Contacto:</asp:Label>
@@ -263,7 +249,7 @@
                         <td>
                             <asp:Label ID="lblDireccion" runat="server">Direccion:</asp:Label>
                         </td>
-                        <td colspan="4">
+                        <td colspan="3">
                             <telerik:RadTextBox ID="txtDireccion" runat="server" Height="40px" 
                                 ontextchanged="txtDireccion_TextChanged" Skin="Web20" TextMode="MultiLine" 
                                 Width="500px">
@@ -274,7 +260,7 @@
                         <td>
                             <asp:Label ID="lblComentarios" runat="server">Comentarios:</asp:Label>
                         </td>
-                        <td colspan="4">
+                        <td colspan="3">
                             <asp:Label ID="lblDescripcionComentarios" runat="server" Font-Bold="true"></asp:Label>
                         </td>
                     </tr>
@@ -296,9 +282,6 @@
                             </telerik:RadComboBox>
                         </td>
                         <td>
-                            &nbsp;
-                        </td>
-                        <td>
                             <asp:Label runat="server" ID="lblProducto" Visible="False">Producto:</asp:Label>
                         </td>
                         <td>
@@ -318,9 +301,6 @@
                             </telerik:RadNumericTextBox>
                         </td>
                         <td>
-                            &nbsp;
-                        </td>
-                        <td>
                             <asp:Label runat="server" ID="lblcantProd" Visible="False">Cantidad Producto:</asp:Label>
                         </td>
                         <td>
@@ -335,16 +315,13 @@
                             <asp:Button runat="server" ID="btCrear" Text="Agregar" Width="120px" 
                                 Visible="False" onclick="btCrear_Click" /> 
                         </td>
-                        <td>
-                            &nbsp;
-                        </td>
                         <td colspan="2" class="clase1">
                             <asp:Button runat="server" ID="btCancelar" Text="Cancelar" Width="120px" 
                                 Visible="False" onclick="btCancelar_Click" />
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="clase1">
+                        <td colspan="4" class="clase1">
                             <asp:Button runat="server" ID="btNuevo" Text="Nuevo" Width="120px" 
                                 onclick="btNuevo_Click"/>
                         </td>
@@ -355,8 +332,7 @@
 
         <div class="grid">
             <telerik:RadAjaxPanel runat="server" ID="pnlDescripcionSol">
-                <telerik:RadGrid runat="server" ID="grdDescripciones" Skin="Web20" 
-                    AutoGenerateColumns="false" ShowStatusBar="true" 
+                <telerik:RadGrid runat="server" ID="grdDescripciones" Skin="Web20" AutoGenerateColumns="false" ShowStatusBar="true" 
                     onneeddatasource="grdDescripciones_NeedDataSource">
                     <MasterTableView>
                         <Columns>
@@ -376,6 +352,10 @@
                                 HeaderStyle-Font-Bold="true" HeaderText="Codigo Dispensador" 
                                 UniqueName="CodigoDispensador">
                                 <HeaderStyle Font-Bold="True" />
+                            </telerik:GridBoundColumn>
+
+                            <telerik:GridBoundColumn DataField="DESCRIPTION" HeaderButtonType="None" HeaderStyle-Font-Bold="true"
+                                HeaderText="Descripcion" UniqueName="Descripcion">
                             </telerik:GridBoundColumn>
 
                             <telerik:GridBoundColumn DataField="DISPENSER_QUANTITY" HeaderButtonType="None" 
@@ -438,10 +418,10 @@
         </div>
 
         <div class="botones">
-            <asp:Button runat="server" ID="btAprobar" Text="Programar" Width="120px" 
-                onclick="btAprobar_Click"/>
+            <asp:Button runat="server" ID="btAprobar" Text="Aprobar Cita" Width="120px" 
+                onclick="btAprobar_Click" ValidationGroup="TodoError"/>
             &nbsp;
-            <asp:Button runat="server" ID="btRechazar" Text="Rechazar" Width="120px" 
+            <asp:Button runat="server" ID="btRechazar" Text="Rechazar Cita" Width="120px" 
                 onclick="btRechazar_Click" />
             <br />
             <asp:Button runat="server" ID="btGuardar" Text="Guardar Cambios" Width="120px" 

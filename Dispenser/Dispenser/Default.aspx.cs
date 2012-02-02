@@ -27,15 +27,6 @@ namespace Dispenser
                         "¿Cómo dar seguimiento a las solicitudues? ahora te decimos:";
 
                     parrafo2.Visible = false;
-                    /*string query = String.Format("SELECT DISTINCT(R.REASON_DESCRIP), SUM(SD.INVER_SOLICITADA) AS INVERSION_TOTAL "
-                    + "FROM SOLICITUD_DISPENSADORES AS SD "
-                    + "INNER JOIN RAZONES AS R ON R.ID_REASON = SD.REASON_ID "
-                    + "WHERE (SD.STATUS_ID = 1 OR STATUS_ID = 5) AND (SD.DATE_REQUEST BETWEEN '{1}' AND '{2}') "
-                    + "GROUP BY R.REASON_DESCRIP"
-                    , clientId, new DateTime(hoy.Year, hoy.Month, 1).ToString("yyyMMdd"), hoy.ToString("yyyMMdd"));
-
-                    chrtConsumo.DataSource = conexion.getGridDataSource(query);
-                    chrtConsumo.Visible = true;*/
 
                     string query = String.Format("SELECT COUNT(DR_ID) AS PENDIENTE "
                     + "FROM SOLICITUD_DISPENSADORES "
@@ -82,17 +73,29 @@ namespace Dispenser
                         double tp = Convert.ToDouble(fila["BUDGET_TP"]);
                         double inversion = Convert.ToDouble(fila["INVERSION"]);
                         double inversionF = Convert.ToDouble(fila["INVERSION_FLOTANTE"]);
+                        double disponibilidad = tp - (inversion + inversionF);
+                        double porcentaje = ((disponibilidad) / tp) * 100;
 
                         lblTP.Text = "<b>Presupuesto:</b> $" + tp.ToString();
-                        lblInvAut.Text = "<b>Inversion:</b> $" + inversion.ToString();
-                        lblInvPend.Text = "<b>Inversion pendiente:</b> $" + inversionF.ToString();
-                        lblInvUsada.Text = "<b>% Uso de Presupuesto:</b> " + Convert.ToDouble(((inversion + inversionF) / tp) * 100).ToString("0.00") + "%";
+                        lblInvAut.Text = "<b>Inversion Aprobada:</b> $" + inversion.ToString("0.00");
+                        lblInvPend.Text = "<b>Inversion Pendiente:</b> $" + inversionF.ToString("0.00");
 
-                        if (inversionF > tp)
-                            lblInvPend.ForeColor = System.Drawing.Color.Red;
+                        if (disponibilidad > 0)
+                            lblRestante.Text = "<b>Presupuesto Restante:</b> $" + disponibilidad.ToString("0.00");
+                        else
+                        {
+                            lblRestante.ForeColor = System.Drawing.Color.Red;
+                            lblRestante.Text = "$0.0";
+                        }
 
-                        if (Convert.ToDouble(((inversion + inversionF) / tp) * 100) > 100)
+                        if (porcentaje > 0)
+                            lblInvUsada.Text = "<b>% Disponibilidad:</b> " + porcentaje.ToString("0.00") + "%";
+                        else
+                        {
                             lblInvUsada.ForeColor = System.Drawing.Color.Red;
+                            lblInvUsada.Text = "0%";
+                        }
+
                         
                         Session.Add("presupuesto", tp);
                         Session.Add("aprobado", inversion);
@@ -122,7 +125,7 @@ namespace Dispenser
             {
                 mensajes.Text = String.Format("<script languaje='javascript'>" +
                                         "alert('{0}');" +
-                                        "window.location.href = 'Default.aspx';" +
+                                        "window.location.href = 'About.aspx';" +
                                      "</script>", error.Message);
             }
         }

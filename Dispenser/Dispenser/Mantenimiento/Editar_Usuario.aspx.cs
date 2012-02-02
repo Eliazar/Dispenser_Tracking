@@ -21,6 +21,9 @@ namespace Dispenser.Mantenimiento
                 Menu menu = Master.FindControl("NavigationMenu") as Menu;
                 menu.Items[2].ChildItems[0].ChildItems.RemoveAt(1);
 
+                if (Session.Contents["rol"].ToString().Equals("DSTADM"))
+                    Response.Redirect("../Default.aspx");
+                
                 Connection conexion = new Connection();
                 string query = String.Empty;
 

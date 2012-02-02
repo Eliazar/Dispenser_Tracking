@@ -36,6 +36,9 @@ namespace Dispenser.Kcp
             {
                 if (!IsPostBack)
                 {
+                    if (Session.Contents["rol"].ToString().Equals("DSTADM"))
+                        Response.Redirect("../Default.aspx");
+                    
                     Connection conexion = new Connection();
 
                     lblSolicitud.Text = "Solicitud No: " + Session.Contents["solicitud"].ToString();
@@ -57,10 +60,10 @@ namespace Dispenser.Kcp
                     {
                         btNuevo.Enabled = false;
                         btAprobar.Enabled = false;
-                        btRechazar.Enabled = false;
+                        btRechazar.Enabled = true;
                         btCerrarCita.Enabled = false;
                         btGuardar.Enabled = false;
-                        RadAjaxManager1.ResponseScripts.Add(@"alert('Solicitud correspondiente al siguiente mes, no se puede modificar.');");
+                        RadAjaxManager1.ResponseScripts.Add(@"alert('Solicitud corrida sin acceso a aprobacion. Accesos a rechazo unicamente.');");
                     }
                 }
             }
@@ -1123,9 +1126,11 @@ namespace Dispenser.Kcp
             {
                 Connection conexion = new Connection();
 
-                string query = String.Format("SELECT PRODUCT_ID, PRODUCT_QUANTITY, DISPENSER_ID, DISPENSER_QUANTITY, INVERSION, " +
-                    "(SELECT DD.DISPENSER_PRICE FROM DISPENSADOR_PAIS AS DD WHERE DD.DISPENSER_ID = DESCRIPCION_DISPENSADORES.DISPENSER_ID AND DD.COUNTRY_ID = '{0}') AS UNIDAD "
-                + "FROM DESCRIPCION_DISPENSADORES WHERE DR_ID = {1}",
+                /*Arreglar esto*/
+
+                string query = String.Format("SELECT DD.PRODUCT_ID, DD.PRODUCT_QUANTITY, DD.DISPENSER_ID, D.DESCRIPTION, DD.DISPENSER_QUANTITY, DD.INVERSION, " +
+                    "(SELECT DP.DISPENSER_PRICE FROM DISPENSADOR_PAIS AS DP WHERE DP.DISPENSER_ID = DD.DISPENSER_ID AND DP.COUNTRY_ID = '{0}') AS UNIDAD "
+                + "FROM DESCRIPCION_DISPENSADORES AS DD JOIN DISPENSADORES AS D ON D.ID_DISPENSER = DD.DISPENSER_ID WHERE DD.DR_ID = {1}",
                 conexion.getUsersInfo("ID_COUNTRY", "USER_ID", Session.Contents["userid"].ToString()), Session["solicitud"].ToString());
                 grdDescripciones.DataSource = conexion.getGridDataSource(query);
             }
@@ -1504,7 +1509,7 @@ namespace Dispenser.Kcp
                     }
                 }
 
-                #region
+                #region Inversion
 
                 double inversionFlotante = Convert.ToDouble(conexion.getClientKCInfo("INVERSION_FLOTANTE", "CLIENT_ID", conexion.getSolicitudInfo("CLIENT_ID", Session.Contents["solicitud"].ToString())));
                 double inversionSolicitada = Convert.ToDouble(conexion.getSolicitudInfo("INVER_SOLICITADA", Session.Contents["solicitud"].ToString()));
@@ -1529,18 +1534,18 @@ namespace Dispenser.Kcp
                     {
                         lblDescripcionEstado.Text = conexion.getStatusDescripInfo("STATUS_DESCRIP", "STATUS_ID", "3");
                         configurarBotones();
-                        RadAjaxManager1.ResponseScripts.Add(@"alert('Solicitud Rechazada.');");
+                        RadAjaxManager1.ResponseScripts.Add(@"aprobadoRechazado('Rechazo hecho con exito.');");
                     }
                     else
                     {
                         lblDescripcionEstado.Text = conexion.getStatusDescripInfo("STATUS_DESCRIP", "STATUS_ID", "3");
                         configurarBotones();
-                        RadAjaxManager1.ResponseScripts.Add(@"alert('Solicitud Rechazada; error de conexion no se envio correo al distribuidor.');");
+                        RadAjaxManager1.ResponseScripts.Add(@"aprobadoRechazado('Solicitud Rechazada; error de conexion no se envio correo al distribuidor.');");
                     }
                 }
                 else
                 {
-                    RadAjaxManager1.ResponseScripts.Add(@"alert('Error de conexion al momento del rechazo, contactese con su administrador.');");
+                    RadAjaxManager1.ResponseScripts.Add(@"aprobadoRechazado('Error de conexion al momento del rechazo, contactese con su administrador.');");
                     return;
                 }
 
@@ -1581,11 +1586,11 @@ namespace Dispenser.Kcp
                 {
                     lblDescripcionEstado.Text = conexion.getStatusDescripInfo("STATUS_DESCRIP", "STATUS_ID", "4");
                     configurarBotones();
-                    RadAjaxManager1.ResponseScripts.Add(@"alert('Solicitud Cerrada.');");
+                    RadAjaxManager1.ResponseScripts.Add(@"aprobadoRechazado('Solicitud Cerrada.');");
                 }
                 else
                 {
-                    RadAjaxManager1.ResponseScripts.Add(@"alert('Error de conexion al momento de cerrar, contactese con su administrador.');");
+                    RadAjaxManager1.ResponseScripts.Add(@"aprobadoRechazado('Error de conexion al momento de cerrar, contactese con su administrador.');");
                     return;
                 }
             }
@@ -1594,6 +1599,11 @@ namespace Dispenser.Kcp
                 RadAjaxManager1.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
             }
 
+        }
+
+        protected void RadScriptManager1_AsyncPostBackError(object sender, AsyncPostBackErrorEventArgs e)
+        {
+            RadScriptManager1.AsyncPostBackErrorMessage = "Error inesperado:\n" + e.Exception.Message;
         }
         #endregion
 

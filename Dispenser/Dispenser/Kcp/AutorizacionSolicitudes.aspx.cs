@@ -14,19 +14,8 @@ namespace Dispenser.Kcp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*try
-            {
-                if (!IsPostBack)
-                {
-                    string historial = Session.Contents["historial"].ToString();
-                    historial += "Autorizacion de Solicitudes; ";
-                    Session.Contents["historial"] = historial;
-                }
-            }
-            catch (Exception error)
-            {
-                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio('{0}');", error.Message));
-            }*/
+            if (Session.Contents["rol"].ToString().Equals("DSTADM"))
+                Response.Redirect("../Default.aspx");
         }
 
         #region Todo del grid
