@@ -323,10 +323,9 @@ namespace Dispenser.Dst
 
                     if (conexion.setDescripcionDis(dispenserId, codigoDispensadores, codigoProducto, cantidadDispensadores, cantidadProductos, costoDetalle))
                     {
-                        double valDetTemp = valorDetalle2;
-                        valorDetalle2 += Convert.ToDouble(Session.Contents["pendiente"].ToString());
+                        //valorDetalle2 += Convert.ToDouble(Session.Contents["pendiente"].ToString());
 
-                        string query2 = String.Format("UPDATE CLIENTES_KC SET INVERSION_FLOTANTE = {0} WHERE CLIENT_ID = '{1}'", valorDetalle2, clientid);
+                        string query2 = String.Format("UPDATE CLIENTES_KC SET INVERSION_FLOTANTE = (INVERSION_FLOTANTE + {0}) WHERE CLIENT_ID = '{1}'", valorDetalle2, clientid);
                         conexion.updateClientesFinales(query2);
 
                         btEnviar.Visible = false;
@@ -361,9 +360,9 @@ namespace Dispenser.Dst
                             campos.Clear();
 
                             if (!paraSiguienteMes)
-                                radajaxmanager.ResponseScripts.Add(String.Format("alerta('{0}');", valDetTemp));
+                                radajaxmanager.ResponseScripts.Add(String.Format("alerta('{0}');", valorDetalle2));
                             else
-                                radajaxmanager.ResponseScripts.Add(String.Format("alerta2('{0}');", valDetTemp));
+                                radajaxmanager.ResponseScripts.Add(String.Format("alerta2('{0}');", valorDetalle2));
                         }
                         else
                         {
@@ -376,9 +375,9 @@ namespace Dispenser.Dst
                             datos.Clear();
                             campos.Clear();
                             if (!paraSiguienteMes)
-                                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio(\"La solicitud fue creada costo total ${0}, sin aviso por correo.\");", valDetTemp));
+                                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio(\"La solicitud fue creada costo total ${0}, sin aviso por correo.\");", valorDetalle2));
                             else
-                                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio(\"La solicitud fue creada costo total ${0} y movida al siguiente mes presupuesto excedido, sin aviso por correo.\");", valDetTemp));
+                                radajaxmanager.ResponseScripts.Add(String.Format("errorEnvio(\"La solicitud fue creada costo total ${0} y movida al siguiente mes presupuesto excedido, sin aviso por correo.\");", valorDetalle2));
                         }
                     }
                     else

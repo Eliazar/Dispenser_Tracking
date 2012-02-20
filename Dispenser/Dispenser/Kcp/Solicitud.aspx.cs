@@ -1435,17 +1435,20 @@ namespace Dispenser.Kcp
                 DateTime fechaInstalacion = DateTime.Parse(Convert.ToString(dpFechaInstalacion.SelectedDate));
 
                 #region Movimientos de inversion e inversion flotante
-                double inversionFlotante = Convert.ToDouble(conexion.getClientKCInfo("INVERSION_FLOTANTE", "CLIENT_ID", conexion.getSolicitudInfo("CLIENT_ID", Session.Contents["solicitud"].ToString())));
-                double inversion = Convert.ToDouble(conexion.getClientKCInfo("INVERSION", "CLIENT_ID", conexion.getSolicitudInfo("CLIENT_ID", Session.Contents["solicitud"].ToString())));
+                //double inversionFlotante = Convert.ToDouble(conexion.getClientKCInfo("INVERSION_FLOTANTE", "CLIENT_ID", conexion.getSolicitudInfo("CLIENT_ID", Session.Contents["solicitud"].ToString())));
+                //double inversion = Convert.ToDouble(conexion.getClientKCInfo("INVERSION", "CLIENT_ID", conexion.getSolicitudInfo("CLIENT_ID", Session.Contents["solicitud"].ToString())));
 
                 double inversionSolicitud = Convert.ToDouble(conexion.getSolicitudInfo("INVER_SOLICITADA", Session.Contents["solicitud"].ToString()));
                 double inversionAproSol = Convert.ToDouble(conexion.getSolicitudInfo("INVER_APRO", Session.Contents["solicitud"].ToString()));
 
-                inversionFlotante -= inversionSolicitud;
-                inversion += inversionAproSol;
+                //inversionFlotante -= inversionSolicitud;
+                //inversion += inversionAproSol;
 
-                conexion.Actualizar(String.Format("UPDATE CLIENTES_KC SET INVERSION_FLOTANTE = {0}, INVERSION = {1} WHERE CLIENT_ID = '{2}'",
-                    inversionFlotante, inversion, conexion.getSolicitudInfo("CLIENT_ID", Session.Contents["solicitud"].ToString())));
+                //conexion.Actualizar(String.Format("UPDATE CLIENTES_KC SET INVERSION_FLOTANTE = (INVERSION_FLOTANTE - {0}), INVERSION = (INVERSION + {1}) WHERE CLIENT_ID = '{2}'",
+                    //inversionFlotante, inversion, conexion.getSolicitudInfo("CLIENT_ID", Session.Contents["solicitud"].ToString())));
+
+                conexion.Actualizar(String.Format("UPDATE CLIENTES_KC SET INVERSION_FLOTANTE = (INVERSION_FLOTANTE - {0}), INVERSION = (INVERSION + {1}) WHERE CLIENT_ID = '{2}'",
+                inversionSolicitud, inversionAproSol, conexion.getSolicitudInfo("CLIENT_ID", Session.Contents["solicitud"].ToString())));
                 #endregion
 
                 query = String.Format("UPDATE SOLICITUD_DISPENSADORES SET STATUS_ID = 2, PROGRAMMING_DATE = '{0}', APPROVAL_DATE = '{1}'" +
