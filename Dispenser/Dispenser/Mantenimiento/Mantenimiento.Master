@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
     <title>Mantenimientos</title>
     <link href="../Styles/Mantenimiento.css" rel="Stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="../Imagenes/favicon.ico" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

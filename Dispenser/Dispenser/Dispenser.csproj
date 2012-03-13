@@ -237,6 +237,7 @@
     <Content Include="Imagenes\cancel.png" />
     <Content Include="Imagenes\check.png" />
     <Content Include="Imagenes\Clean.png" />
+    <Content Include="Imagenes\favicon.ico" />
     <Content Include="Imagenes\KCPLogos.png" />
     <Content Include="Imagenes\Logo CTM.png" />
     <Content Include="Imagenes\requerido.png" />

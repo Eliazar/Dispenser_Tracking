@@ -7,6 +7,7 @@
     <title>Solicitud</title>
     <link href="../Styles/Solicitudes.css" rel="stylesheet" type="text/css" />
     <link href="../Styles/ListboxMultiCampo.css" rel="Stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="../Imagenes/favicon.ico" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>

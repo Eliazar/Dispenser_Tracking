@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
     <title>Autorizaciones</title>
     <link href="../Styles/Autorizaciones.css" rel="Stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="../Imagenes/favicon.ico" />
     <asp:ContentPlaceHolder id="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>

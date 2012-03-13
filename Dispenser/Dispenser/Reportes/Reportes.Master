@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
     <title>Estadisticas</title>
     <link href="../Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="../Imagenes/favicon.ico" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

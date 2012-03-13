@@ -123,7 +123,6 @@ namespace Dispenser.Dst
         }
 
         #region Eventos
-
         protected void cmbNombreComercial_SelectedIndexChanged(object o, RadComboBoxSelectedIndexChangedEventArgs e)
         {
             try
