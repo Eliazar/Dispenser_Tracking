@@ -8,13 +8,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <telerik:RadScriptManager ID="RadScriptManager1" Runat="server" 
-        onasyncpostbackerror="RadScriptManager1_AsyncPostBackError">
+    <telerik:RadScriptManager Runat="server" onasyncpostbackerror="RadScriptManager1_AsyncPostBackError" id="RadScriptManager1">
     </telerik:RadScriptManager>
-
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Web20">
-    </telerik:RadWindowManager>
-    
+        
     <asp:SqlDataSource ID="sqlCiudad" runat="server"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sqlVendedores" runat="server"></asp:SqlDataSource>
     <asp:SqlDataSource ID="sqlCondicionesPago" runat="server"></asp:SqlDataSource>
@@ -58,7 +54,7 @@
                             <asp:Label runat="server" ID="lblMotivo">Motivo de Instalacion:</asp:Label>
                         </td>
                         <td>
-                            <telerik:RadTextBox ID="txtMotivo" Runat="server" Enabled="False" Skin="Web20" 
+                            <telerik:RadTextBox ID="txtMotivo" Runat="server" Enabled="False" Skin="Default" 
                                 Width="190px">
                             </telerik:RadTextBox>
                         </td>
@@ -71,12 +67,13 @@
                         <td>
                             <telerik:RadDatePicker ID="dpFechaSolicitada" runat="server" Culture="es-HN" 
                                 Skin="Web20" Width="200px" CssClass="requerido">
-                                <Calendar Skin="Web20" UseColumnHeadersAsSelectors="False" 
-                                    UseRowHeadersAsSelectors="False" ViewSelectorText="x">
+                                <Calendar UseColumnHeadersAsSelectors="False" 
+                                    UseRowHeadersAsSelectors="False" ViewSelectorText="x" Skin="Web20">
                                 </Calendar>
                                 <DateInput DateFormat="dd/MM/yyyy" DisplayDateFormat="dd/MM/yyyy">
                                 </DateInput>
                                 <DatePopupButton HoverImageUrl="" ImageUrl="" />
+                                <datepopupbutton hoverimageurl="" imageurl="" />
                             </telerik:RadDatePicker>
                         </td>
                     </tr>
@@ -293,7 +290,7 @@
                         </td>
                         <td>
                             <telerik:RadTextBox ID="txtCodigoPostal" runat="server" 
-                                MaxLength="10" Skin="Web20" 
+                                MaxLength="10" Skin="Default" 
                                 Width="190px">
                             </telerik:RadTextBox>
                         </td>
@@ -496,9 +493,9 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <asp:Label runat="server" ID="lblPersonaContacto">Contacto:</asp:Label>
+                            <asp:Label runat="server" ID="lblPersonaContacto">Nombre:</asp:Label>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" 
-                                ErrorMessage="Contacto requerido" ControlToValidate="txtPersonaContacto" 
+                                ErrorMessage="Nombre contacto requerido" ControlToValidate="txtPersonaContacto" 
                                 CssClass="failureNotification" ValidationGroup="TodoError">*
                             </asp:RequiredFieldValidator>
                         </td>
@@ -517,25 +514,41 @@
                             <asp:TextBox ID="txtTelefonoContacto" runat="server" CssClass="requerido" 
                                 MaxLength="12" Width="190px"></asp:TextBox>
                         </td>
+                        <td>
+                            <telerik:RadTextBox ID="txtExtension" runat="server" MaxLength="6" Width="40px" 
+                                EmptyMessage="EXT" Skin="Web20"></telerik:RadTextBox>
+                        </td>
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label runat="server" ID="lblCorreoContacto">Correo:</asp:Label>
+                            <asp:Label ID="lblApellidoContacto" runat="server">Apellido:</asp:Label>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" 
+                                ErrorMessage="Apellido del contacto requerido." CssClass="failureNotification" 
+                                ValidationGroup="TodoError" ControlToValidate="txtApellido">*</asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtApellido" runat="server" CssClass="requerido" 
+                                MaxLength="50" Width="190px"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:Label ID="lblCorreoContacto" runat="server">Correo:</asp:Label>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" 
-                                ErrorMessage="Correo del contacto requerido" ControlToValidate="txtCorreoContacto" 
-                                CssClass="failureNotification" ValidationGroup="TodoError">*
+                                ControlToValidate="txtCorreoContacto" CssClass="failureNotification" 
+                                ErrorMessage="Correo del contacto requerido" ValidationGroup="TodoError">*
                             </asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <asp:TextBox ID="txtCorreoContacto" runat="server" CssClass="requerido" 
                                 MaxLength="50" Width="190px"></asp:TextBox>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
-                            <asp:Label runat="server" ID="lblPosicion">Cargo:</asp:Label>
+                            <asp:Label ID="lblPosicion" runat="server">Cargo:</asp:Label>
                         </td>
                         <td>
-                            <telerik:RadTextBox ID="txtPosicion" runat="server" Width="190px"
-                                Skin="Web20" MaxLength="50">
+                            <telerik:RadTextBox ID="txtPosicion" runat="server" MaxLength="50" Skin="Web20" 
+                                Width="190px">
                             </telerik:RadTextBox>
                         </td>
                     </tr>
@@ -564,6 +577,11 @@
                             <br />
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
                                 ControlToValidate="txtTelefonoContacto" CssClass="failureNotification" 
+                                ErrorMessage="No se aceptan letras en el telefono" ValidationExpression="^\d+$" 
+                                ValidationGroup="TodoError"></asp:RegularExpressionValidator>
+                            <br />
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
+                                ControlToValidate="txtExtension" CssClass="failureNotification" 
                                 ErrorMessage="No se aceptan letras en el telefono" ValidationExpression="^\d+$" 
                                 ValidationGroup="TodoError"></asp:RegularExpressionValidator>
                         </td>
