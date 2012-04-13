@@ -336,7 +336,7 @@ namespace Dispenser.Dst
 
                         //Para el correo electronico
                         datosGenerales.Add(nombrecliente);//Indice 0
-                        datosGenerales.Add(conexion.getEndClientInfo("TRADE_NAME", "END_USER_ID", cmbNombreComercial.SelectedValue, "CLIENT_ID", clientid)); //Indice 1
+                        datosGenerales.Add(txtNombreComercial.Text); //Indice 1
                         datosGenerales.Add(conexion.getUsersInfo("USER_NAME", "USER_ID", Session.Contents["userid"].ToString()));//indice 2
                         datosGenerales.Add(hoy.ToString("dd/MM/yyy"));//indice 3
                         datosGenerales.Add(fechaRequerida.ToString("dd/MM/yyy"));//indice 4

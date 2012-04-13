@@ -877,6 +877,15 @@ namespace Dispenser.Dst {
         protected global::System.Web.UI.WebControls.CustomValidator CustomValidator5;
         
         /// <summary>
+        /// CustomValidator7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator7;
+        
+        /// <summary>
         /// CustomValidator6 control.
         /// </summary>
         /// <remarks>

@@ -516,7 +516,7 @@
                         </td>
                         <td>
                             <telerik:RadTextBox ID="txtExtension" runat="server" MaxLength="6" Width="40px" 
-                                EmptyMessage="EXT" Skin="Web20"></telerik:RadTextBox>
+                                EmptyMessage="EXT" Skin="Web20" LabelWidth=""></telerik:RadTextBox>
                         </td>
                     </tr>
                     <tr>
@@ -566,8 +566,16 @@
                             <asp:CustomValidator ID="CustomValidator5" runat="server" 
                                 ClientValidationFunction="validarSimbolos" 
                                 ControlToValidate="txtPersonaContacto" CssClass="failureNotification" 
-                                ErrorMessage="No se permiten simbolos en el campo &quot;contacto&quot;" 
-                                onservervalidate="CustomValidator_ServerValidate" ValidationGroup="TodoError"></asp:CustomValidator>
+                                ErrorMessage="No se permiten simbolos en el campo &quot;Nombre&quot;" 
+                                onservervalidate="CustomValidator_ServerValidate" 
+                                ValidationGroup="TodoError"></asp:CustomValidator>
+                            <br />
+                            <asp:CustomValidator ID="CustomValidator7" runat="server" 
+                                ClientValidationFunction="validarSimbolos" 
+                                ControlToValidate="txtApellido" CssClass="failureNotification" 
+                                ErrorMessage="No se permiten simbolos en el campo &quot;Apellido&quot;" 
+                                onservervalidate="CustomValidator_ServerValidate" 
+                                ValidationGroup="TodoError"></asp:CustomValidator>
                             <br />
                             <asp:CustomValidator ID="CustomValidator6" runat="server" 
                                 ClientValidationFunction="validarSimbolos" ControlToValidate="txtPosicion" 
@@ -582,7 +590,7 @@
                             <br />
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
                                 ControlToValidate="txtExtension" CssClass="failureNotification" 
-                                ErrorMessage="No se aceptan letras en el telefono" ValidationExpression="^\d+$" 
+                                ErrorMessage="No se aceptan letras en la extension" ValidationExpression="^\d+$" 
                                 ValidationGroup="TodoError"></asp:RegularExpressionValidator>
                         </td>
                     </tr>
