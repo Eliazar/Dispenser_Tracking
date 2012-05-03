@@ -312,7 +312,7 @@ div.accountInfo
 .centrar
 {
     width: auto;
-    padding: 0px 300px 10px 300px;
+    padding: 0px 200px 10px 200px;
     margin: 0px;
 }
 
@@ -330,4 +330,11 @@ div.accountInfo
 {
     padding: 10px 50px 10px 510px;
     /*float:right;*/
+}
+
+.requerido
+{
+    border-left-color: #ff0000;
+    border-left-style: solid;
+    border-left-width: 3px;
 }

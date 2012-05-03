@@ -1330,12 +1330,24 @@ namespace Dispenser
             cuerpo.Append("</td>");
             cuerpo.Append("</tr>");
 
+            if (!datosGrl[9].Equals("0"))
+            {
+                cuerpo.Append("<tr>");
+                cuerpo.Append("<td>");
+                cuerpo.Append("Extension:");
+                cuerpo.Append("</td>");
+                cuerpo.Append("<td>");
+                cuerpo.Append(datosGrl[9]);
+                cuerpo.Append("</td>");
+                cuerpo.Append("</tr>");
+            }
+
             cuerpo.Append("<tr>");
             cuerpo.Append("<td>");
             cuerpo.Append("Comentarios:");
             cuerpo.Append("</td>");
             cuerpo.Append("<td>");
-            cuerpo.Append(datosGrl[9]);
+            cuerpo.Append(datosGrl[10]);
             cuerpo.Append("</td>");
             cuerpo.Append("</tr>");
 
@@ -1410,6 +1422,7 @@ namespace Dispenser
             }
 
             cuerpo.Append("</table>");
+            cuerpo.Append("<p>Correo generado automaticamente, favor no contestar.</p>");
             #endregion
 
             string query = String.Format("SELECT K.KAM_NAME, K.KAM_MAIL FROM KAM AS K JOIN CUENTAS_KAM AS CK ON CK.KAM_ID = K.KAM_ID WHERE CK.CLIENT_ID = '{0}' AND K.KAM_ACTIVE = 1"
@@ -1424,8 +1437,11 @@ namespace Dispenser
             MailMessage mensaje = new MailMessage();
 
             //Se ingresa primero la copia ya que no se quiere mandar mas de una vez el correo en caso de que existieran varios Customer Care
-            MailAddress copia = new MailAddress(kamInfo.Rows[0]["KAM_MAIL"].ToString(), kamInfo.Rows[0]["KAM_NAME"].ToString());
-            mensaje.CC.Add(copia);
+            foreach (DataRow fila in kamInfo.Rows)
+            {
+                MailAddress copia = new MailAddress(fila["KAM_MAIL"].ToString(), fila["KAM_NAME"].ToString());
+                mensaje.CC.Add(copia);
+            }
 
             foreach (DataRow fila in customerCareInfo.Rows)
             {

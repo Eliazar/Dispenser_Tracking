@@ -22,7 +22,7 @@
     </telerik:RadAjaxManager>
 
     <div>
-        <telerik:RadAjaxPanel runat="server" ID="pnlGrid">
+        <telerik:RadAjaxPanel runat="server" ID="pnlGrid" Width="100%">
             <telerik:RadGrid ID="grdConsulta" runat="server" Skin="Web20" AutoGenerateColumns="false"
                 AllowFilteringByColumn="true" PageSize="15" AllowPaging="true" 
                 onneeddatasource="grdConsulta_NeedDataSource" 

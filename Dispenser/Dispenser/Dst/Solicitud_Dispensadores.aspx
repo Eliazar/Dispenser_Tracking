@@ -139,7 +139,7 @@
                     <table width="100%">
                         <tr>
                             <td>
-                                <asp:Label ID="lblCodigoCliente" runat="server">Nombre Cliente:</asp:Label>
+                                <asp:Label ID="lblCodigoCliente" runat="server">Buscar Cliente:</asp:Label>
                             </td>
                             <td colspan="3">
                                                         
@@ -526,7 +526,8 @@
                             <td>
                                 <telerik:RadNumericTextBox ID="txtBañoHombre" runat="server" Width="210px"
                                     Skin="Web20" MinValue="0" Value="0" DataType="System.Int32" 
-                                    Enabled="False" ontextchanged="txtBañoHombre_TextChanged" MaxLength="5">
+                                    Enabled="False" ontextchanged="txtBañoHombre_TextChanged" MaxLength="5" 
+                                    style="top: -1px; left: 0px">
                                     <IncrementSettings InterceptArrowKeys="False" InterceptMouseWheel="False" />
                                     <NumberFormat DecimalDigits="0" />
                                 </telerik:RadNumericTextBox>
@@ -610,8 +611,10 @@
                                     Width="190px"></asp:TextBox>
                             </td>
                             <td>
+                                <asp:Label ID="lblExtension" runat="server">Ext.:</asp:Label>
                                 <telerik:RadTextBox ID="txtExtension" runat="server" MaxLength="6" Width="40px" 
-                                    EmptyMessage="EXT" Skin="Web20" LabelWidth=""></telerik:RadTextBox>
+                                    Skin="Web20" LabelWidth="" Enabled="False" 
+                                    ontextchanged="txtExtension_TextChanged" Text="0"></telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
@@ -624,7 +627,8 @@
                             </td>
                             <td>
                                 <asp:TextBox ID="txtApellido" runat="server" CssClass="requerido" 
-                                    MaxLength="50" Width="190px"></asp:TextBox>
+                                    MaxLength="50" Width="190px" Enabled="False" 
+                                    ontextchanged="txtApellido_TextChanged"></asp:TextBox>
                             </td>
                             <td>
                                 <asp:Label ID="lblCorreoContacto" runat="server">Correo:</asp:Label>

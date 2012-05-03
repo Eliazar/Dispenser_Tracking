@@ -515,8 +515,9 @@
                                 MaxLength="12" Width="190px"></asp:TextBox>
                         </td>
                         <td>
+                            <asp:Label ID="lblExtension" runat="server">Ext.:</asp:Label>
                             <telerik:RadTextBox ID="txtExtension" runat="server" MaxLength="6" Width="40px" 
-                                EmptyMessage="EXT" Skin="Web20" LabelWidth=""></telerik:RadTextBox>
+                                Skin="Web20" LabelWidth="" Text="0"></telerik:RadTextBox>
                         </td>
                     </tr>
                     <tr>

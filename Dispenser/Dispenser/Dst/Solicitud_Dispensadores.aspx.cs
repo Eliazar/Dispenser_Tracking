@@ -73,9 +73,6 @@ namespace Dispenser.Dst
                     dpFechaSolicitada.MinDate = hoy.AddDays(7);
                     dpFechaSolicitada.SelectedDate = hoy.AddDays(7);
 
-                    //cargarRazones();
-                    //cargarClientesFinales();
-
                     setDataSources();
 
                     //Listas para los cambios de datos
@@ -145,10 +142,6 @@ namespace Dispenser.Dst
                 inicializarComponentes();
 
                 cargarData(cmbNombreComercial.SelectedValue);
-                //cargarVendedores(cmbNombreComercial.SelectedValue);
-                //cargarCondicionesPago(cmbNombreComercial.SelectedValue);
-                //cargarSubsegmentos(cmbNombreComercial.SelectedValue);
-                //cargarCiudades(cmbNombreComercial.SelectedValue);
 
             }
             catch (Exception error)
@@ -181,7 +174,8 @@ namespace Dispenser.Dst
             try
             {
                 //En el caso de que falle con javascript
-                if (!CustomValidator1.IsValid || !CustomValidator2.IsValid || !CustomValidator3.IsValid || !CustomValidator4.IsValid)
+                if (!CustomValidator1.IsValid || !CustomValidator2.IsValid || !CustomValidator3.IsValid || !CustomValidator4.IsValid || !CustomValidator5.IsValid
+                    || !CustomValidator6.IsValid || !CustomValidator7.IsValid)
                 {
                     radajaxmanager.ResponseScripts.Add(@"alert('Existen conflictos en campos requeridos favor verifique.');");
                     return;
@@ -242,9 +236,7 @@ namespace Dispenser.Dst
                     cantidadDispensadores.Clear();
                     cantidadProductos.Clear();
                     costoDetalle.Clear();
-                    /*datos.Clear();
-                    campos.Clear();*/
-
+                    
                     radajaxmanager.ResponseScripts.Add(String.Format(@"alert('Se han encontrado {0} inconsistencias favor revise la tabla de dispensadores y productos.');", inconsistencias));
 
                     return;
@@ -258,9 +250,7 @@ namespace Dispenser.Dst
                     cantidadDispensadores.Clear();
                     cantidadProductos.Clear();
                     costoDetalle.Clear();
-                    /*datos.Clear();
-                    campos.Clear();*/
-
+                    
                     radajaxmanager.ResponseScripts.Add(@"alert('No se han contabilizado productos.');");
 
                     return;
@@ -294,19 +284,45 @@ namespace Dispenser.Dst
                 string queryTemp = String.Format("SELECT SEGMENT_ID FROM SUB_SEGMENTOS WHERE SUB_SEGMENT_ID = '{0}'", cmbSubSegmento.SelectedValue);
                 DataTable tablaTemp = conexion.getGridDataSource(queryTemp);
 
+                //Verifica que el codigo postal no se guarde con valor vacio
+                string codigoPostal = "N/A";
+                if (!txtCodigoPostal.Text.Equals(String.Empty))
+                    codigoPostal = txtCodigoPostal.Text;
+
+                //si la extension esta vacio se coloca el 0
+                if (txtExtension.Text.Equals(String.Empty))
+                    txtExtension.Text = "0";
+
+                #region Validacion de datos adicionales del cliente
+                if (txtCantidadEmpleados.Text.Equals(String.Empty))
+                    txtCantidadEmpleados.Text = "0";
+
+                if (txtCantidadVisitantes.Text.Equals(String.Empty))
+                    txtCantidadVisitantes.Text = "0";
+
+                if (txtCantidadVisitantes.Text.Equals(String.Empty))
+                    txtCantidadVisitantes.Text = "0";
+
+                if (txtBañoHombre.Text.Equals(String.Empty))
+                    txtBañoHombre.Text = "0";
+
+                if (txtBañoMujer.Text.Equals(String.Empty))
+                    txtBañoMujer.Text = "0";
+                #endregion
+
                 query = "INSERT INTO SOLICITUD_DISPENSADORES (DATE_REQUEST, ID_COUNTRY, REASON_ID, INSTALL_DATE, CLIENT_ID, SALES_ID, COMMENTS, END_USER_ID, SEGMENT_ID, SUB_SEGMENT_ID, ADDRESS, NEIGHBORHOOD, CITY, "
                 + "STATE, POSTAL_CODE, CONTACT_TELEPHONE, CONTACT_NAME, CONTACT_EMAIL, CONTACT_POSITION, ID_PAYMENT_CONDITION, PURCHASE_FREQUENCY, MAINTENANCE_FREQUENCY, "
                 + "STRATEGIC_CUSTOMER, TRAFFIC_TYPE, TERTIARY_CLEANING, EMPLOYEES, VISITORS, WASHBASIN, MALE_BATHROOM, FEMALE_BATHROOM, STATUS_ID, INVER_SOLICITADA, "
-                + "NEXT_MONTH, IS_EDITABLE) VALUES ('" + hoy.ToString("yyyMMdd") + "', '" + idpais + "', '" + cmbMotivos.SelectedValue + "', '"
+                + "NEXT_MONTH, IS_EDITABLE, CONTACT_EXT, CONTACT_SURNAME) VALUES ('" + hoy.ToString("yyyMMdd") + "', '" + idpais + "', '" + cmbMotivos.SelectedValue + "', '"
                 + fechaRequerida.ToString("yyyMMdd") + "', '" + clientid + "', '" + cmbVendedor.SelectedValue + "', '" + txtComentarios.Text + "', '" +
                 cmbNombreComercial.SelectedValue + "', '" + tablaTemp.Rows[0]["SEGMENT_ID"].ToString() + "', '" + cmbSubSegmento.SelectedValue + "', '" + txtDireccion.Text + "', '" +
-                txtBarrio.Text + "', '" + cmbCiudad.SelectedValue + "', '" + cmbCiudad.Text + "', '" + txtCodigoPostal.Text + "', '" +
+                txtBarrio.Text + "', '" + cmbCiudad.SelectedValue + "', '" + cmbCiudad.Text + "', '" + codigoPostal + "', '" +
                 txtTelefono.Text + "', '" + txtPersonaContacto.Text + "', '" + txtCorreoContacto.Text + "', '" + txtPosicion.Text + "', '" +
                 cmbCondicionPago.SelectedValue + "', '" + cmbFrecuenciaCompra.SelectedValue + "', '" + cmbFrecuenciaMantenimiento.SelectedValue + "', '" +
                 cmbClienteEstrategico.SelectedValue + "', '" + cmbTipoTrafico.SelectedValue + "', '" + cmbLimpiezaTercerizada.SelectedValue + "', " +
                 Convert.ToInt32(txtCantidadEmpleados.Text) + ", " + Convert.ToInt32(txtCantidadVisitantes.Text) + ", " + Convert.ToInt32(txtCantidadLavatorios.Text) + ", " +
                 Convert.ToInt32(txtBañoHombre.Text) + ", " + Convert.ToInt32(txtBañoMujer.Text) + ", 1, " + valorDetalle2 + ", '" + paraSiguienteMes + "', '" +
-                esEditable + "')";
+                esEditable + "', '" + txtExtension.Text + "', '" + txtApellido.Text + "')";
                 #endregion
 
                 #region Inserccion
@@ -342,9 +358,10 @@ namespace Dispenser.Dst
                         datosGenerales.Add(fechaRequerida.ToString("dd/MM/yyy"));//indice 4
                         datosGenerales.Add(cmbMotivos.Text);//indice 5
                         datosGenerales.Add(txtDireccion.Text);//indice 6
-                        datosGenerales.Add(txtPersonaContacto.Text);//inidice 7
+                        datosGenerales.Add(String.Format("{0} {1}", txtPersonaContacto.Text, txtApellido.Text));//inidice 7
                         datosGenerales.Add(txtTelefonoContacto.Text);//incice 8
-                        datosGenerales.Add(txtComentarios.Text);//indice 9
+                        datosGenerales.Add(txtExtension.Text);//indice 9
+                        datosGenerales.Add(txtComentarios.Text);//indice 10
 
                         if (conexion.enviarEmail(datosGenerales, codigoDispensadores, codigoProducto, cantidadDispensadores, cantidadProductos, idpais,
                             clientid, paraSiguienteMes))
@@ -544,8 +561,12 @@ namespace Dispenser.Dst
             txtBañoMujer.Text = "0";
             txtPersonaContacto.Enabled = false;
             txtPersonaContacto.Text = String.Empty;
+            txtApellido.Enabled = false;
+            txtApellido.Text = String.Empty;
             txtTelefonoContacto.Enabled = false;
             txtTelefonoContacto.Text = String.Empty;
+            txtExtension.Enabled = false;
+            txtExtension.Text = "0";
             txtCorreoContacto.Enabled = false;
             txtCorreoContacto.Text = String.Empty;
             txtPosicion.Enabled = false;
@@ -613,9 +634,15 @@ namespace Dispenser.Dst
                 if (txtPersonaContacto.Text.Equals("N/A"))
                     txtPersonaContacto.Text = String.Empty;
 
+                txtApellido.Text = clientesFinales.Rows[0]["CONTACT_SURNAME"].ToString();
+                if (txtApellido.Text.Equals("N/A"))
+                    txtApellido.Text = String.Empty;
+
                 txtTelefonoContacto.Text = clientesFinales.Rows[0]["CONTACT_TELEPHONE"].ToString();
                 if (txtTelefonoContacto.Text.Equals("N/A"))
                     txtTelefonoContacto.Text = String.Empty;
+
+                txtExtension.Text = clientesFinales.Rows[0]["CONTACT_EXT"].ToString();
 
                 txtCorreoContacto.Text = clientesFinales.Rows[0]["CONTACT_MAIL"].ToString();
                 if (txtCorreoContacto.Text.Equals("N/A"))
@@ -702,7 +729,9 @@ namespace Dispenser.Dst
             txtBañoHombre.Enabled = true;
             txtBañoMujer.Enabled = true;
             txtPersonaContacto.Enabled = true;
+            txtApellido.Enabled = true;
             txtTelefonoContacto.Enabled = true;
+            txtExtension.Enabled = true;
             txtCorreoContacto.Enabled = true;
             txtPosicion.Enabled = true;
             grdDispensadoresProducto.Enabled = true;
@@ -970,6 +999,21 @@ namespace Dispenser.Dst
         {
             campos.Add("TERTIARY_CLEANING");
             datos.Add(cmbLimpiezaTercerizada.SelectedValue);
+        }
+
+        protected void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+            campos.Add("CONTACT_SURNAME");
+            datos.Add(txtApellido.Text);
+        }
+
+        protected void txtExtension_TextChanged(object sender, EventArgs e)
+        {
+            if (!txtExtension.Text.Equals("0"))
+            {
+                campos.Add("CONTACT_EXT");
+                datos.Add(txtExtension.Text);
+            }
         }
         #endregion
         
